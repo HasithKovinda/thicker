@@ -1,0 +1,29 @@
+.nav{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    margin: 0 auto;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.nav ul {
+    justify-self: end;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    align-items: center;
+    justify-content: center;
+   column-gap: 30px;
+}
+
+.nav a {
+    color: #10221B;
+    font-size: 1.1rem;
+    letter-spacing: .2rem;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+.nav a:hover{
+    color: var(--clr-primary-1);
+}
+
