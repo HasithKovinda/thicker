@@ -1,0 +1,26 @@
+.section {
+  margin-top: 5rem;
+}
+
+.section h1 {
+  text-align: center;
+}
+
+.section p {
+  font-size: 1.2rem;
+}
+
+.main-image {
+  padding: 2rem;
+}
+
+.article {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  justify-content: center;
+  column-gap: 2rem;
+}
+
+/* .left {
+  text-align: right;
+} */
