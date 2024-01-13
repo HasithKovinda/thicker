@@ -5,7 +5,7 @@
 :root {
   /* dark shades of primary color*/
   --clr-primary-1: #1DC5CE;
-  --color-grey-700: #e5e7eb;
+  --color-grey-700: #f8f8f8;
   --color-dark:#10221B;
   --clr-white: #fff;
   --ff-primary: "Poppins", sans-serif;
@@ -36,6 +36,10 @@ h3 {
   font-size: 1.25rem;
 }
 
+/* p{
+  font-size: 2rem;
+} */
+
 ul {
   list-style-type: none;
 }
@@ -46,10 +50,29 @@ a {
 body{
   font-family:var(--ff-primary);
   line-height: 1.5;
-  background: var(--color-grey-700);
+  background: var(--clr-white);
   color: var(--color-dark);
 }
 
 .section-center{
-  max-width: 1400px
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-top: 5rem;
+}
+
+.btn {
+  text-transform: uppercase;
+  color: var(--clr-white);
+  padding: 0.375rem 0.75rem;
+  letter-spacing: var(--spacing);
+  display: inline-block;
+  transition: var(--transition);
+  font-size: 0.875rem;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.space-top{
+  margin-top: 5rem;
 }
