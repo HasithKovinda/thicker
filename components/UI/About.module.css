@@ -1,7 +1,10 @@
+.section {
+  margin-bottom: 5rem;
+}
+
 .heading {
   font-size: 4rem;
   text-align: center;
-  margin-bottom: 5rem;
 }
 .underline {
   width: 8rem;

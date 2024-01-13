@@ -1,0 +1,36 @@
+.section {
+  margin-top: 5rem;
+}
+
+.section h1 {
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2rem;
+  margin-top: 7rem;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heading div {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  border: 1px solid var(--clr-primary-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.icons {
+  color: var(--clr-primary-1);
+  font-size: 4rem;
+}

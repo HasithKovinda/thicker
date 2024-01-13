@@ -1,0 +1,44 @@
+.main {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.rating-icons img {
+  height: 30px;
+  width: 30px;
+}
+
+.article {
+  padding: 2rem;
+  border: 3px solid var(--clr-primary-1);
+  border-radius: 10px;
+  position: relative;
+}
+
+.profile {
+  height: 132px;
+  width: 94px;
+  object-fit: cover;
+  border-radius: 47px;
+  position: absolute;
+  top: 0;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+.content {
+  margin-top: 1.5rem;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.footer span {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #000;
+}
