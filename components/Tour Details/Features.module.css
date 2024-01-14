@@ -1,0 +1,31 @@
+.features {
+  margin-top: 3rem;
+}
+.feature-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.feature-container > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* justify-content: center; */
+}
+
+.icon-container {
+  width: 2rem;
+  height: 2rem;
+  background: var(--color-light-3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  font-size: 1.4rem;
+  color: var(--clr-primary-1);
+}

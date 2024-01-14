@@ -1,0 +1,17 @@
+.facilities {
+  margin-top: 3rem;
+}
+
+.facilities-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2rem;
+  margin-top: 2rem;
+  row-gap: 2rem;
+}
+
+.facilities-container > div {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
