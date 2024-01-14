@@ -1,0 +1,51 @@
+.footer {
+  margin-top: 5rem;
+  padding: 2rem 4rem;
+  background: #000;
+  color: var(--clr-white);
+}
+
+.section {
+  max-width: 1400px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 3rem;
+  align-items: stretch;
+  color: var(--clr-white);
+  margin: 0 auto;
+}
+
+.log {
+  color: var(--clr-primary-1);
+  font-family: var(--ff-secondary);
+  font-size: 3rem;
+}
+
+.section h4 {
+  margin-top: 1.6rem;
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+
+/* .section > div:not(:first-child) p {
+  margin-top: 1.5rem;
+} */
+
+.section div {
+  align-items: start;
+}
+
+.rights {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* .uro {
+  width: 100%;
+  background: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+} */
