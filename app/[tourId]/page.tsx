@@ -1,5 +1,6 @@
 import CoverImage from "@/components/Tour Details/CoverImage";
 import Info from "@/components/Tour Details/Info";
+import Review from "@/components/UI/Review/Reviews";
 import Row from "@/components/UI/Row";
 
 export default function page() {
@@ -8,6 +9,7 @@ export default function page() {
       <CoverImage />
       <Info />
       <Row />
+      <Review />
     </main>
   );
 }

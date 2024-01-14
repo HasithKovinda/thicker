@@ -1,6 +1,7 @@
 import styles from "./Description.module.css";
 import Facilities from "./Facilities";
 import Features from "./Features";
+import TourGuides from "./TourGuides";
 
 export default function Description() {
   return (
@@ -19,6 +20,7 @@ export default function Description() {
       <Features />
       <hr />
       <Facilities />
+      <TourGuides />
     </section>
   );
 }

@@ -1,0 +1,38 @@
+.guides {
+  margin-top: 3rem;
+}
+
+.guides h2 {
+  text-align: center;
+}
+
+.guide-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.guide-container > div {
+  width: 40%;
+  /* display: grid;
+  grid-template-columns: auto auto auto; */
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  /* column-gap: 0.5rem; */
+}
+
+.guide-container p {
+  font-weight: bold;
+}
+
+.guide-container span {
+  color: var(--color-dark-2);
+}
+
+.profile {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}

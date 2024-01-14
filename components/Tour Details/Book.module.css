@@ -1,0 +1,91 @@
+.container {
+  padding: 2rem;
+  /* background: var(--clr-primary-1); */
+  color: var(--clr-white);
+  border-radius: 20px;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(28, 234, 245, 0.8),
+      rgba(29, 197, 206, 0.8)
+    ),
+    url("/assert/book.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.form {
+  margin-top: 2rem;
+}
+
+.form input {
+  font-family: var(--ff-third);
+  padding: 0.6rem 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 1.2px;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  border: 1px solid var(--clr-white);
+  border-radius: 10px;
+  transition: var(--transition);
+}
+
+.form input::placeholder {
+  color: var(--clr-white);
+  /* border: none; */
+}
+
+.form input:focus {
+  background: var(--clr-white);
+  outline: none;
+}
+
+.form input:focus::placeholder {
+  color: var(--color-dark);
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+.icon {
+  font-size: 1.7rem;
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+}
+
+.form input:focus + .icon {
+  color: var(--clr-primary-3);
+}
+
+.form input[type="date"] {
+  color: var(--clr-white);
+  /* width: 100%; */
+}
+
+/* To style calendar icon */
+.form input[type="date"]::-webkit-calendar-picker-indicator {
+  border: none;
+  outline: none;
+  color: #fff;
+  opacity: 1; /* Ensure the color is fully visible */
+}
+
+.book-btn {
+  font-family: var(--ff-third);
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  letter-spacing: 1.3px;
+  background: transparent;
+  border: 1px solid var(--clr-white);
+  border-radius: 10px;
+}
+.book-btn:hover {
+  color: var(--color-dark);
+  background: var(--clr-primary-1);
+  transform: scale(1.1);
+  box-shadow: var(--light-shadow);
+}
