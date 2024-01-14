@@ -9,7 +9,7 @@ export default function page() {
       <CoverImage />
       <Info />
       <Row />
-      <Review />
+      <Review title="Review For The Tour" />
     </main>
   );
 }

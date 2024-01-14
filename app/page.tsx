@@ -12,7 +12,7 @@ export default function Home() {
       <About />
       <Tours />
       <WhyUs />
-      <Review />
+      <Review title="Top Reviews For Treker" />
       <NewLetter />
     </main>
   );

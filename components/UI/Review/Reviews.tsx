@@ -2,7 +2,11 @@ import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import styles from "./Reviews.module.css";
 import SingleReview from "./SingleReview";
 
-export default function Review() {
+type reviewProps = {
+  title: string;
+};
+
+export default function Review({ title }: reviewProps) {
   return (
     <section className={`section-center ${styles.section}`}>
       <div>
@@ -10,7 +14,7 @@ export default function Review() {
           <div>
             <BiChevronLeft className={styles.icons} />
           </div>
-          <h1>Top Reviews For Treker</h1>
+          <h1>{title}</h1>
           <div>
             <BiChevronRight className={styles.icons} />
           </div>

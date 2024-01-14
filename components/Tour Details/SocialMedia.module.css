@@ -13,6 +13,7 @@
   padding: 1rem;
   background: var(--clr-white);
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .icon {
