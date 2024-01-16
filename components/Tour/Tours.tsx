@@ -1,8 +1,10 @@
 import React from "react";
 import SingleTour from "./SingleTour";
 import styles from "./Tours.module.css";
+import { fetchAllTours } from "@/util/actions";
 
-export default function Tours() {
+export default async function Tours() {
+  await fetchAllTours();
   return (
     <section className={styles.section}>
       <div>

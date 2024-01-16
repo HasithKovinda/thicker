@@ -1,6 +1,6 @@
 import styles from "./About.module.css";
 
-export default function About() {
+export default async function About() {
   return (
     <section className={`section-center ${styles.section}`}>
       <h1 className={`${styles.heading}`}>About Thicker</h1>
