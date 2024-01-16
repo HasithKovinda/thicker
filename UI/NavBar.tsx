@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import styles from "./NavBar.module.css";
 import { useEffect, useState } from "react";
+import NavLink from "@/components/NavLink";
 
 export default function NavBar() {
   const [isNavFixed, setIsNavFixed] = useState(false);
@@ -27,19 +27,19 @@ export default function NavBar() {
         </div>
         <ul>
           <li>
-            <Link href="/">Home</Link>
+            <NavLink herf="/">Home</NavLink>
           </li>
           <li>
-            <Link href="/">About</Link>
+            <NavLink herf="/about">About</NavLink>
           </li>
           <li>
-            <Link href="/">Contact</Link>
+            <NavLink herf="/tours">Tours</NavLink>
           </li>
           <li>
-            <Link href="/">Login</Link>
+            <NavLink herf="/login">Login</NavLink>
           </li>
           <li>
-            <Link href="/">SignUp</Link>
+            <NavLink herf="/signUp">SignUp</NavLink>
           </li>
         </ul>
       </section>

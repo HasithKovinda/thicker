@@ -1,6 +1,7 @@
+import { TourModel } from "@/types/model";
 import mongoose from "mongoose";
 
-const tourSchema = new mongoose.Schema(
+const tourSchema = new mongoose.Schema<TourModel>(
   {
     name: {
       type: String,

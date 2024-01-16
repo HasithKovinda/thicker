@@ -1,0 +1,21 @@
+.link {
+  color: #10221b;
+  font-size: 1.1rem;
+  letter-spacing: 0.2rem;
+  font-weight: bold;
+  transition: var(--transition);
+  border-radius: 10px;
+  padding: 0.7rem 0.7rem;
+}
+
+.active {
+  background: var(--clr-primary-1);
+}
+
+.link:hover {
+  color: var(--clr-primary-1);
+}
+
+.active.link:hover {
+  color: var(--clr-white);
+}

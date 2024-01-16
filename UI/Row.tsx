@@ -1,6 +1,6 @@
-import OtherInformation from "../Tour Details/OtherInformation";
-import Wrapper from "../Tour Details/Wrapper";
+import Wrapper from "@/components/Tour Details/Wrapper";
 import styles from "./Row.module.css";
+import OtherInformation from "@/components/Tour Details/OtherInformation";
 
 export default function Row() {
   return (

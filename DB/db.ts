@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 async function connect() {
-  const connectionString = process.env.DATABASE_URL!;
+  if (!process.env.DATABASE_URL) throw new Error("No env variable found");
+  const connectionString = process.env.DATABASE_URL;
   try {
     if (mongoose.connections[0].readyState) return;
     await mongoose.connect(connectionString);

@@ -35,19 +35,11 @@
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
   justify-content: center;
-  column-gap: 30px;
+  /* column-gap: 30px; */
 }
 
-.nav a {
-  color: #10221b;
-  font-size: 1.1rem;
-  letter-spacing: 0.2rem;
-  font-weight: bold;
-  transition: var(--transition);
-}
-
-.nav a:hover {
-  color: var(--clr-primary-1);
+.nav li {
+  justify-self: center;
 }
 
 .logo {
