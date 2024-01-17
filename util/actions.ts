@@ -3,6 +3,7 @@
 import connect from "@/DB/db";
 import Tours from "@/model/Tours";
 import { TourModel } from "@/types/model";
+import { Filter, PopularTour } from "@/types/tour";
 
 export async function fetchAllTours(): Promise<PopularTour[]> {
   await connect();
@@ -17,6 +18,8 @@ export async function fetchAllTours(): Promise<PopularTour[]> {
       ratingsAverage: tour.ratingsAverage,
       ratingsQuantity: tour.ratingsQuantity,
       summary: tour.summary,
+      maxGroupSize: tour.maxGroupSize,
+      difficulty: tour.difficulty,
     };
   });
   return tourList;
@@ -40,7 +43,36 @@ export async function fetchMostPopularTour(): Promise<PopularTour[]> {
       ratingsAverage: tour.ratingsAverage,
       ratingsQuantity: tour.ratingsQuantity,
       summary: tour.summary,
+      maxGroupSize: tour.maxGroupSize,
+      difficulty: tour.difficulty,
     };
   });
   return tourList;
+}
+
+export async function filterTours({
+  price,
+  groupSize,
+  duration,
+}: // difficulty,
+Filter): Promise<PopularTour[]> {
+  console.log(groupSize);
+  let tours: PopularTour[] = await fetchAllTours();
+  if (!price && !groupSize && !duration) {
+    return tours;
+  }
+
+  if (price) {
+    tours = tours.filter((tour) => tour.price >= price);
+  } else if (groupSize) {
+    tours = tours.filter((tour) => tour.maxGroupSize >= groupSize);
+  } else if (duration) {
+    tours = tours.filter((tour) => tour.duration >= duration);
+  }
+
+  // tours = tours.filter((tour) => tour.difficulty === difficulty);
+
+  console.log(tours);
+
+  return tours;
 }

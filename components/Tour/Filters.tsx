@@ -1,8 +1,40 @@
-import Star from "@/UI/StarMatri";
-import styles from "./Filters.module.css";
-import StarMatrix from "@/UI/StarMatri";
+"use client";
 
-export default function Filters() {
+import StarMatrix from "@/UI/StarMatri";
+import styles from "./Filters.module.css";
+import { type ChangeEvent, useState, useEffect } from "react";
+import {
+  DURATION_MAX,
+  DURATION_MIN,
+  GROUP_SIZE_MAX,
+  GROUP_SIZE_MIN,
+  PRICE_MAX,
+  PRICE_MIN,
+} from "@/util/constant";
+
+import { Filter } from "@/types/tour";
+
+type FilterPops = {
+  handleChange: (data: Filter) => void;
+};
+
+export default function Filters({ handleChange }: FilterPops) {
+  const [price, setPrice] = useState("");
+  const [duration, setDuration] = useState("");
+  const [groupSize, setGroupSize] = useState("");
+  const [difficulty, setDifficulty] = useState("all");
+
+  function handleSelect(event: ChangeEvent<HTMLSelectElement>) {}
+
+  // const { data } = useQuery({
+  //   queryKey: ["tours", price, duration, groupSize],
+  //   queryFn: () => filterTours({ price, duration, groupSize }),
+  // });
+
+  useEffect(() => {
+    handleChange({ price: +price, duration: +duration, groupSize: +groupSize });
+  }, [price, duration, groupSize]);
+
   return (
     <aside className={styles.container}>
       <div className={styles.heading}>
@@ -12,48 +44,62 @@ export default function Filters() {
       <div className={styles.options}>
         <div>
           <p>Price</p>
-          <span>$10 - $1000</span>
+          <span>
+            ${PRICE_MIN} - ${price}
+          </span>
         </div>
         <input
           type="range"
           name="price"
           id="price"
-          minLength={100}
-          maxLength={1000}
+          min={PRICE_MIN}
+          max={PRICE_MAX}
           className={styles.range}
+          onChange={(e) => setPrice(e.target.value)}
         />
       </div>
       <div className={styles.options}>
         <div>
           <p>Duration</p>
-          <span>1 Day - 10 Days</span>
+          <span>
+            {DURATION_MIN} Day - {duration} Days
+          </span>
         </div>
         <input
           type="range"
           name="price"
           id="price"
-          minLength={1}
-          maxLength={10}
+          min={DURATION_MIN}
+          max={DURATION_MAX}
           className={styles.range}
+          onChange={(e) => setDuration(e.target.value)}
         />
       </div>
       <div className={styles.options}>
         <div>
           <p>Group Size</p>
-          <span>5 Persons - 40 Persons</span>
+          <span>
+            {GROUP_SIZE_MIN} Persons - {groupSize} Persons
+          </span>
         </div>
         <input
           type="range"
           name="price"
           id="price"
-          minLength={1}
-          maxLength={10}
+          min={GROUP_SIZE_MIN}
+          max={GROUP_SIZE_MAX}
+          onChange={(e) => setGroupSize(e.target.value)}
           className={styles.range}
         />
       </div>
       <div className={styles.options}>
         <p>Difficulty</p>
-        <select name="cars" id="cars" className={styles.select}>
+        <select
+          name="cars"
+          id="cars"
+          className={styles.select}
+          onChange={handleSelect}
+        >
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="difficult">Difficult</option>

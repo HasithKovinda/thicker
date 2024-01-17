@@ -47,7 +47,7 @@ export default function StarMatrix({ rows }: StarMatrixProps) {
   };
 
   function handleClick(num: number) {
-    console.log("Add rating" + num);
+    // console.log("Add rating" + num);
   }
 
   console.log([...Array(rows).keys()]);
