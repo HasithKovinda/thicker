@@ -1,0 +1,8 @@
+.section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* align-items: center; */
+  row-gap: 4rem;
+  column-gap: 4rem;
+  margin-bottom: 2rem;
+}

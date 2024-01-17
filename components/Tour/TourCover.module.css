@@ -1,0 +1,17 @@
+.cover {
+  position: relative;
+}
+
+.cover div {
+  position: absolute;
+  max-width: 70%;
+  top: 50%;
+  left: 50%;
+  color: var(--clr-white);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.cover h1 {
+  font-size: 4rem;
+}

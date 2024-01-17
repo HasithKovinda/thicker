@@ -42,6 +42,8 @@ export default function SingleTour({
           </div>
           <span>0{ratingsQuantity} Reviews</span>
         </div>
+      </div>
+      <div className={styles.summary}>
         <p>{summary}</p>
       </div>
       <div className={styles.footer}>
