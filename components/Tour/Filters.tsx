@@ -18,22 +18,43 @@ type FilterPops = {
   handleChange: (data: Filter) => void;
 };
 
+// const initialState: Filter = {
+//   price: null,
+//   duration: null,
+//   groupSize: null,
+//   rating: 1,
+// };
+
 export default function Filters({ handleChange }: FilterPops) {
-  const [price, setPrice] = useState("");
-  const [duration, setDuration] = useState("");
-  const [groupSize, setGroupSize] = useState("");
-  const [difficulty, setDifficulty] = useState("all");
+  const [price, setPrice] = useState<number | null>(null);
+  const [duration, setDuration] = useState<number | null>(null);
+  const [groupSize, setGroupSize] = useState<number | null>(null);
+  const [difficulty, setDifficulty] = useState<string | null>("all");
+  const [rating, setRating] = useState<number>(1);
+
+  const isFilterApply = price || duration || groupSize || rating > 1;
 
   function handleSelect(event: ChangeEvent<HTMLSelectElement>) {}
 
-  // const { data } = useQuery({
-  //   queryKey: ["tours", price, duration, groupSize],
-  //   queryFn: () => filterTours({ price, duration, groupSize }),
-  // });
+  function getRating(rating: number) {
+    if (rating) setRating(rating);
+  }
+
+  function clearFilters() {
+    setDifficulty(null);
+    setPrice(null);
+    setDuration(null);
+    setRating(1);
+  }
 
   useEffect(() => {
-    handleChange({ price: +price, duration: +duration, groupSize: +groupSize });
-  }, [price, duration, groupSize]);
+    handleChange({
+      price: price,
+      duration: duration,
+      groupSize: groupSize,
+      rating,
+    });
+  }, [price, duration, groupSize, rating]);
 
   return (
     <aside className={styles.container}>
@@ -55,7 +76,7 @@ export default function Filters({ handleChange }: FilterPops) {
           min={PRICE_MIN}
           max={PRICE_MAX}
           className={styles.range}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => setPrice(+e.target.value)}
         />
       </div>
       <div className={styles.options}>
@@ -72,7 +93,7 @@ export default function Filters({ handleChange }: FilterPops) {
           min={DURATION_MIN}
           max={DURATION_MAX}
           className={styles.range}
-          onChange={(e) => setDuration(e.target.value)}
+          onChange={(e) => setDuration(+e.target.value)}
         />
       </div>
       <div className={styles.options}>
@@ -88,7 +109,7 @@ export default function Filters({ handleChange }: FilterPops) {
           id="price"
           min={GROUP_SIZE_MIN}
           max={GROUP_SIZE_MAX}
-          onChange={(e) => setGroupSize(e.target.value)}
+          onChange={(e) => setGroupSize(+e.target.value)}
           className={styles.range}
         />
       </div>
@@ -107,10 +128,14 @@ export default function Filters({ handleChange }: FilterPops) {
       </div>
       <div className={styles.options}>
         <p>Customer Reviews</p>
-        <StarMatrix rows={5} />
+        <StarMatrix rows={5} handleRating={getRating} />
       </div>
       <div className={styles.options}>
-        <button className={`btn ${styles.clear}`}>Clear Filters</button>
+        {isFilterApply && (
+          <button className={`btn ${styles.clear}`} onClick={clearFilters}>
+            Clear Filters
+          </button>
+        )}
       </div>
     </aside>
   );

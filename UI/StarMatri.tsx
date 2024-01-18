@@ -4,6 +4,7 @@ import { BiSolidStar } from "react-icons/bi";
 import styles from "./StarMatrix.module.css";
 interface StarMatrixProps {
   rows: number;
+  handleRating: (rating: number) => void;
 }
 
 const a = (
@@ -35,7 +36,7 @@ const b = (
   </svg>
 );
 
-export default function StarMatrix({ rows }: StarMatrixProps) {
+export default function StarMatrix({ rows, handleRating }: StarMatrixProps) {
   const renderStars = (row: number, totalStars: number) => {
     const stars = [];
     for (let i = 0; i < totalStars; i++) {
@@ -46,11 +47,9 @@ export default function StarMatrix({ rows }: StarMatrixProps) {
     return stars;
   };
 
-  function handleClick(num: number) {
-    // console.log("Add rating" + num);
+  function handleClick(rating: number) {
+    handleRating(rating + 1);
   }
-
-  console.log([...Array(rows).keys()]);
 
   return (
     <div className={styles.starMatrix}>

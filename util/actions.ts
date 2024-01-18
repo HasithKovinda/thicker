@@ -54,11 +54,12 @@ export async function filterTours({
   price,
   groupSize,
   duration,
+  rating,
 }: // difficulty,
 Filter): Promise<PopularTour[]> {
-  console.log(groupSize);
+  console.log(rating);
   let tours: PopularTour[] = await fetchAllTours();
-  if (!price && !groupSize && !duration) {
+  if (!price && !groupSize && !duration && !rating) {
     return tours;
   }
 
@@ -68,11 +69,11 @@ Filter): Promise<PopularTour[]> {
     tours = tours.filter((tour) => tour.maxGroupSize >= groupSize);
   } else if (duration) {
     tours = tours.filter((tour) => tour.duration >= duration);
+  } else if (rating) {
+    tours = tours.filter((tour) => rating <= tour.ratingsAverage);
   }
 
   // tours = tours.filter((tour) => tour.difficulty === difficulty);
-
-  console.log(tours);
 
   return tours;
 }

@@ -7,15 +7,20 @@ import styles from "./AllTours.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { Filter, PopularTour } from "@/types/tour";
 
-export default function AllTours({ price, duration, groupSize }: Filter) {
+export default function AllTours({
+  price,
+  duration,
+  groupSize,
+  rating,
+}: Filter) {
   const { data, isPending } = useQuery({
-    queryKey: ["tours", price, duration, groupSize],
-    queryFn: () => filterTours({ price, duration, groupSize }),
+    queryKey: ["tours", price, duration, groupSize, rating],
+    queryFn: () => filterTours({ price, duration, groupSize, rating }),
   });
-  console.log(data);
-  if (isPending) return <h3>Loding....</h3>;
+  if (isPending) return <h3>Loading....</h3>;
 
-  if (!data || data.length === 0) return <h1>No data found</h1>;
+  if (!data || data.length === 0)
+    return <h1 className={styles.data}>No data found</h1>;
   return (
     <section className={styles.section}>
       {data.map((tour) => {

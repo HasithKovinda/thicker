@@ -8,9 +8,10 @@ import { useState } from "react";
 
 export default function TourContent() {
   const [data, setData] = useState<Filter>({
-    price: undefined,
-    duration: undefined,
-    groupSize: undefined,
+    price: null,
+    duration: null,
+    groupSize: null,
+    rating: 1,
   });
 
   function handleChange(newData: Filter) {

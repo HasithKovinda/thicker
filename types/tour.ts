@@ -12,8 +12,9 @@ export type PopularTour = {
 };
 
 export type Filter = {
-  price?: number;
-  duration?: number;
-  groupSize?: number;
+  price: number | null;
+  duration: number | null;
+  groupSize: number | null;
+  rating: number | null;
   // difficulty: "easy" | "medium" | "difficult" | "all";
 };
