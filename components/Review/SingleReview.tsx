@@ -1,16 +1,22 @@
 import styles from "./SingleReview.module.css";
 
-export default function SingleReview() {
+
+type SingleReviewProp={
+  photo:string,
+  review:string
+  rating:number
+}
+
+export default function SingleReview({photo,review,rating}:SingleReviewProp) {
   return (
     <article className={styles.article}>
       <div className={styles.main}>
         <img src="/assert/quotes-1.svg" alt="" className={styles.icon} />
-        <img src="/assert/profile.jpg" className={styles.profile} alt="" />
+        <img src={photo} className={styles.profile} alt="" />
       </div>
       <div className={styles.content}>
         <p>
-          We teach martial arts because we love it — not because we want to make
-          money on you. Unlike other martial.
+          {review}
         </p>
       </div>
       <div className={styles.footer}>

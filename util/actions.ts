@@ -3,7 +3,7 @@
 import connect from "@/DB/db";
 import Tours from "@/model/Tours";
 import { Difficulty } from "@/types/enum";
-import { type TourModel } from "@/types/model";
+import {type ReviewModel, type TourModel } from "@/types/model";
 import { type Filter, type PopularTour } from "@/types/tour";
 import {
   DEFAULT_DURATION,
@@ -12,6 +12,7 @@ import {
   DEFAULT_RATING,
 } from "./constant";
 import Review from "@/model/review";
+import User from "@/model/user";
 
 export async function fetchAllTours(): Promise<PopularTour[]> {
   await connect();
@@ -94,7 +95,8 @@ export async function filterTours({
 }
 
 
-export async function fetchAllReviews(){
-  const a=await Review.find()
-  console.log(a)
+export async function fetchAllTopReviews(){
+  const allReviews:ReviewModel[]=await Review.find({rating:{ $eq: 5 }}).limit(10).populate({path:'user'}).lean()
+  const data:ReviewModel[] =JSON.parse(JSON.stringify(allReviews))
+  return data
 }

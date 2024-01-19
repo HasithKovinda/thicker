@@ -35,10 +35,21 @@ export type TourModel = Document & {
   guides: Types.ObjectId[];
 };
 
+
+export type userModel = Document & {
+  name: string;
+  email:string
+  password: string
+  role:string
+  photo:string
+}
+
 export type ReviewModel = Document & {
   review: string;
   rating:number
-  user: Types.ObjectId
+  user: userModel
   tour: Types.ObjectId
   createdAt:Date
 }
+
+

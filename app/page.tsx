@@ -1,9 +1,10 @@
 import About from "@/UI/About";
 import Hero from "@/UI/Hero";
 import NewLetter from "@/UI/NewLetter";
-import Review from "@/components/Review/Reviews";
 import WhyUs from "@/UI/WhyUs";
 import Tours from "@/components/Tour/Tours";
+import ReviewSection from "@/components/Review/ReviewSection";
+
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
       <About />
       <Tours />
       <WhyUs />
-      <Review title="Top Reviews For Treker" />
+      <ReviewSection/>
       <NewLetter />
     </main>
   );

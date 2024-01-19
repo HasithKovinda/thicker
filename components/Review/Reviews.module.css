@@ -17,13 +17,18 @@
   margin-top: 7rem;
 }
 
+.review-slider > article {
+  flex: 0 0 33.33%; /* Display 3 reviews at a time */
+  transition: transform 0.5s ease-in-out;
+}
+
 .heading {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
 }
 
-.heading div {
+.rounded {
   height: 80px;
   width: 80px;
   border-radius: 50%;
@@ -37,4 +42,17 @@
 .icons {
   color: var(--clr-primary-1);
   font-size: 4rem;
+}
+
+.forward {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.disable .icons {
+  color: var(--color-dark-2);
+}
+.rounded.disable {
+  border: 1px solid var(--color-dark-2);
 }

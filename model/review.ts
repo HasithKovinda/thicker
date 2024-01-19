@@ -29,10 +29,8 @@ const reviewSchema = new mongoose.Schema<ReviewModel>(
       default: Date.now(),
     },
   },
-  {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
-  }
 );
 
-export default mongoose.models.Tour || mongoose.model("Review", reviewSchema);
+
+
+export default mongoose.models.Review || mongoose.model("Review", reviewSchema);
