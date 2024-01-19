@@ -5,6 +5,7 @@ import Filters from "./Filters";
 import AllTours from "./AllTours";
 import { Filter } from "@/types/tour";
 import { useState } from "react";
+import { Difficulty } from "@/types/enum";
 
 export default function TourContent() {
   const [data, setData] = useState<Filter>({
@@ -12,6 +13,7 @@ export default function TourContent() {
     duration: null,
     groupSize: null,
     rating: 1,
+    difficulty: Difficulty.ALL,
   });
 
   function handleChange(newData: Filter) {

@@ -1,4 +1,5 @@
 import { Document, Schema, Types } from "mongoose";
+import { Difficulty } from "./enum";
 
 type Location = {
   type: "Point";
@@ -12,7 +13,7 @@ export type TourModel = Document & {
   slug?: string;
   duration: number;
   maxGroupSize: number;
-  difficulty: "easy" | "medium" | "difficult";
+  difficulty: Difficulty;
   ratingsAverage: number;
   ratingsQuantity: number;
   price: number;

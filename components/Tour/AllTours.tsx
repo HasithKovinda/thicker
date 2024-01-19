@@ -12,10 +12,12 @@ export default function AllTours({
   duration,
   groupSize,
   rating,
+  difficulty,
 }: Filter) {
   const { data, isPending } = useQuery({
-    queryKey: ["tours", price, duration, groupSize, rating],
-    queryFn: () => filterTours({ price, duration, groupSize, rating }),
+    queryKey: ["tours", price, duration, groupSize, rating, difficulty],
+    queryFn: () =>
+      filterTours({ price, duration, groupSize, rating, difficulty }),
   });
   if (isPending) return <h3>Loading....</h3>;
 

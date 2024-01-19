@@ -1,3 +1,5 @@
+import { Difficulty } from "./enum";
+
 export type PopularTour = {
   name: string;
   duration: number;
@@ -8,7 +10,7 @@ export type PopularTour = {
   ratingsQuantity: number;
   summary: string;
   maxGroupSize: number;
-  difficulty: "easy" | "medium" | "difficult";
+  difficulty: Difficulty;
 };
 
 export type Filter = {
@@ -16,5 +18,5 @@ export type Filter = {
   duration: number | null;
   groupSize: number | null;
   rating: number | null;
-  // difficulty: "easy" | "medium" | "difficult" | "all";
+  difficulty: Difficulty;
 };

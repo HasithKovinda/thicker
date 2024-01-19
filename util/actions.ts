@@ -2,6 +2,7 @@
 
 import connect from "@/DB/db";
 import Tours from "@/model/Tours";
+import { Difficulty } from "@/types/enum";
 import { TourModel } from "@/types/model";
 import { Filter, PopularTour } from "@/types/tour";
 
@@ -55,15 +56,29 @@ export async function filterTours({
   groupSize,
   duration,
   rating,
-}: // difficulty,
-Filter): Promise<PopularTour[]> {
-  console.log(rating);
+  difficulty,
+}: Filter): Promise<PopularTour[]> {
+  console.log(difficulty);
+  console.log(Difficulty.ALL);
+  console.log(difficulty !== Difficulty.ALL);
+
   let tours: PopularTour[] = await fetchAllTours();
-  if (!price && !groupSize && !duration && !rating) {
+  if (
+    !price &&
+    !groupSize &&
+    !duration &&
+    !rating &&
+    difficulty === Difficulty.ALL
+  ) {
     return tours;
   }
 
-  if (price) {
+  console.log("LLLLLLLLLLLLLLLLLLLL");
+
+  if (difficulty !== Difficulty.ALL) {
+    console.log("AAAAAAAAAAAAAAAAAAAAAAA");
+    tours = tours.filter((tour) => tour.difficulty === difficulty);
+  } else if (price) {
     tours = tours.filter((tour) => tour.price >= price);
   } else if (groupSize) {
     tours = tours.filter((tour) => tour.maxGroupSize >= groupSize);
@@ -72,8 +87,5 @@ Filter): Promise<PopularTour[]> {
   } else if (rating) {
     tours = tours.filter((tour) => rating <= tour.ratingsAverage);
   }
-
-  // tours = tours.filter((tour) => tour.difficulty === difficulty);
-
   return tours;
 }
