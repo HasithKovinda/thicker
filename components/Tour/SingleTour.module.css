@@ -1,6 +1,7 @@
 .single-tour {
   display: grid;
   grid-template-rows: auto auto 1fr auto;
+  align-items: center;
   padding: 2rem;
   background: #fff;
   /* border: 1px solid rgb(150, 150, 150); */

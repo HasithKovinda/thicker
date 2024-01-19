@@ -3,8 +3,14 @@
 import connect from "@/DB/db";
 import Tours from "@/model/Tours";
 import { Difficulty } from "@/types/enum";
-import { TourModel } from "@/types/model";
-import { Filter, PopularTour } from "@/types/tour";
+import { type TourModel } from "@/types/model";
+import { type Filter, type PopularTour } from "@/types/tour";
+import {
+  DEFAULT_DURATION,
+  DEFAULT_GROUP_SIZE,
+  DEFAULT_PRICE,
+  DEFAULT_RATING,
+} from "./constant";
 
 export async function fetchAllTours(): Promise<PopularTour[]> {
   await connect();
@@ -58,34 +64,30 @@ export async function filterTours({
   rating,
   difficulty,
 }: Filter): Promise<PopularTour[]> {
-  console.log(difficulty);
-  console.log(Difficulty.ALL);
-  console.log(difficulty !== Difficulty.ALL);
-
   let tours: PopularTour[] = await fetchAllTours();
   if (
-    !price &&
-    !groupSize &&
-    !duration &&
-    !rating &&
+    !(price !== DEFAULT_PRICE) &&
+    !(groupSize !== DEFAULT_GROUP_SIZE) &&
+    !(duration !== DEFAULT_DURATION) &&
+    !(rating !== DEFAULT_RATING) &&
     difficulty === Difficulty.ALL
   ) {
     return tours;
   }
 
-  console.log("LLLLLLLLLLLLLLLLLLLL");
+  const filters = [
+    (tour: PopularTour) =>
+      difficulty !== Difficulty.ALL && tour.difficulty === difficulty,
+    (tour: PopularTour) => price && tour.price >= price,
+    (tour: PopularTour) => groupSize && tour.maxGroupSize >= groupSize,
+    (tour: PopularTour) => duration && tour.duration >= duration,
+    (tour: PopularTour) => rating && rating! <= tour.ratingsAverage,
+  ];
 
-  if (difficulty !== Difficulty.ALL) {
-    console.log("AAAAAAAAAAAAAAAAAAAAAAA");
-    tours = tours.filter((tour) => tour.difficulty === difficulty);
-  } else if (price) {
-    tours = tours.filter((tour) => tour.price >= price);
-  } else if (groupSize) {
-    tours = tours.filter((tour) => tour.maxGroupSize >= groupSize);
-  } else if (duration) {
-    tours = tours.filter((tour) => tour.duration >= duration);
-  } else if (rating) {
-    tours = tours.filter((tour) => rating <= tour.ratingsAverage);
+  if (difficulty === Difficulty.ALL) {
+    filters.shift();
   }
+
+  tours = tours.filter((tour) => filters.every((filter) => filter(tour)));
   return tours;
 }

@@ -6,13 +6,19 @@ import AllTours from "./AllTours";
 import { Filter } from "@/types/tour";
 import { useState } from "react";
 import { Difficulty } from "@/types/enum";
+import {
+  DEFAULT_DURATION,
+  DEFAULT_GROUP_SIZE,
+  DEFAULT_PRICE,
+  DEFAULT_RATING,
+} from "@/util/constant";
 
 export default function TourContent() {
   const [data, setData] = useState<Filter>({
-    price: null,
-    duration: null,
-    groupSize: null,
-    rating: 1,
+    price: DEFAULT_PRICE,
+    duration: DEFAULT_DURATION,
+    groupSize: DEFAULT_GROUP_SIZE,
+    rating: DEFAULT_RATING,
     difficulty: Difficulty.ALL,
   });
 

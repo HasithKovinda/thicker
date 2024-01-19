@@ -1,6 +1,7 @@
 import styles from "./SingleTour.module.css";
 import { FiClock, FiMapPin } from "react-icons/fi";
 import { BiSolidStar } from "react-icons/bi";
+import { type PopularTour } from "@/types/tour";
 
 export default function SingleTour({
   name,

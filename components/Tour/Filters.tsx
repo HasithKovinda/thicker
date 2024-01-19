@@ -4,6 +4,10 @@ import StarMatrix from "@/UI/StarMatri";
 import styles from "./Filters.module.css";
 import { type ChangeEvent, useState, useEffect } from "react";
 import {
+  DEFAULT_DURATION,
+  DEFAULT_GROUP_SIZE,
+  DEFAULT_PRICE,
+  DEFAULT_RATING,
   DURATION_MAX,
   DURATION_MIN,
   GROUP_SIZE_MAX,
@@ -12,31 +16,31 @@ import {
   PRICE_MIN,
 } from "@/util/constant";
 
-import { Filter } from "@/types/tour";
+import { type Filter } from "@/types/tour";
 import { Difficulty } from "@/types/enum";
 
 type FilterPops = {
   handleChange: (data: Filter) => void;
 };
 
-// const initialState: Filter = {
-//   price: null,
-//   duration: null,
-//   groupSize: null,
-//   rating: 1,
-// };
+const options = ["All", "Easy", "Medium", "Difficult"];
 
 export default function Filters({ handleChange }: FilterPops) {
-  const [price, setPrice] = useState<number | null>(null);
-  const [duration, setDuration] = useState<number | null>(null);
-  const [groupSize, setGroupSize] = useState<number | null>(null);
+  const [price, setPrice] = useState(DEFAULT_PRICE);
+  const [duration, setDuration] = useState(DEFAULT_DURATION);
+  const [groupSize, setGroupSize] = useState(DEFAULT_GROUP_SIZE);
   const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.ALL);
-  const [rating, setRating] = useState<number>(1);
+  const [rating, setRating] = useState(DEFAULT_RATING);
 
-  const isFilterApply = price || duration || groupSize || rating > 1;
+  const isFilterApply =
+    DEFAULT_PRICE < price ||
+    DEFAULT_DURATION < duration ||
+    DEFAULT_GROUP_SIZE < groupSize ||
+    rating > DEFAULT_PRICE ||
+    difficulty !== Difficulty.ALL;
 
   function handleSelect(event: ChangeEvent<HTMLSelectElement>) {
-    setDifficulty(event.target.value as Difficulty);
+    setDifficulty(event.target.value.toLowerCase() as Difficulty);
   }
 
   function getRating(rating: number) {
@@ -45,9 +49,10 @@ export default function Filters({ handleChange }: FilterPops) {
 
   function clearFilters() {
     setDifficulty(Difficulty.ALL);
-    setPrice(null);
-    setDuration(null);
-    setRating(1);
+    setPrice(DEFAULT_PRICE);
+    setDuration(DEFAULT_DURATION);
+    setRating(DEFAULT_RATING);
+    setGroupSize(DEFAULT_GROUP_SIZE);
   }
 
   useEffect(() => {
@@ -69,12 +74,17 @@ export default function Filters({ handleChange }: FilterPops) {
       <div className={styles.options}>
         <div>
           <p>Price</p>
-          <span>{price ? `$${PRICE_MIN} - $${price}` : `$${PRICE_MIN}`}</span>
+          <span>
+            {DEFAULT_PRICE >= price
+              ? `$${PRICE_MIN}`
+              : `$${PRICE_MIN} - $${price}`}
+          </span>
         </div>
         <input
           type="range"
           name="price"
           id="price"
+          value={price}
           min={PRICE_MIN}
           max={PRICE_MAX}
           className={styles.range}
@@ -85,15 +95,16 @@ export default function Filters({ handleChange }: FilterPops) {
         <div>
           <p>Duration</p>
           <span>
-            {duration
-              ? `${DURATION_MIN} Day - ${duration} Day`
-              : `${DURATION_MIN} Day`}
+            {DEFAULT_DURATION >= duration
+              ? `${DURATION_MIN} Day`
+              : `${DURATION_MIN} Day - ${duration} Day`}
           </span>
         </div>
         <input
           type="range"
-          name="price"
-          id="price"
+          name="duration"
+          id="duration"
+          value={duration}
           min={DURATION_MIN}
           max={DURATION_MAX}
           className={styles.range}
@@ -105,17 +116,18 @@ export default function Filters({ handleChange }: FilterPops) {
           {/* Think About OPtimized */}
           <p>Group Size</p>
           <span>
-            {groupSize
-              ? `${GROUP_SIZE_MIN} Persons - ${groupSize} Persons`
-              : `${GROUP_SIZE_MIN} Persons`}
+            {DEFAULT_GROUP_SIZE >= groupSize
+              ? `${GROUP_SIZE_MIN} Persons`
+              : `${GROUP_SIZE_MIN} Persons - ${groupSize} Persons`}
           </span>
         </div>
         <input
           type="range"
-          name="price"
-          id="price"
+          name="group_size"
+          id="group_size"
           min={GROUP_SIZE_MIN}
           max={GROUP_SIZE_MAX}
+          value={groupSize}
           onChange={(e) => setGroupSize(+e.target.value)}
           className={styles.range}
         />
@@ -128,13 +140,15 @@ export default function Filters({ handleChange }: FilterPops) {
           id="cars"
           className={styles.select}
           onChange={handleSelect}
+          value={difficulty}
         >
-          <option value="all" defaultValue="all">
-            All
-          </option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="difficult">Difficult</option>
+          {options.map((option, index) => {
+            return (
+              <option value={option} key={index}>
+                {option}
+              </option>
+            );
+          })}
         </select>
       </div>
       <div className={styles.options}>
