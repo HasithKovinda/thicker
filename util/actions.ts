@@ -11,6 +11,7 @@ import {
   DEFAULT_PRICE,
   DEFAULT_RATING,
 } from "./constant";
+import Review from "@/model/review";
 
 export async function fetchAllTours(): Promise<PopularTour[]> {
   await connect();
@@ -90,4 +91,10 @@ export async function filterTours({
 
   tours = tours.filter((tour) => filters.every((filter) => filter(tour)));
   return tours;
+}
+
+
+export async function fetchAllReviews(){
+  const a=await Review.find()
+  console.log(a)
 }

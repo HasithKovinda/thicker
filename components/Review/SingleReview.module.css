@@ -14,10 +14,13 @@
   border: 3px solid var(--clr-primary-1);
   border-radius: 10px;
   position: relative;
+  min-width: 30%;
+  height: 100%;
 }
 
 .profile {
-  height: 132px;
+  display: block;
+  min-height: 132px;
   width: 94px;
   object-fit: cover;
   border-radius: 47px;
@@ -25,6 +28,7 @@
   top: 0;
   right: 20px;
   transform: translateY(-50%);
+  z-index: 10;
 }
 
 .content {

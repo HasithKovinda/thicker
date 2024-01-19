@@ -34,3 +34,11 @@ export type TourModel = Document & {
   locations: Location[];
   guides: Types.ObjectId[];
 };
+
+export type ReviewModel = Document & {
+  review: string;
+  rating:number
+  user: Types.ObjectId
+  tour: Types.ObjectId
+  createdAt:Date
+}

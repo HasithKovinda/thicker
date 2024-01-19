@@ -9,7 +9,7 @@ async function connect() {
     console.log("Connection successful");
   } catch (error) {
     console.log(error);
-    throw new Error("Error connecting to Mongoose");
+    throw new Error("Error connecting to database");
   }
 }
 

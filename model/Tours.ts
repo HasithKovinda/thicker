@@ -72,7 +72,6 @@ const tourSchema = new mongoose.Schema<TourModel>(
       default: false,
     },
     startLocation: {
-      //GeoJSON format for geolocation data
       type: {
         type: String,
         default: "Point",

@@ -1,4 +1,4 @@
-import Review from "@/UI/Review/Reviews";
+import Review from "@/components/Review/Reviews";
 import Row from "@/UI/Row";
 import CoverImage from "@/components/Tour Details/CoverImage";
 import Info from "@/components/Tour Details/Info";

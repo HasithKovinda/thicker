@@ -1,7 +1,7 @@
 import About from "@/UI/About";
 import Hero from "@/UI/Hero";
 import NewLetter from "@/UI/NewLetter";
-import Review from "@/UI/Review/Reviews";
+import Review from "@/components/Review/Reviews";
 import WhyUs from "@/UI/WhyUs";
 import Tours from "@/components/Tour/Tours";
 
