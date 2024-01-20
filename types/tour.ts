@@ -26,3 +26,9 @@ export type MapLocation = {
   coordinates: [number, number];
   description: string;
 };
+
+export type Guides = {
+  name: string;
+  role: string;
+  photo: string;
+};

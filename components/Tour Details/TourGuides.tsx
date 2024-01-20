@@ -1,25 +1,29 @@
+import { Guides } from "@/types/tour";
 import styles from "./TourGuides.module.css";
-export default function TourGuides() {
+
+type TourGuidesPropType = {
+  guides: Guides[];
+};
+
+export default function TourGuides({ guides }: TourGuidesPropType) {
   return (
     <section className={styles.guides}>
       <h2>Your Tour Guides</h2>
       <div className="underline"></div>
       <article className={styles["guide-container"]}>
-        <div>
-          <img src="/assert/profile.jpg" alt="" className={styles.profile} />
-          <p>Lead Guide</p>
-          <span>George Oliver</span>
-        </div>
-        <div>
-          <img src="/assert/profile.jpg" alt="" className={styles.profile} />
-          <p>Tour Guide</p>
-          <span>Arthur Leo</span>
-        </div>
-        <div>
-          <img src="/assert/profile.jpg" alt="" className={styles.profile} />
-          <p>Tour Guide</p>
-          <span>Harry Oscar</span>
-        </div>
+        {guides.map((guide, index) => {
+          return (
+            <div key={index}>
+              <img
+                src={guide.photo}
+                alt={guide.name}
+                className={styles.profile}
+              />
+              <p>{guide.role} Guide</p>
+              <span>{guide.name}</span>
+            </div>
+          );
+        })}
       </article>
     </section>
   );

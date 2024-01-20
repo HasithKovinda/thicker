@@ -1,9 +1,14 @@
+import { Guides } from "@/types/tour";
 import styles from "./Description.module.css";
 import Facilities from "./Facilities";
 import Features from "./Features";
 import TourGuides from "./TourGuides";
 
-export default function Description() {
+type DescriptionPropType = {
+  guides: Guides[];
+};
+
+export default function Description({ guides }: DescriptionPropType) {
   return (
     <section className={styles.section}>
       <h2>About Moscow Red City Land</h2>
@@ -21,7 +26,7 @@ export default function Description() {
       <hr />
       <Facilities />
       <hr />
-      <TourGuides />
+      <TourGuides guides={guides} />
     </section>
   );
 }

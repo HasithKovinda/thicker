@@ -1,5 +1,6 @@
 import { TourModel } from "@/types/model";
 import mongoose from "mongoose";
+import user from "./user";
 
 const tourSchema = new mongoose.Schema<TourModel>(
   {
@@ -67,10 +68,6 @@ const tourSchema = new mongoose.Schema<TourModel>(
       select: false,
     },
     startDates: [Date],
-    secretTour: {
-      type: Boolean,
-      default: false,
-    },
     startLocation: {
       type: {
         type: String,
@@ -96,7 +93,7 @@ const tourSchema = new mongoose.Schema<TourModel>(
     guides: [
       {
         type: mongoose.Schema.ObjectId,
-        ref: "User",
+        ref: user,
       },
     ],
   },

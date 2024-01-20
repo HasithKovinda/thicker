@@ -16,7 +16,11 @@ export default function MapC({ locations, startLocation }: MapProps) {
   //   console.log(locations);
   console.log();
   return (
-    <section className={`section-center ${styles.section}`}>
+    <section className={`${styles.section}`}>
+      <div>
+        <h1>View Locations On Map</h1>
+        <div className="underline"></div>
+      </div>
       <MapContainer
         center={[startLocation[1], startLocation[0]]}
         zoom={6}

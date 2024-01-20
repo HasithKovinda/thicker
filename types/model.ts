@@ -24,7 +24,6 @@ export type TourModel = Document & {
   images: string[];
   createdAt: Date;
   startDates: Date[];
-  secretTour: boolean;
   startLocation: {
     type: "Point";
     coordinates: [number, number];
@@ -32,7 +31,7 @@ export type TourModel = Document & {
     description: string;
   };
   locations: Location[];
-  guides: Types.ObjectId[];
+  guides: userModel[];
 };
 
 export type userModel = Document & {

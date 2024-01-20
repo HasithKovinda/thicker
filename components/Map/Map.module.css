@@ -1,9 +1,17 @@
 .section {
-  margin-top: 3rem;
-  height: 40rem;
+  margin-top: 5rem;
+  height: 50rem;
+  z-index: 0;
+  overflow: hidden;
+  /* position: relative; */
   /* background: var(--clr-primary-2); */
+}
+
+.section div {
+  text-align: center;
 }
 
 .map {
   height: 100%;
+  position: relative;
 }

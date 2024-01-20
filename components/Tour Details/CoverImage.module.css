@@ -1,6 +1,39 @@
-.hero {
-  height: 40rem;
+.container {
+  min-height: 80vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.container h1 {
+  font-size: 6rem;
+  color: var(--clr-white);
+  font-weight: 900;
+}
+
+.container div {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.view {
+  padding: 0.8rem 1.2rem;
+  background: var(--clr-primary-1);
+  border: none;
+  transition: var(--transition);
+  box-shadow: var(--light-shadow);
+  border-radius: 10px;
+  outline: none;
+}
+
+.view:hover {
+  color: var(--color-dark-3);
+  background: var(--clr-primary-2);
+}
+
+/* .hero {
+  height: 30rem;
   width: 100%;
   object-fit: cover;
   display: block;
-}
+} */

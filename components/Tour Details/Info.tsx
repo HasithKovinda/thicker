@@ -1,11 +1,28 @@
 import styles from "./Info.module.css";
-export default function Info() {
+
+type InfoProps = {
+  duration: number;
+  groupSize: number;
+  startLocation: string;
+  difficulty: string;
+  price: number;
+  title: string;
+};
+
+export default function Info({
+  duration,
+  difficulty,
+  startLocation,
+  groupSize,
+  price,
+  title,
+}: InfoProps) {
   return (
     <section className={`section-center ${styles.section}`}>
       <div className={styles.heading}>
-        <h2>YELLOWSTONE & MT RUSHM</h2>
+        <h2>{title}</h2>
         <p>
-          <span>$120</span>per person
+          <span>${price}</span>per person
         </p>
       </div>
       <article className={styles.article}>
@@ -15,7 +32,7 @@ export default function Info() {
           </div>
           <div>
             <p>Duration</p>
-            <span>4 Days</span>
+            <span>{duration} Days</span>
           </div>
           <div className={styles.line}></div>
         </div>
@@ -25,7 +42,7 @@ export default function Info() {
           </div>
           <div>
             <p>Difficulty</p>
-            <span>Easy-Moderate</span>
+            <span>{difficulty}</span>
           </div>
           <div className={styles.line}></div>
         </div>
@@ -35,7 +52,7 @@ export default function Info() {
           </div>
           <div>
             <p>Group Size</p>
-            <span>30 Person</span>
+            <span>{groupSize} Person</span>
           </div>
           <div className={styles.line}></div>
         </div>
@@ -45,7 +62,7 @@ export default function Info() {
           </div>
           <div>
             <p>Location</p>
-            <span>Moscow, Russia</span>
+            <span>{startLocation}</span>
           </div>
         </div>
       </article>

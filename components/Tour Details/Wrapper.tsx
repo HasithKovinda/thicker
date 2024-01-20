@@ -1,9 +1,14 @@
+import { Guides } from "@/types/tour";
 import Description from "./Description";
 
-export default function Wrapper() {
+type WrapperPropType = {
+  guides: Guides[];
+};
+
+export default function Wrapper({ guides }: WrapperPropType) {
   return (
     <section>
-      <Description />
+      <Description guides={guides} />
     </section>
   );
 }

@@ -3,7 +3,7 @@
 import connect from "@/DB/db";
 import Tours from "@/model/Tours";
 import { Difficulty } from "@/types/enum";
-import { type ReviewModel, type TourModel } from "@/types/model";
+import { TourModel, type ReviewModel } from "@/types/model";
 import { type Filter, type PopularTour } from "@/types/tour";
 import {
   DEFAULT_DURATION,
@@ -110,8 +110,16 @@ export async function fetchAllTopReviews(): Promise<ReviewModel[]> {
 export async function fetchSingleTour(slug: string): Promise<TourModel | null> {
   try {
     await connect();
-    const tour: TourModel | null = await Tours.findOne({ slug }).exec();
-    return tour;
+    const rowData: TourModel | null = await Tours.findOne({ slug })
+      .populate({
+        path: "guides",
+        select: "-_id -__v -active",
+      })
+      .lean();
+    if (!rowData) return null;
+    const data: TourModel = JSON.parse(JSON.stringify(rowData));
+    // const tour: TourModel[] = rowData.toObject();
+    return data;
   } catch (error) {
     console.log(error);
     throw new Error("There was error in fetching data");
