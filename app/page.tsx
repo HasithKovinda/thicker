@@ -5,7 +5,6 @@ import WhyUs from "@/UI/WhyUs";
 import Tours from "@/components/Tour/Tours";
 import ReviewSection from "@/components/Review/ReviewSection";
 
-
 export default function Home() {
   return (
     <main>
@@ -13,7 +12,7 @@ export default function Home() {
       <About />
       <Tours />
       <WhyUs />
-      <ReviewSection/>
+      <ReviewSection />
       <NewLetter />
     </main>
   );

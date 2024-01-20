@@ -1,7 +1,9 @@
+"use client";
 import styles from "./SingleTour.module.css";
 import { FiClock, FiMapPin } from "react-icons/fi";
 import { BiSolidStar } from "react-icons/bi";
 import { type PopularTour } from "@/types/tour";
+import Link from "next/link";
 
 export default function SingleTour({
   name,
@@ -12,6 +14,7 @@ export default function SingleTour({
   ratingsQuantity,
   startLocation,
   summary,
+  slug,
 }: PopularTour) {
   console.log(Math.floor(ratingsAverage));
   return (
@@ -48,7 +51,9 @@ export default function SingleTour({
         <p>{summary}</p>
       </div>
       <div className={styles.footer}>
-        <button className={`btn ${styles.details}`}>View Details</button>
+        <Link className={`btn ${styles.details}`} href={`tours/${slug}`}>
+          View Details
+        </Link>
       </div>
     </article>
   );

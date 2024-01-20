@@ -1,0 +1,9 @@
+.section {
+  margin-top: 3rem;
+  height: 40rem;
+  /* background: var(--clr-primary-2); */
+}
+
+.map {
+  height: 100%;
+}

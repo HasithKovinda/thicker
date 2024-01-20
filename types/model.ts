@@ -1,7 +1,7 @@
 import { Document, Schema, Types } from "mongoose";
 import { Difficulty } from "./enum";
 
-type Location = {
+export type Location = {
   type: "Point";
   coordinates: [number, number];
   address: string;
@@ -10,7 +10,7 @@ type Location = {
 
 export type TourModel = Document & {
   name: string;
-  slug?: string;
+  slug: string;
   duration: number;
   maxGroupSize: number;
   difficulty: Difficulty;
@@ -35,21 +35,18 @@ export type TourModel = Document & {
   guides: Types.ObjectId[];
 };
 
-
 export type userModel = Document & {
   name: string;
-  email:string
-  password: string
-  role:string
-  photo:string
-}
+  email: string;
+  password: string;
+  role: string;
+  photo: string;
+};
 
 export type ReviewModel = Document & {
   review: string;
-  rating:number
-  user: userModel
-  tour: Types.ObjectId
-  createdAt:Date
-}
-
-
+  rating: number;
+  user: userModel;
+  tour: Types.ObjectId;
+  createdAt: Date;
+};

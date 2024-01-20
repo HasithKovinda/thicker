@@ -3,7 +3,7 @@
 import connect from "@/DB/db";
 import Tours from "@/model/Tours";
 import { Difficulty } from "@/types/enum";
-import {type ReviewModel, type TourModel } from "@/types/model";
+import { type ReviewModel, type TourModel } from "@/types/model";
 import { type Filter, type PopularTour } from "@/types/tour";
 import {
   DEFAULT_DURATION,
@@ -12,7 +12,7 @@ import {
   DEFAULT_RATING,
 } from "./constant";
 import Review from "@/model/review";
-import User from "@/model/user";
+import User from "../model/user";
 
 export async function fetchAllTours(): Promise<PopularTour[]> {
   await connect();
@@ -20,6 +20,7 @@ export async function fetchAllTours(): Promise<PopularTour[]> {
   const tourList: PopularTour[] = tours.map((tour) => {
     return {
       name: tour.name,
+      slug: tour.slug,
       duration: tour.duration,
       price: tour.price,
       startLocation: tour.startLocation.description,
@@ -45,6 +46,7 @@ export async function fetchMostPopularTour(): Promise<PopularTour[]> {
   const tourList: PopularTour[] = mostPopularTour.map((tour) => {
     return {
       name: tour.name,
+      slug: tour.slug,
       duration: tour.duration,
       price: tour.price,
       startLocation: tour.startLocation.description,
@@ -66,6 +68,7 @@ export async function filterTours({
   rating,
   difficulty,
 }: Filter): Promise<PopularTour[]> {
+  await connect();
   let tours: PopularTour[] = await fetchAllTours();
   if (
     !(price !== DEFAULT_PRICE) &&
@@ -94,9 +97,23 @@ export async function filterTours({
   return tours;
 }
 
+export async function fetchAllTopReviews(): Promise<ReviewModel[]> {
+  await connect();
+  const allReviews: ReviewModel[] = await Review.find({ rating: { $eq: 5 } })
+    .limit(10)
+    .populate({ path: "user" })
+    .lean();
+  const data: ReviewModel[] = JSON.parse(JSON.stringify(allReviews));
+  return data;
+}
 
-export async function fetchAllTopReviews(){
-  const allReviews:ReviewModel[]=await Review.find({rating:{ $eq: 5 }}).limit(10).populate({path:'user'}).lean()
-  const data:ReviewModel[] =JSON.parse(JSON.stringify(allReviews))
-  return data
+export async function fetchSingleTour(slug: string): Promise<TourModel | null> {
+  try {
+    await connect();
+    const tour: TourModel | null = await Tours.findOne({ slug }).exec();
+    return tour;
+  } catch (error) {
+    console.log(error);
+    throw new Error("There was error in fetching data");
+  }
 }

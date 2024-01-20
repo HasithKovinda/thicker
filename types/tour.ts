@@ -2,6 +2,7 @@ import { Difficulty } from "./enum";
 
 export type PopularTour = {
   name: string;
+  slug: string;
   duration: number;
   price: number;
   startLocation: string;
@@ -19,4 +20,9 @@ export type Filter = {
   groupSize: number;
   rating: number;
   difficulty: Difficulty;
+};
+
+export type MapLocation = {
+  coordinates: [number, number];
+  description: string;
 };
