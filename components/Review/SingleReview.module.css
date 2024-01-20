@@ -39,11 +39,13 @@
 .footer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
   margin-top: 1rem;
 }
 
 .footer span {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: bold;
   color: #000;
 }

@@ -1,0 +1,87 @@
+.signUp {
+  margin: 3rem auto;
+  padding: 1.6rem;
+  background: var(--color-light-2);
+  width: 30%;
+  border-radius: 20px;
+  box-shadow: var(--dark-shadow);
+}
+
+.signUp p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.signUp span {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.container > div label {
+  display: block;
+  letter-spacing: 1.2px;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.container > div input {
+  font-family: var(--ff-third);
+  width: 100%;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.4rem;
+  letter-spacing: 1.2px;
+  border: none;
+  outline: none;
+  box-shadow: var(--light-shadow);
+  border-radius: 10px;
+}
+
+.container > div input:focus {
+  outline: var(--clr-primary-1);
+  border-bottom: 4px solid var(--clr-primary-1);
+}
+
+.container > div input:focus:invalid {
+  border-bottom: 4px solid var(--danger);
+}
+
+.signUp-btn {
+  padding: 0.8rem 1.2rem;
+  /* border: none; */
+  border: 1px solid var(--clr-primary-1);
+  outline: none;
+  color: var(--clr-white);
+  letter-spacing: 1.2px;
+  background: var(--clr-primary-1);
+  box-shadow: var(--light-shadow);
+  font-size: 1.3rem;
+  border-radius: 10px;
+  transition: var(--transition);
+  margin-bottom: 1rem;
+}
+
+.signUp-btn:hover {
+  color: var(--color-dark);
+  background: transparent;
+  border: 1px solid var(--clr-primary-1);
+}
+
+.login {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: normal;
+  color: var(--color-dark-2);
+  text-align: center;
+}
+
+.login a {
+  text-align: center;
+  text-decoration: underline;
+  color: var(--clr-primary-3);
+}
