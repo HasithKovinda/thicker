@@ -11,7 +11,7 @@ export default async function page() {
   return (
     <main>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <TourCover />
+        {/* <TourCover /> */}
         <TourContent />
       </HydrationBoundary>
     </main>

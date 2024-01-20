@@ -2,12 +2,13 @@
 
 import { BiSolidStar } from "react-icons/bi";
 import styles from "./StarMatrix.module.css";
+import { ReactHTML, ReactNode } from "react";
 interface StarMatrixProps {
   rows: number;
   handleRating: (rating: number) => void;
 }
 
-const a = (
+const starStroke = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -24,7 +25,7 @@ const a = (
   </svg>
 );
 
-const b = (
+const startBackground = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
@@ -38,11 +39,11 @@ const b = (
 
 export default function StarMatrix({ rows, handleRating }: StarMatrixProps) {
   const renderStars = (row: number, totalStars: number) => {
-    const stars = [];
+    const stars: ReactNode[] = [];
     for (let i = 0; i < totalStars; i++) {
       const isHighlighted = i < row;
-      const c = isHighlighted ? b : a;
-      stars.push(c);
+      const rating = isHighlighted ? startBackground : starStroke;
+      stars.push(<span key={i}>{rating}</span>);
     }
     return stars;
   };
@@ -53,14 +54,14 @@ export default function StarMatrix({ rows, handleRating }: StarMatrixProps) {
 
   return (
     <div className={styles.starMatrix}>
-      {[...Array(rows).keys()].map((row) => (
+      {[...Array(rows).keys()].map((row, index) => (
         <div
-          key={row}
+          key={index}
           className={styles.starRow}
           onClick={() => handleClick(row)}
         >
-          {renderStars(row + 1, 5)}
-          <span>& Up</span>
+          <span>{renderStars(row + 1, 5)}</span>
+          <span>{index === 4 ? "" : "& Up"}</span>
         </div>
       ))}
     </div>

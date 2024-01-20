@@ -37,6 +37,8 @@ export default function PageContent({ tours }: PageContentProps) {
     };
   });
 
+  console.log(tours._id);
+
   const tourGuides: Guides[] = guides.map((guide) => {
     return {
       name: guide.name,
@@ -69,7 +71,7 @@ export default function PageContent({ tours }: PageContentProps) {
           startLocation={startLocation.coordinates}
         />
       </div>
-      <Review title="Review For The Tour" />
+      <Review title="Review For The Tour" id={tours._id} />
     </main>
   );
 }

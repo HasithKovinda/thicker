@@ -10,13 +10,13 @@ import { userModel } from "@/types/model";
 
 type reviewProps = {
   title: string;
-  //  reviews:ReviewModel []
+  id?: string;
 };
 
-export default function Review({ title }: reviewProps) {
+export default function Review({ title, id }: reviewProps) {
   const { data, isPending } = useQuery({
-    queryKey: ["review"],
-    queryFn: () => fetchAllTopReviews(),
+    queryKey: ["review", id],
+    queryFn: () => fetchAllTopReviews(id),
   });
   const [imageIndex, setImageIndex] = useState(0);
   useEffect(() => {
@@ -94,6 +94,7 @@ export default function Review({ title }: reviewProps) {
                   photo={review.user.photo}
                   rating={review.rating}
                   review={review.review}
+                  name={review.user.name}
                   key={index}
                 />
               );

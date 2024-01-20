@@ -9,6 +9,7 @@ export type Location = {
 };
 
 export type TourModel = Document & {
+  _id: string;
   name: string;
   slug: string;
   duration: number;

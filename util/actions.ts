@@ -97,15 +97,35 @@ export async function filterTours({
   return tours;
 }
 
-export async function fetchAllTopReviews(): Promise<ReviewModel[]> {
+export async function fetchAllTopReviews(id?: string): Promise<ReviewModel[]> {
+  console.log(id);
   await connect();
-  const allReviews: ReviewModel[] = await Review.find({ rating: { $eq: 5 } })
-    .limit(10)
+  const options = id
+    ? { rating: { $eq: 5 }, tour: id }
+    : { rating: { $eq: 5 } };
+  console.log(options);
+
+  const allReviews: ReviewModel[] = await Review.find(options)
+    .limit(20)
     .populate({ path: "user" })
     .lean();
   const data: ReviewModel[] = JSON.parse(JSON.stringify(allReviews));
+  console.log(data);
+  console.log(data.length);
   return data;
 }
+
+// export async function fetchReviewsForTour(id: string): Promise<ReviewModel[]> {
+//   await connect();
+//   const reviews: ReviewModel[] = await Review.find({
+//     rating: { $eq: 5 },
+//     tour: id,
+//   })
+//     .populate({ path: "user" })
+//     .lean();
+//   const data: ReviewModel[] = JSON.parse(JSON.stringify(reviews));
+//   return data;
+// }
 
 export async function fetchSingleTour(slug: string): Promise<TourModel | null> {
   try {
