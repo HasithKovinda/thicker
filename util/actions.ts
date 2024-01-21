@@ -1,9 +1,9 @@
 "use server";
-
+import bcrypt from "bcrypt";
 import connect from "@/DB/db";
 import Tours from "@/model/Tours";
 import { Difficulty } from "@/types/enum";
-import { TourModel, type ReviewModel } from "@/types/model";
+import { TourModel, UserModel, type ReviewModel } from "@/types/model";
 import { type Filter, type PopularTour } from "@/types/tour";
 import {
   DEFAULT_DURATION,
@@ -13,9 +13,21 @@ import {
 } from "./constant";
 import Review from "@/model/review";
 import user from "@/model/user";
-// import user from "@/model/user";
+import User from "@/model/user";
 
-// import UserModel from "@/model/user";
+//Auth Sever Actions
+
+export async function signUpUser(user: Omit<UserModel, "photo" | "role">) {
+  const role = "user";
+
+  try {
+    const password = await bcrypt.hash(user.password, 10);
+    await User.create({ ...user, password, role });
+    return "user created successfully";
+  } catch (error) {
+    throw new Error("Can not create the user");
+  }
+}
 
 export async function fetchAllTours(): Promise<PopularTour[]> {
   await connect();
@@ -101,20 +113,15 @@ export async function filterTours({
 }
 
 export async function fetchAllTopReviews(id?: string): Promise<ReviewModel[]> {
-  console.log(id);
   await connect();
   const options = id
     ? { rating: { $eq: 5 }, tour: id }
     : { rating: { $eq: 5 } };
-  console.log(options);
-
   const allReviews: ReviewModel[] = await Review.find(options)
     .limit(20)
     .populate({ path: "user" })
     .lean();
   const data: ReviewModel[] = JSON.parse(JSON.stringify(allReviews));
-  console.log(data);
-  console.log(data.length);
   return data;
 }
 

@@ -1,7 +1,15 @@
-import mongoose from "mongoose";
 import { UserModel } from "@/types/model";
+import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema<UserModel>({
+interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  photo: string;
+}
+
+const userSchema = new mongoose.Schema<IUser>({
   name: {
     type: String,
     trim: true,
@@ -29,12 +37,12 @@ const userSchema = new mongoose.Schema<UserModel>({
   },
 });
 
-let User: mongoose.Model<UserModel>;
+let User: mongoose.Model<IUser>;
 try {
   // Try to get the existing model from mongoose
-  User = mongoose.model<UserModel>("User");
+  User = mongoose.model<IUser>("User");
 } catch {
   // If the model doesn't exist, define it
-  User = mongoose.model<UserModel>("User", userSchema);
+  User = mongoose.model<IUser>("User", userSchema);
 }
 export default User;

@@ -5,6 +5,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import styles from "./Auth.module.css";
+import { useMutation } from "@tanstack/react-query";
+import { signUpUser } from "@/util/actions";
+import { UserModel } from "@/types/model";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const signUpFromSchema = z
   .object({
@@ -34,8 +39,25 @@ export default function SignUp() {
     formState: { errors },
   } = useForm<InputTypes>({ resolver: zodResolver(signUpFromSchema) });
 
+  const router = useRouter();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: (user: UserModel) => signUpUser(user),
+    onSuccess: (data) => {
+      console.log("🚀 ~ SignUp ~ data:", data);
+      toast.success("User sign up successfully ");
+      reset();
+      router.push("/");
+    },
+    onError: (err) => {
+      console.log("🚀 ~ SignUp ~ err:", err);
+      toast.error("Something went wrong");
+    },
+  });
+
   async function signUp(data: InputTypes) {
-    console.log(data);
+    const { passwordConfirm, ...user } = data;
+    mutate(user as UserModel);
   }
 
   return (
@@ -110,14 +132,18 @@ export default function SignUp() {
           )}
         </div>
         <div>
-          <button type="submit" className={`btn ${styles["signUp-btn"]}`}>
-            Sign Up &#x261B;
+          <button
+            type="submit"
+            className={`btn ${styles["signUp-btn"]}`}
+            disabled={isPending}
+          >
+            {isPending ? "Loading..." : <span>Sign Up &#x261B;</span>}
           </button>
         </div>
       </form>
       <div className={styles.login}>
         <span>
-          Already have an account? <Link href="/login">Login In</Link>
+          Already have an account? <Link href="/api/auth/signin">Login In</Link>
         </span>
       </div>
     </section>

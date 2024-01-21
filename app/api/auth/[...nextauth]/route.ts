@@ -1,10 +1,17 @@
 import connect from "@/DB/db";
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions, User as NextAuthUser } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import User from "@/model/user";
+import { UserModel } from "@/types/model";
 
-export const authOptions = {
+type ExtendedUser = NextAuthUser & UserModel;
+
+export const authOptions: AuthOptions = {
+  secret: process.env.AUTH_SECRET,
+  pages: {
+    signIn: "/login",
+  },
   //   Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -25,22 +32,38 @@ export const authOptions = {
         if (!user) throw new Error("email or password not match!");
 
         const isPasswordMatch = await bcrypt.compare(
-          user.password,
-          credentials.password
+          credentials.password,
+          user.password
         );
 
-        if (!isPasswordMatch) return null;
+        if (!isPasswordMatch) throw new Error("email or password not match!");
 
         return {
-          id: user._id,
+          id: user.id,
           name: user.name,
           email: user.email,
           photo: user.photo,
+          role: user.role,
         };
       },
     }),
     // ...add more providers here
   ],
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) token.user = user as ExtendedUser;
+      return token;
+    },
+    async session({ token, session }) {
+      session.user = token.user;
+      return session;
+    },
+  },
 };
 
-export default NextAuth(authOptions);
+// export default NextAuth(authOptions);
+
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };

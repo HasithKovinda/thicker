@@ -3,6 +3,7 @@
 import styles from "./NavBar.module.css";
 import { useEffect, useState } from "react";
 import NavLink from "@/components/NavLink";
+import Auth from "@/components/Auth/Auth";
 
 export default function NavBar() {
   const [isNavFixed, setIsNavFixed] = useState(false);
@@ -35,12 +36,7 @@ export default function NavBar() {
           <li>
             <NavLink herf="/tours">Tours</NavLink>
           </li>
-          <li>
-            <NavLink herf="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink herf="/signUp">SignUp</NavLink>
-          </li>
+          <Auth />
         </ul>
       </section>
     </nav>

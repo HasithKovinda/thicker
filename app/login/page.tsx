@@ -1,5 +1,11 @@
 import Login from "@/components/Auth/Login";
 
-export default function page() {
-  return <Login />;
+type PageProps = {
+  searchParams: {
+    callbackUrl: string;
+  };
+};
+
+export default function page({ searchParams }: PageProps) {
+  return <Login callbackUrl={searchParams.callbackUrl} />;
 }

@@ -5,6 +5,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import styles from "./Auth.module.css";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
+type LoginProps = {
+  callbackUrl?: string;
+};
 
 const signUpFromSchema = z.object({
   email: z.string().email("please add a valid email address"),
@@ -16,16 +23,26 @@ const signUpFromSchema = z.object({
 
 type InputTypes = z.infer<typeof signUpFromSchema>;
 
-export default function Login() {
+export default function Login({ callbackUrl }: LoginProps) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<InputTypes>({ resolver: zodResolver(signUpFromSchema) });
 
   async function login(data: InputTypes) {
-    console.log(data);
+    const res = await signIn("credentials", {
+      redirect: false,
+      username: data.email,
+      password: data.password,
+    });
+    if (!res?.ok) {
+      toast.error(res?.error!);
+      return;
+    }
+    toast.success("Login Successfully Done");
+    router.push(callbackUrl ? callbackUrl : "/");
   }
   return (
     <section className={`section-center ${styles.signUp}`}>
@@ -65,8 +82,12 @@ export default function Login() {
           )}
         </div>
         <div>
-          <button type="submit" className={`btn ${styles["signUp-btn"]}`}>
-            Login
+          <button
+            type="submit"
+            className={`btn ${styles["signUp-btn"]}`}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Loading.." : "Login"}
           </button>
         </div>
       </form>
