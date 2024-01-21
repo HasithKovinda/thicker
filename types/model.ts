@@ -32,10 +32,10 @@ export type TourModel = Document & {
     description: string;
   };
   locations: Location[];
-  guides: userModel[];
+  guides: UserModel[];
 };
 
-export type userModel = Document & {
+export type UserModel = Document & {
   name: string;
   email: string;
   password: string;
@@ -46,7 +46,7 @@ export type userModel = Document & {
 export type ReviewModel = Document & {
   review: string;
   rating: number;
-  user: userModel;
+  user: UserModel;
   tour: Types.ObjectId;
   createdAt: Date;
 };

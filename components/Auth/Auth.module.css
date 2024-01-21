@@ -30,24 +30,24 @@
   margin-bottom: 0.8rem;
 }
 
-.container > div input {
+.input {
   font-family: var(--ff-third);
   width: 100%;
   padding: 0.7rem 1.2rem;
   font-size: 1.4rem;
   letter-spacing: 1.2px;
-  border: none;
+  border: transparent;
   outline: none;
   box-shadow: var(--light-shadow);
   border-radius: 10px;
 }
 
-.container > div input:focus {
+.input:focus {
   outline: var(--clr-primary-1);
   border-bottom: 4px solid var(--clr-primary-1);
 }
 
-.container > div input:focus:invalid {
+.input:focus:invalid {
   border-bottom: 4px solid var(--danger);
 }
 
@@ -84,4 +84,15 @@
   text-align: center;
   text-decoration: underline;
   color: var(--clr-primary-3);
+}
+
+.error {
+  color: var(--danger);
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.error-input.input:focus,
+.error-input.input {
+  border-bottom: 4px solid var(--danger);
 }

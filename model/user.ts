@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { userModel } from "@/types/model";
+import { UserModel } from "@/types/model";
 
-const userSchema = new mongoose.Schema<userModel>({
+const userSchema = new mongoose.Schema<UserModel>({
   name: {
     type: String,
     trim: true,
@@ -29,4 +29,12 @@ const userSchema = new mongoose.Schema<userModel>({
   },
 });
 
-export default mongoose.models.User || mongoose.model("User", userSchema);
+let User: mongoose.Model<UserModel>;
+try {
+  // Try to get the existing model from mongoose
+  User = mongoose.model<UserModel>("User");
+} catch {
+  // If the model doesn't exist, define it
+  User = mongoose.model<UserModel>("User", userSchema);
+}
+export default User;

@@ -12,7 +12,10 @@ import {
   DEFAULT_RATING,
 } from "./constant";
 import Review from "@/model/review";
-import User from "../model/user";
+import user from "@/model/user";
+// import user from "@/model/user";
+
+// import UserModel from "@/model/user";
 
 export async function fetchAllTours(): Promise<PopularTour[]> {
   await connect();
@@ -114,18 +117,6 @@ export async function fetchAllTopReviews(id?: string): Promise<ReviewModel[]> {
   console.log(data.length);
   return data;
 }
-
-// export async function fetchReviewsForTour(id: string): Promise<ReviewModel[]> {
-//   await connect();
-//   const reviews: ReviewModel[] = await Review.find({
-//     rating: { $eq: 5 },
-//     tour: id,
-//   })
-//     .populate({ path: "user" })
-//     .lean();
-//   const data: ReviewModel[] = JSON.parse(JSON.stringify(reviews));
-//   return data;
-// }
 
 export async function fetchSingleTour(slug: string): Promise<TourModel | null> {
   try {
