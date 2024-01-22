@@ -1,5 +1,6 @@
+import ProfileInformation from "@/components/Dashboard/Profile/ProfileInformation";
 import React from "react";
 
 export default function page() {
-  return <h1>DashBord</h1>;
+  return <ProfileInformation />;
 }

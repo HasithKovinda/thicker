@@ -1,0 +1,6 @@
+.section {
+  background: var(--color-grey-1);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: var(--light-shadow);
+}

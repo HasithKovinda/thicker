@@ -1,0 +1,32 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-grey-1);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: var(--light-shadow);
+}
+
+.nav-heading {
+  display: flex;
+  align-items: center;
+}
+
+.nav-heading button {
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  background: var(--color-dark);
+  color: var(--clr-white);
+  padding: 0.5rem 0.9rem;
+  transition: var(--transition);
+  border: 1px solid var(--color-dark);
+  border-radius: 10px;
+}
+
+.nav-heading button:hover {
+  color: var(--color-dark);
+  background: transparent;
+  border: 1px solid var(--color-dark);
+}

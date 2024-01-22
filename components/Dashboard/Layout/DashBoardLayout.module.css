@@ -5,4 +5,5 @@
   column-gap: 3rem;
   row-gap: 2rem;
   padding: 2rem 2rem 0 2rem;
+  align-items: stretch;
 }

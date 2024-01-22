@@ -1,0 +1,74 @@
+.sidebar {
+  grid-row: 1/-1;
+  background: var(--color-grey-1);
+  min-height: calc(100vh - 2rem);
+  padding: 1rem 0;
+  width: 20rem;
+  border-radius: 20px;
+  box-shadow: var(--light-shadow);
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+}
+
+.logo-container {
+  text-align: center;
+}
+
+.logo {
+  height: 120px;
+  width: 120px;
+}
+
+.profile {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}
+
+.profile-info {
+  text-align: center;
+}
+.profile-info p {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.section-container {
+  margin-top: 1rem;
+}
+
+.section-container li {
+  padding: 1rem 0;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  gap: 10px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.section-container li:hover {
+  padding-left: 2rem;
+}
+
+.icon {
+  font-size: 1.3rem;
+}
+
+.section-container span {
+  font-size: 1.1rem;
+  flex-grow: 1;
+}
