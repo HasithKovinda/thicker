@@ -28,13 +28,19 @@ export default function NavBar() {
         </div>
         <ul>
           <li>
-            <NavLink herf="/">Home</NavLink>
+            <NavLink type="link" path="/">
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink herf="/about">About</NavLink>
+            <NavLink type="link" path="/about">
+              About
+            </NavLink>
           </li>
           <li>
-            <NavLink herf="/tours">Tours</NavLink>
+            <NavLink type="link" path="/tours">
+              Tours
+            </NavLink>
           </li>
           <Auth />
         </ul>

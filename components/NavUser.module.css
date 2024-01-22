@@ -1,0 +1,14 @@
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: var(--color-dark-3);
+  padding: 0 0.5rem;
+}
+
+.profile {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}

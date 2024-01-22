@@ -33,10 +33,10 @@
 .nav ul {
   justify-self: end;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: auto auto auto 1fr auto;
   align-items: center;
   justify-content: center;
-  /* column-gap: 30px; */
+  column-gap: 20px;
 }
 
 .nav li {

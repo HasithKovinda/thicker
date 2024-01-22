@@ -8,14 +8,24 @@
   padding: 0.7rem 0.7rem;
 }
 
-.active {
-  background: var(--clr-primary-1);
-}
-
 .link:hover {
   color: var(--clr-primary-1);
 }
 
 .active.link:hover {
   color: var(--clr-white);
+}
+
+/* .login-btn .active {
+  background: transparent;
+} */
+
+.login-btn {
+  border: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.active {
+  background: var(--clr-primary-1);
 }

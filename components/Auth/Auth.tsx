@@ -1,29 +1,44 @@
 "use client";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import NavLink from "../NavLink";
+import NavUser from "../NavUser";
 
 export default function Auth() {
   const { data: session } = useSession();
-
   return (
     <>
       {session && session.user ? (
         <>
           <li>
-            <span>{session.user.name}</span>
+            <NavUser name={session.user.name} image={session.user?.photo} />
           </li>
           <li>
-            <NavLink herf="/api/auth/signout">Sign out</NavLink>
+            <NavLink
+              type="button"
+              path="/login"
+              onClick={() =>
+                signOut({ callbackUrl: "http://localhost:3000/login" })
+              }
+            >
+              Sign out
+            </NavLink>
+            {/* <NavLink herf="/api/auth/signout">Sign out</NavLink> */}
           </li>
         </>
       ) : (
         <>
           <li>
-            <button onClick={() => signIn()}>Login</button>
-            {/* <NavLink herf="/api/auth/signin">Login</NavLink> */}
+            <NavLink type="button" path="/login" onClick={() => signIn()}>
+              Login
+            </NavLink>
+            {/* <NavLink type="link" link="/api/auth/signin">
+              Login
+            </NavLink> */}
           </li>
           <li>
-            <NavLink herf="/signUp">SignUp</NavLink>
+            <NavLink type="link" path="/signUp">
+              SignUp
+            </NavLink>
           </li>
         </>
       )}

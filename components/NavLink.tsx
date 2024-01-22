@@ -2,23 +2,45 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { ComponentPropsWithoutRef, PropsWithoutRef, ReactNode } from "react";
 import styles from "./NavLink.module.css";
 
-type NavLinkProps = {
+type ButtonProps = {
+  type: "button";
+} & ComponentPropsWithoutRef<"button"> &
+  BaseProps;
+
+type BaseProps = {
   children: ReactNode;
-  herf: string;
+  path: string;
 };
 
-export default function NavLink({ herf, children }: NavLinkProps) {
+type LinkProps = {
+  type: "link";
+} & BaseProps;
+
+type NavLinkProps = ButtonProps | LinkProps;
+
+export default function NavLink(props: NavLinkProps) {
+  const { children, path } = props;
   const pathName = usePathname();
-  const activePath = herf === pathName ? true : false;
+  const activePath = path === pathName ? true : false;
+  const classActive = activePath
+    ? `${styles.link} ${styles.active}`
+    : styles.link;
+  if (props.type === "link")
+    return (
+      <Link
+        href={props.type === "link" ? props.path : ""}
+        className={classActive}
+      >
+        {children}
+      </Link>
+    );
+
   return (
-    <Link
-      href={herf}
-      className={activePath ? `${styles.link} ${styles.active}` : styles.link}
-    >
+    <button className={`${styles["login-btn"]} ${classActive}`} {...props}>
       {children}
-    </Link>
+    </button>
   );
 }
