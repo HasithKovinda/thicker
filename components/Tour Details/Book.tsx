@@ -1,8 +1,12 @@
+import { useQueryClient } from "@tanstack/react-query";
 import styles from "./Book.module.css";
 import { BiUser, BiCalendar, BiEnvelope, BiPhone } from "react-icons/bi";
 import { FiUsers, FiBookmark } from "react-icons/fi";
+import { UserModel } from "@/types/model";
 
 export default function Book() {
+  const queryClient = useQueryClient();
+  const queryData = queryClient.getQueryData<UserModel>(["user"]);
   return (
     <aside className={styles.booking}>
       <section className={styles.container}>
@@ -39,7 +43,9 @@ export default function Book() {
             <FiUsers className={styles.icon} />
           </div>
           <div>
-            <button className={`btn ${styles["book-btn"]}`}>Book now</button>
+            <button className={`btn ${styles["book-btn"]}`}>
+              {queryData ? "Book a tour" : "Login to Book a tour"}
+            </button>
           </div>
         </form>
       </section>

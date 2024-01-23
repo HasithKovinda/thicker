@@ -12,6 +12,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { changeProfile, getUserSession, uploadImage } from "@/util/actions";
 import toast from "react-hot-toast";
 import Loading from "@/UI/Loading";
+import { UserModel } from "@/types/model";
 
 type ImageType = {
   submit: boolean;
@@ -43,10 +44,7 @@ export default function ProfileInformation() {
   } = useForm<InputTypes>({ resolver: zodResolver(profileFromSchema) });
 
   const queryClient = useQueryClient();
-  const { data: queryData } = useQuery({
-    queryKey: ["user"],
-    queryFn: () => getUserSession(),
-  });
+  const queryData = queryClient.getQueryData<UserModel>(["user"]);
   const [dataImg, setData] = useState("");
   const { mutate, isPending } = useMutation({
     mutationFn: (data: ProfileSettings) => changeProfile(data),
