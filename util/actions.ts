@@ -21,12 +21,6 @@ import { v2 as cloudinary } from "cloudinary";
 
 //Auth Sever Actions
 
-cloudinary.config({
-  cloud_name: "dehxgov2k",
-  api_key: "583217883931599",
-  api_secret: "wnS6GeeLavMgpjH1QrDSFewXs9c",
-});
-
 export async function signUpUser(user: Omit<UserModel, "photo" | "role">) {
   const role = "user";
 
@@ -183,7 +177,22 @@ export async function fetchSingleTour(slug: string): Promise<TourModel | null> {
   }
 }
 
-export async function uploadImage(baseString: string): Promise<string> {
+export async function uploadImage(
+  baseString: string,
+  fileName: string
+): Promise<string> {
+  const { CLOUD_NAME, API_KEY, API_SECRET } = process.env;
+
+  if (!CLOUD_NAME || !API_KEY || API_SECRET) {
+    throw new Error("Please setup env values");
+  }
+
+  cloudinary.config({
+    cloud_name: CLOUD_NAME,
+    api_key: API_KEY,
+    api_secret: API_SECRET,
+  });
+
   type CloudinaryUploadResult = {
     url: string;
     secure_url: string;
@@ -192,7 +201,7 @@ export async function uploadImage(baseString: string): Promise<string> {
 
   const blob = new Blob([arrayBuffer]);
 
-  const file = new File([blob], "filename");
+  const file = new File([blob], fileName);
 
   const arrayBufferTwo = await (file as Blob).arrayBuffer();
 

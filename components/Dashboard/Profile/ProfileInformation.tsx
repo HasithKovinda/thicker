@@ -63,7 +63,7 @@ export default function ProfileInformation() {
     let photo;
     if (image.submit || !image.file) {
       try {
-        photo = await uploadImage(dataImg);
+        photo = await uploadImage(dataImg, image.file?.name!);
       } catch (error) {
         if (error instanceof Error) toast.error(error.message);
       }
@@ -96,7 +96,6 @@ export default function ProfileInformation() {
           setData(base64String);
         }
       };
-
       reader.readAsDataURL(e.target.files[0]);
       setImage({ submit: true, file: e.target.files[0] });
     }
