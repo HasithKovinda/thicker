@@ -14,8 +14,18 @@ import {
 import Review from "@/model/review";
 import user from "@/model/user";
 import User from "@/model/user";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import axios from "axios";
+import { v2 as cloudinary } from "cloudinary";
 
 //Auth Sever Actions
+
+cloudinary.config({
+  cloud_name: "dehxgov2k",
+  api_key: "583217883931599",
+  api_secret: "wnS6GeeLavMgpjH1QrDSFewXs9c",
+});
 
 export async function signUpUser(user: Omit<UserModel, "photo" | "role">) {
   const role = "user";
@@ -26,6 +36,35 @@ export async function signUpUser(user: Omit<UserModel, "photo" | "role">) {
     return "user created successfully";
   } catch (error) {
     throw new Error("Can not create the user");
+  }
+}
+
+export async function changeProfile({ name, email, photo }: ProfileSettings) {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user) throw new Error("User not found");
+  const id = session.user.id;
+  try {
+    const updateData: ProfileSettings = { name, email };
+    if (photo) {
+      updateData.photo = photo;
+    }
+    const user = await User.findByIdAndUpdate(id, updateData).lean();
+    return JSON.parse(JSON.stringify(user));
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getUserSession(): Promise<UserModel | null> {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) return null;
+    const user = await User.findById(session.user.id).lean();
+    return JSON.parse(JSON.stringify(user));
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 }
 
@@ -141,5 +180,46 @@ export async function fetchSingleTour(slug: string): Promise<TourModel | null> {
   } catch (error) {
     console.log(error);
     throw new Error("There was error in fetching data");
+  }
+}
+
+export async function uploadImage(baseString: string): Promise<string> {
+  type CloudinaryUploadResult = {
+    url: string;
+    secure_url: string;
+  };
+  const arrayBuffer = Buffer.from(baseString, "base64").buffer;
+
+  const blob = new Blob([arrayBuffer]);
+
+  const file = new File([blob], "filename");
+
+  const arrayBufferTwo = await (file as Blob).arrayBuffer();
+
+  const buffer = new Uint8Array(arrayBufferTwo);
+  try {
+    const photo: CloudinaryUploadResult = await new Promise(
+      (resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream(
+            {
+              tags: ["user-profile-image"],
+            },
+            function (error, result) {
+              if (error) {
+                reject(error);
+                return;
+              }
+              resolve(result!);
+            }
+          )
+          .end(buffer);
+      }
+    );
+    const data = photo.url;
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Cannot upload the image!");
   }
 }

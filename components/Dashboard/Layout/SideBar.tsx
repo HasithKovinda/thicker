@@ -1,16 +1,27 @@
+"use client";
+
 import { FiStar, FiBriefcase, FiCreditCard, FiSettings } from "react-icons/fi";
 import styles from "./SideBar.module.css";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useQuery } from "@tanstack/react-query";
+import { getUserSession } from "@/util/actions";
 
 export default function SideBar() {
+  // const { data: session } = useSession();
+  const { data: queryData } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => getUserSession(),
+  });
+  const src = queryData?.photo ? queryData.photo : "assert/default.jpg";
   return (
     <aside className={styles.sidebar}>
       <div className={styles["logo-container"]}>
         <img src="/logo.svg" alt="logo" className={styles.logo} />
       </div>
       <div className={styles["profile-info"]}>
-        <img src="/assert/profile.jpg" alt="logo" className={styles.profile} />
-        <p>Hasith kovinda</p>
+        <img src={src} alt="logo" className={styles.profile} />
+        <p>{queryData?.name}</p>
         <span>User</span>
       </div>
       <ul className={styles["section-container"]}>

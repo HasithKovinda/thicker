@@ -8,6 +8,10 @@ import styles from "./Auth.module.css";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { getUserSession } from "@/util/actions";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import Loading from "@/UI/Loading";
 
 type LoginProps = {
   callbackUrl?: string;
@@ -31,6 +35,8 @@ export default function Login({ callbackUrl }: LoginProps) {
     formState: { errors, isSubmitting },
   } = useForm<InputTypes>({ resolver: zodResolver(signUpFromSchema) });
 
+  const queryClient = useQueryClient();
+
   async function login(data: InputTypes) {
     const res = await signIn("credentials", {
       redirect: false,
@@ -41,7 +47,9 @@ export default function Login({ callbackUrl }: LoginProps) {
       toast.error(res?.error!);
       return;
     }
+    queryClient.invalidateQueries({ queryKey: ["user"] });
     toast.success("Login Successfully Done");
+
     router.push(callbackUrl ? callbackUrl : "/");
   }
   return (
@@ -82,13 +90,17 @@ export default function Login({ callbackUrl }: LoginProps) {
           )}
         </div>
         <div>
-          <button
-            type="submit"
-            className={`btn ${styles["signUp-btn"]}`}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Loading.." : "Login"}
-          </button>
+          {isSubmitting ? (
+            <Loading />
+          ) : (
+            <button
+              type="submit"
+              className={`btn ${styles["signUp-btn"]}`}
+              disabled={isSubmitting}
+            >
+              Login
+            </button>
+          )}
         </div>
       </form>
       <div className={styles.login}>

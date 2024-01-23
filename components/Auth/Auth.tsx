@@ -2,15 +2,21 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import NavLink from "../NavLink";
 import NavUser from "../NavUser";
+import { useQuery } from "@tanstack/react-query";
+import { getUserSession } from "@/util/actions";
 
 export default function Auth() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const { data: queryData } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => getUserSession(),
+  });
   return (
     <>
-      {session && session.user ? (
+      {queryData ? (
         <>
           <li>
-            <NavUser name={session.user.name} image={session.user?.photo} />
+            <NavUser name={queryData.name} image={queryData.photo} />
           </li>
           <li>
             <NavLink
