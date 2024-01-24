@@ -5,7 +5,7 @@ import Review from "../Review/Reviews";
 import CoverImage from "../Tour Details/CoverImage";
 import Info from "../Tour Details/Info";
 import { Guides, MapLocation } from "@/types/tour";
-import { TourModel, userModel } from "@/types/model";
+import { TourModel } from "@/types/model";
 
 import dynamic from "next/dynamic";
 import { useRef } from "react";
@@ -64,7 +64,7 @@ export default function PageContent({ tours }: PageContentProps) {
         title={name}
         price={price}
       />
-      <Row guides={tourGuides} />
+      <Row guides={tourGuides} tourId={tours._id} price={price} />
       <div ref={ref}>
         <Map
           locations={mapLocations}

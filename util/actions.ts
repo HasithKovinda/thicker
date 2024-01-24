@@ -4,7 +4,7 @@ import connect from "@/DB/db";
 import Tours from "@/model/Tours";
 import { Difficulty } from "@/types/enum";
 import { TourModel, UserModel, type ReviewModel } from "@/types/model";
-import { type Filter, type PopularTour } from "@/types/tour";
+import { type BookingType, type Filter, type PopularTour } from "@/types/tour";
 import {
   DEFAULT_DURATION,
   DEFAULT_GROUP_SIZE,
@@ -12,12 +12,13 @@ import {
   DEFAULT_RATING,
 } from "./constant";
 import Review from "@/model/review";
-import user from "@/model/user";
 import User from "@/model/user";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
+import Booking from "@/model/booking";
+import { CgLayoutGrid } from "react-icons/cg";
 
 //Auth Sever Actions
 
@@ -50,12 +51,24 @@ export async function changeProfile({ name, email, photo }: ProfileSettings) {
   }
 }
 
-export async function getUserSession(): Promise<UserModel | null> {
+export async function getUserSession(): Promise<Omit<
+  UserModel,
+  "password"
+> | null> {
   try {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) return null;
-    const user = await User.findById(session.user.id).lean();
-    return JSON.parse(JSON.stringify(user));
+    const data = await User.findById(session.user.id).lean();
+    if (!data) return null;
+    const user: Omit<UserModel, "password"> = {
+      id: data._id.toString(),
+      name: data.name,
+      email: data.email,
+      photo: data.photo,
+      role: data.role,
+    };
+
+    return user;
   } catch (error) {
     console.log(error);
     return null;
@@ -231,4 +244,17 @@ export async function uploadImage(
     console.log(error);
     throw new Error("Cannot upload the image!");
   }
+}
+
+export async function createBooking(bookingData: Omit<BookingType, "id">) {
+  console.log("🚀 ~ createBooking ~ bookingData:", bookingData);
+  console.log("dasdsad");
+  try {
+    const booking = await Booking.create(bookingData);
+    return "Booking created successfully";
+  } catch (error) {
+    return null;
+    console.log(error);
+  }
+  // console.log("🚀 ~ createBooking ~ booking:", booking);
 }

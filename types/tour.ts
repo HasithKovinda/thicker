@@ -27,6 +27,17 @@ export type MapLocation = {
   description: string;
 };
 
+export type BookingType = {
+  id: string;
+  fullName: string;
+  email: string;
+  tourId: string;
+  userId: string;
+  price: number;
+  phoneNumber: string;
+  bookingDate: Date;
+};
+
 export type Guides = {
   name: string;
   role: string;

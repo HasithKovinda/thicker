@@ -46,7 +46,6 @@
 
 .input-container {
   position: relative;
-  margin-bottom: 1.2rem;
 }
 
 .icon {
@@ -63,15 +62,22 @@
 
 .form input[type="date"] {
   color: var(--clr-white);
-  /* width: 100%; */
+  width: 94%;
 }
 
-/* To style calendar icon */
+.form input[type="date"]:focus {
+  color: var(--color-dark);
+}
+
+.form input[type="date"]::-webkit-calendar-picker-indicator:focus {
+  filter: invert(83%) sepia(12%) saturate(4301%) hue-rotate(136deg)
+    brightness(84%) contrast(90%);
+  color: var(--color-dark);
+}
+
 .form input[type="date"]::-webkit-calendar-picker-indicator {
-  border: none;
-  outline: none;
-  color: #fff;
-  opacity: 1; /* Ensure the color is fully visible */
+  filter: invert(1);
+  font-size: 1.7rem;
 }
 
 .book-btn {
@@ -88,4 +94,15 @@
   background: var(--clr-primary-1);
   transform: scale(1.1);
   box-shadow: var(--light-shadow);
+}
+
+.error {
+  color: var(--danger);
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 1.2rem;
+}
+
+.space {
+  margin-bottom: 1.2rem;
 }
