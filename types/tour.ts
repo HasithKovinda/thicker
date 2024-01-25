@@ -62,3 +62,8 @@ export type Guides = {
   role: string;
   photo: string;
 };
+
+export type BookPagination = {
+  numberOfResults: number;
+  bookings: FetchedBookingType[];
+};

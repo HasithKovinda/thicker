@@ -3,6 +3,7 @@
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import styles from "./Pagination.module.css";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { PAGE_SIZE } from "@/util/constant";
 
 type PaginationProps = {
   numberOfResults: number;
@@ -17,7 +18,7 @@ export default function Pagination({ numberOfResults }: PaginationProps) {
     ? 1
     : Number(searchParams.get("page"));
 
-  const pageCount = Math.ceil(numberOfResults / 10);
+  const pageCount = Math.ceil(numberOfResults / PAGE_SIZE);
 
   function handleNext() {
     const next = currentPage === pageCount ? currentPage : currentPage + 1;
@@ -35,18 +36,20 @@ export default function Pagination({ numberOfResults }: PaginationProps) {
   return (
     <section className={styles.pagination}>
       <div>
-        Showing <span>{(currentPage - 1) * 10 + 1}</span> to{" "}
+        Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span> to{" "}
         <span>
-          {currentPage === pageCount ? numberOfResults : currentPage * 10}
+          {currentPage === pageCount
+            ? numberOfResults
+            : currentPage * PAGE_SIZE}
         </span>{" "}
         of <span>{numberOfResults}</span> results
       </div>
-      <div>
+      <div className={styles.container}>
         <button onClick={handlePrevious} disabled={currentPage === 1}>
           <BiChevronLeft /> <span>Previous</span>
         </button>
         <button onClick={handleNext} disabled={currentPage === pageCount}>
-          <BiChevronRight /> <span>Next</span>
+          <span>Next</span> <BiChevronRight />
         </button>
       </div>
     </section>

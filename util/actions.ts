@@ -9,12 +9,14 @@ import {
   type Filter,
   type PopularTour,
   FetchedBookingType,
+  BookPagination,
 } from "@/types/tour";
 import {
   DEFAULT_DURATION,
   DEFAULT_GROUP_SIZE,
   DEFAULT_PRICE,
   DEFAULT_RATING,
+  PAGE_SIZE,
 } from "./constant";
 import Review from "@/model/review";
 import User from "@/model/user";
@@ -261,13 +263,27 @@ export async function createBooking(bookingData: Omit<NewBookingType, "id">) {
   }
 }
 
-export async function fetchBookings(): Promise<FetchedBookingType[] | null> {
+export async function fetchBookings(
+  page: number,
+  userId: string
+): Promise<BookPagination | null> {
   try {
-    const bookings: FetchedBookingType[] = await Booking.find()
+    const limit = PAGE_SIZE;
+    const skip = (page - 1) * limit;
+    const numberBookings = await Booking.countDocuments({ userId });
+    const bookings: FetchedBookingType[] = await Booking.find({ userId })
+      .skip(skip)
+      .limit(limit)
       .populate({ path: "tourId" })
       .lean();
-    console.log("🚀 ~ fetchBookings ~  bookings:", bookings);
-    return JSON.parse(JSON.stringify(bookings));
+
+    const res = JSON.parse(JSON.stringify(bookings));
+
+    const data: BookPagination = {
+      numberOfResults: numberBookings,
+      bookings: res,
+    };
+    return data;
   } catch (error) {
     return null;
   }

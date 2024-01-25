@@ -17,3 +17,5 @@ export const ACCEPTED_IMAGE_TYPES = [
   "image/png",
   "image/webp",
 ];
+
+export const PAGE_SIZE = 5;

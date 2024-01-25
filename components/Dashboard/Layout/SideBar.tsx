@@ -5,9 +5,14 @@ import styles from "./SideBar.module.css";
 import Link from "next/link";
 import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import { UserModel } from "@/types/model";
+import { getUserSession } from "@/util/actions";
 
 export default function SideBar() {
   const queryClient = useQueryClient();
+  // const { data: queryData } = useQuery({
+  //   queryKey: ["user"],
+  //   queryFn: () => getUserSession(),
+  // });
   const queryData = queryClient.getQueryData<UserModel>(["user"]);
   const src = queryData?.photo ? queryData.photo : "assert/default.jpg";
   return (

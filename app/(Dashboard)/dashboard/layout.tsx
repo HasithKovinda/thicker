@@ -1,4 +1,4 @@
-import DashBoardLayout from "@/components/Dashboard/Layout/DashBoardLayout";
+import LayoutWrapper from "@/components/Dashboard/Layout/LayoutWrapper";
 
 export default function RootLayout({
   children,
@@ -7,7 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <DashBoardLayout>{children}</DashBoardLayout>
+      <LayoutWrapper>{children}</LayoutWrapper>
     </>
   );
 }

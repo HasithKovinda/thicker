@@ -4,11 +4,10 @@ import { signOut, useSession } from "next-auth/react";
 import NavUser from "../../NavUser";
 import styles from "./NavBar.module.css";
 import { getUserSession } from "@/util/actions";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { UserModel } from "@/types/model";
 import Loading from "@/UI/Loading";
 export default function NavBar() {
-  // const { data: session } = useSession();
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<UserModel>(["user"]);
 
