@@ -1,5 +1,6 @@
+import Booking from "@/components/Dashboard/Bookings/Booking";
 import React from "react";
 
 export default function page() {
-  return <h1>Bookings</h1>;
+  return <Booking />;
 }

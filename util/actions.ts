@@ -4,7 +4,12 @@ import connect from "@/DB/db";
 import Tours from "@/model/Tours";
 import { Difficulty } from "@/types/enum";
 import { TourModel, UserModel, type ReviewModel } from "@/types/model";
-import { type BookingType, type Filter, type PopularTour } from "@/types/tour";
+import {
+  type NewBookingType,
+  type Filter,
+  type PopularTour,
+  FetchedBookingType,
+} from "@/types/tour";
 import {
   DEFAULT_DURATION,
   DEFAULT_GROUP_SIZE,
@@ -246,15 +251,24 @@ export async function uploadImage(
   }
 }
 
-export async function createBooking(bookingData: Omit<BookingType, "id">) {
-  console.log("🚀 ~ createBooking ~ bookingData:", bookingData);
-  console.log("dasdsad");
+export async function createBooking(bookingData: Omit<NewBookingType, "id">) {
   try {
     const booking = await Booking.create(bookingData);
     return "Booking created successfully";
   } catch (error) {
-    return null;
     console.log(error);
+    return null;
   }
-  // console.log("🚀 ~ createBooking ~ booking:", booking);
+}
+
+export async function fetchBookings(): Promise<FetchedBookingType[] | null> {
+  try {
+    const bookings: FetchedBookingType[] = await Booking.find()
+      .populate({ path: "tourId" })
+      .lean();
+    console.log("🚀 ~ fetchBookings ~  bookings:", bookings);
+    return JSON.parse(JSON.stringify(bookings));
+  } catch (error) {
+    return null;
+  }
 }

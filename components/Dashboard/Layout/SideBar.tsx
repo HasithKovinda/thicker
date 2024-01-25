@@ -24,13 +24,13 @@ export default function SideBar() {
       </div>
       <ul className={styles["section-container"]}>
         <li>
-          <Link href="/settings" className={styles.link}>
+          <Link href="/dashboard" className={styles.link}>
             <FiSettings className={styles.icon} />
             <span>Settings</span>
           </Link>
         </li>
         <li>
-          <Link href="/settings" className={styles.link}>
+          <Link href="/dashboard/bookings" className={styles.link}>
             <FiBriefcase className={styles.icon} />
             <span>Bookings</span>
           </Link>
