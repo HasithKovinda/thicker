@@ -23,3 +23,7 @@
   cursor: pointer;
   color: var(--clr-white);
 }
+
+.table-row a {
+  color: var(--clr-white);
+}

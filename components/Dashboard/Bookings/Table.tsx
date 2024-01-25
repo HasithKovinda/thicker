@@ -58,11 +58,13 @@ export default function Table() {
           {data.bookings.map((booking) => {
             return (
               <TableRow
+                userName={booking.fullName}
                 key={booking.id}
                 name={booking.tourId.name}
                 price={booking.price}
                 email={booking.email}
                 bookingDate={booking.bookingDate}
+                imageUrl={booking.tourId.imageCover}
               />
             );
           })}

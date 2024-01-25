@@ -5,6 +5,11 @@ const nextConfig = {
       bodySizeLimit: "5mb",
     },
   },
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false };
+
+    return config;
+  },
 };
 
 module.exports = nextConfig;
