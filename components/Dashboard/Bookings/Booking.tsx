@@ -14,7 +14,7 @@ export default async function Booking() {
         </p>
       </div>
       <Table />
-      <Pagination />
+      <Pagination numberOfResults={45} />
     </main>
   );
 }
