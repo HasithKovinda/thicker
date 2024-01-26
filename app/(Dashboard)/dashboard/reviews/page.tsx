@@ -1,5 +1,6 @@
+import Reviews from "@/components/Dashboard/Reviews/Reviews";
 import React from "react";
 
 export default function page() {
-  return <h1>Your Reviews</h1>;
+  return <Reviews />;
 }

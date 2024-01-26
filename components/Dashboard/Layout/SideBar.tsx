@@ -41,7 +41,7 @@ export default function SideBar() {
           </Link>
         </li>
         <li>
-          <Link href="/settings" className={styles.link}>
+          <Link href="/dashboard/reviews" className={styles.link}>
             <FiStar className={styles.icon} />
             <span>Reviews</span>
           </Link>
