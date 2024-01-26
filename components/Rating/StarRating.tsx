@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const containerStyle = {
   display: "flex",
@@ -20,6 +20,7 @@ type StarRatingProps = {
   messages?: string[];
   defaultRating?: number;
   onSetRating?: (rating: number) => void;
+  reset: boolean;
 };
 
 export default function StarRating({
@@ -30,6 +31,7 @@ export default function StarRating({
   messages = [],
   defaultRating = 0,
   onSetRating,
+  reset = false,
 }: StarRatingProps) {
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
@@ -45,6 +47,10 @@ export default function StarRating({
     color,
     fontSize: `${size / 1.5}px`,
   };
+
+  useEffect(() => {
+    setRating(0);
+  }, [reset]);
 
   return (
     <div style={containerStyle} className={className}>

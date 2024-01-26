@@ -4,3 +4,70 @@
   flex-direction: column;
   gap: 1.5rem;
 }
+
+.heading {
+  font-size: 1.3rem;
+  letter-spacing: 1.2px;
+  margin-bottom: 1rem;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.drop {
+  font-size: 1.1rem;
+  letter-spacing: 1.3px;
+  padding: 1rem;
+}
+
+.form > div {
+  margin-bottom: 1rem;
+}
+
+.form textarea {
+  font-family: var(--ff-third);
+  font-size: 1.1rem;
+  color: var(--color-dark-2);
+  letter-spacing: 1.2px;
+  padding: 1rem;
+}
+
+.submit {
+  padding: 0.7rem 1.2rem;
+  font-size: 1.1rem;
+  color: var(--clr-white);
+  background: var(--clr-primary-1);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  transition: var(--transition);
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.submit:hover {
+  transform: scale(1.1);
+}
+
+.error {
+  display: block;
+  color: var(--danger);
+}
+
+.loading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.title {
+  font-family: var(--ff-secondary);
+  font-size: 2rem;
+}

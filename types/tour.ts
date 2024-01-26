@@ -1,5 +1,5 @@
 import { Difficulty } from "./enum";
-import { TourModel } from "./model";
+import { TourModel, UserModel } from "./model";
 
 export type PopularTour = {
   name: string;
@@ -28,17 +28,6 @@ export type MapLocation = {
   description: string;
 };
 
-// export type BookingType = {
-//   id: string;
-//   fullName: string;
-//   email: string;
-//   tourId: string;
-//   userId: string;
-//   price: number;
-//   phoneNumber: string;
-//   bookingDate: Date;
-// };
-
 type BaseBookingType = {
   id: string;
   fullName: string;
@@ -55,6 +44,21 @@ export type FetchedBookingType = BaseBookingType & {
 
 export type NewBookingType = BaseBookingType & {
   tourId: string;
+};
+
+export type ReviewModel = {
+  review: string;
+  rating: number;
+};
+
+export type FetchedReviewType = ReviewModel & {
+  user: UserModel;
+  tour: TourModel;
+};
+
+export type CreateReviewType = ReviewModel & {
+  user: string;
+  tour: string;
 };
 
 export type Guides = {

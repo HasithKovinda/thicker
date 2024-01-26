@@ -10,6 +10,8 @@ import {
   type PopularTour,
   FetchedBookingType,
   BookPagination,
+  FetchedReviewType,
+  CreateReviewType,
 } from "@/types/tour";
 import {
   DEFAULT_DURATION,
@@ -26,6 +28,7 @@ import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
 import Booking from "@/model/booking";
 import { CgLayoutGrid } from "react-icons/cg";
+import mongoose from "mongoose";
 
 //Auth Sever Actions
 
@@ -165,16 +168,19 @@ export async function filterTours({
   return tours;
 }
 
-export async function fetchAllTopReviews(id?: string): Promise<ReviewModel[]> {
+export async function fetchAllTopReviews(
+  id?: string
+): Promise<FetchedReviewType[]> {
   await connect();
   const options = id
     ? { rating: { $eq: 5 }, tour: id }
     : { rating: { $eq: 5 } };
-  const allReviews: ReviewModel[] = await Review.find(options)
+  const allReviews: FetchedReviewType[] = await Review.find(options)
+    .sort({ createdAt: -1 })
     .limit(20)
     .populate({ path: "user" })
     .lean();
-  const data: ReviewModel[] = JSON.parse(JSON.stringify(allReviews));
+  const data: FetchedReviewType[] = JSON.parse(JSON.stringify(allReviews));
   return data;
 }
 
@@ -255,7 +261,7 @@ export async function uploadImage(
 
 export async function createBooking(bookingData: Omit<NewBookingType, "id">) {
   try {
-    const booking = await Booking.create(bookingData);
+    await Booking.create(bookingData);
     return "Booking created successfully";
   } catch (error) {
     console.log(error);
@@ -287,4 +293,59 @@ export async function fetchBookings(
   } catch (error) {
     return null;
   }
+}
+
+export async function fetchParchedTours(
+  userId: string
+): Promise<{ id: string; name: string; image: string }[] | null> {
+  try {
+    const uniqueTourIds = await Booking.distinct("tourId", { userId });
+    if (!uniqueTourIds.length) return null;
+    const uniqueBookings: FetchedBookingType[] = await Promise.all(
+      uniqueTourIds.map(async (tourId) => {
+        const booking: FetchedBookingType | null = await Booking.findOne({
+          userId,
+          tourId,
+        })
+          .populate("tourId")
+          .lean();
+        return booking!;
+      })
+    );
+    if (!uniqueBookings.length) return null;
+    const bookedToursNames: { id: string; name: string; image: string }[] =
+      uniqueBookings.map((book) => {
+        return {
+          id: book.tourId._id,
+          name: book?.tourId.name,
+          image: book?.tourId.imageCover,
+        };
+      });
+    return bookedToursNames;
+  } catch (error) {
+    throw new Error("something went wrong");
+  }
+}
+
+export async function createReview(review: CreateReviewType) {
+  const id = new mongoose.Types.ObjectId(review.tour);
+  await Review.create(review);
+  const res: { id: string; nRating: number; avgRating: number }[] =
+    await Review.aggregate([
+      { $match: { tour: id } },
+      {
+        $group: {
+          _id: "$tour",
+          nRating: { $sum: 1 },
+          avgRating: { $avg: "$rating" },
+        },
+      },
+    ]);
+  await Tours.findByIdAndUpdate(
+    { _id: id },
+    {
+      ratingsAverage: res[0].avgRating.toFixed(1),
+      ratingsQuantity: res[0].nRating,
+    }
+  );
 }

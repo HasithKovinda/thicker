@@ -1,8 +1,16 @@
-import { ReviewModel } from "@/types/model";
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 import user from "./user";
+import Tours from "./Tours";
 
-const reviewSchema = new mongoose.Schema<ReviewModel>({
+interface IReviewModel extends Document {
+  review: string;
+  rating: number;
+  user: Types.ObjectId;
+  tour: Types.ObjectId;
+  createdAt: Date;
+}
+
+const reviewSchema = new mongoose.Schema<IReviewModel>({
   review: {
     type: String,
     required: [true, "Please provide a review"],
@@ -21,7 +29,7 @@ const reviewSchema = new mongoose.Schema<ReviewModel>({
   },
   tour: {
     type: mongoose.Schema.ObjectId,
-    ref: "Tour",
+    ref: Tours,
     required: [true, "Review must belong to tour"],
   },
   createdAt: {
@@ -30,4 +38,13 @@ const reviewSchema = new mongoose.Schema<ReviewModel>({
   },
 });
 
-export default mongoose.models.Review || mongoose.model("Review", reviewSchema);
+let Review: mongoose.Model<IReviewModel>;
+try {
+  // Try to get the existing model from mongoose
+  Review = mongoose.model<IReviewModel>("Review");
+} catch {
+  // If the model doesn't exist, define it
+  Review = mongoose.model<IReviewModel>("Review", reviewSchema);
+}
+
+export default Review;
