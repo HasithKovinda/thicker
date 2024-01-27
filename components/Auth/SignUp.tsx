@@ -44,7 +44,7 @@ export default function SignUp() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: (user: UserModel) => signUpUser(user),
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success("User sign up successfully ");
       reset();
       router.push("/");

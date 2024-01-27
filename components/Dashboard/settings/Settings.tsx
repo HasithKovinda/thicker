@@ -7,6 +7,11 @@ import styles from "./Settings.module.css";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { type ResetPasswordType } from "@/types/input";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { resetPassword } from "@/util/actions";
+import { UserModel } from "@/types/model";
+import toast from "react-hot-toast";
+import { signOut } from "next-auth/react";
 
 const settingsSchema: ZodType<ResetPasswordType> = z
   .object({
@@ -28,8 +33,6 @@ const settingsSchema: ZodType<ResetPasswordType> = z
     path: ["passwordConfirm"],
   });
 
-// type InputTypes = z.infer<typeof settingsSchema>;
-
 export default function Settings() {
   const {
     register,
@@ -37,8 +40,24 @@ export default function Settings() {
     formState: { errors, isSubmitting },
   } = useForm<ResetPasswordType>({ resolver: zodResolver(settingsSchema) });
 
+  const queryClient = useQueryClient();
+  const queryData = queryClient.getQueryData<UserModel>(["user"]);
+  const { mutate } = useMutation({
+    mutationFn: (data: { userId: string; options: ResetPasswordType }) =>
+      resetPassword(data.userId, data.options),
+    onSuccess: (data) => {
+      console.log("🚀 ~ Settings ~ data:", data);
+      toast.success("Password Reset Successfully");
+      signOut({ callbackUrl: "http://localhost:3000/login" });
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
   function abc(data: ResetPasswordType) {
-    console.log(data);
+    if (!queryData?.id) return;
+    mutate({ userId: queryData.id, options: data });
   }
 
   return (
@@ -74,7 +93,7 @@ export default function Settings() {
           error={errors.passwordConfirm}
         />
         <Button hoverType="transform">
-          {isSubmitting ? "Loading.." : "reset password"}
+          {isSubmitting ? "Updating.." : "reset password"}
         </Button>
       </form>
     </section>

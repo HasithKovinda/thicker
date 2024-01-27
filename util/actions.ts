@@ -29,6 +29,7 @@ import { v2 as cloudinary } from "cloudinary";
 import Booking from "@/model/booking";
 import { CgLayoutGrid } from "react-icons/cg";
 import mongoose from "mongoose";
+import { ResetPasswordType } from "@/types/input";
 
 //Auth Sever Actions
 
@@ -348,4 +349,38 @@ export async function createReview(review: CreateReviewType) {
       ratingsQuantity: res[0].nRating,
     }
   );
+}
+
+export async function resetPassword(
+  userId: string,
+  options: ResetPasswordType
+): Promise<String> {
+  const { currentPassword, newPassword, passwordConfirm } = options;
+  if (newPassword.trim() !== passwordConfirm.trim())
+    throw new Error("Password should match to password confirm");
+  try {
+    const user: UserModel | null = await User.findById({ _id: userId })
+      .select("+password")
+      .lean();
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const { password } = user;
+    const isValid = await bcrypt.compare(currentPassword, password);
+    if (!isValid) {
+      throw new Error("Password not matched");
+    }
+    const newHashPassword = await bcrypt.hash(newPassword, 10);
+    await User.findByIdAndUpdate(
+      { _id: userId },
+      { password: newHashPassword }
+    );
+    return "Password Updated Successfully";
+  } catch (error) {
+    // if (error instanceof Error) {
+    //   throw new Error(error.message);
+    // }
+    // throw new Error("Something went wrong");
+    throw error;
+  }
 }
