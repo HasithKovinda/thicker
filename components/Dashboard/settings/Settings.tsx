@@ -4,10 +4,11 @@ import { ZodType, z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./Settings.module.css";
-import Input, { FormData } from "@/components/Input/Input";
+import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
+import { type ResetPasswordType } from "@/types/input";
 
-const settingsSchema: ZodType<FormData> = z
+const settingsSchema: ZodType<ResetPasswordType> = z
   .object({
     currentPassword: z
       .string()
@@ -34,9 +35,9 @@ export default function Settings() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({ resolver: zodResolver(settingsSchema) });
+  } = useForm<ResetPasswordType>({ resolver: zodResolver(settingsSchema) });
 
-  function abc(data: FormData) {
+  function abc(data: ResetPasswordType) {
     console.log(data);
   }
 
@@ -72,7 +73,9 @@ export default function Settings() {
           register={register}
           error={errors.passwordConfirm}
         />
-        <Button content="reset password" />
+        <Button hoverType="transform">
+          {isSubmitting ? "Loading.." : "reset password"}
+        </Button>
       </form>
     </section>
   );

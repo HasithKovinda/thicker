@@ -12,6 +12,8 @@ import { getUserSession } from "@/util/actions";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import Loading from "@/UI/Loading";
+import Input from "../Input/Input";
+import Button from "../Button/Button";
 
 type LoginProps = {
   callbackUrl?: string;
@@ -56,50 +58,29 @@ export default function Login({ callbackUrl }: LoginProps) {
     <section className={`section-center ${styles.signUp}`}>
       <p>Sign Up</p>
       <form onSubmit={handleSubmit(login)} className={styles.container}>
-        <div>
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            {...register("email")}
-            className={
-              errors.email
-                ? `${styles["error-input"]} ${styles.input}`
-                : `${styles.input}`
-            }
-          />
-          {errors.email && (
-            <span className={styles.error}>{errors.email?.message}</span>
-          )}
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            minLength={6}
-            className={
-              errors.password
-                ? `${styles["error-input"]} ${styles.input}`
-                : `${styles.input}`
-            }
-            {...register("password")}
-          />
-          {errors.password && (
-            <span className={styles.error}>{errors.password?.message}</span>
-          )}
-        </div>
+        <Input
+          placeholder="Email Address"
+          type="email"
+          name="email"
+          register={register}
+          error={errors.email}
+        />
+
+        <Input
+          placeholder="Password"
+          type="password"
+          name="password"
+          register={register}
+          error={errors.password}
+        />
+
         <div>
           {isSubmitting ? (
             <Loading />
           ) : (
-            <button
-              type="submit"
-              className={`btn ${styles["signUp-btn"]}`}
-              disabled={isSubmitting}
-            >
+            <Button hoverType="bgChange" disabled={isSubmitting}>
               Login
-            </button>
+            </Button>
           )}
         </div>
       </form>

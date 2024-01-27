@@ -11,8 +11,14 @@
   transition: var(--transition);
   margin-bottom: 1rem;
   text-transform: capitalize;
+  cursor: pointer;
 }
 
-.button:hover {
+.bgChange:hover {
+  background: transparent;
+  color: var(--color-dark);
+}
+
+.transform:hover {
   transform: scale(1.1);
 }

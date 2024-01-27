@@ -1,30 +1,22 @@
-import { FieldError, UseFormRegister } from "react-hook-form";
+import { FieldError, Path, UseFormRegister } from "react-hook-form";
 import styles from "./Input.module.css";
-export type FormData = {
-  currentPassword: string;
-  newPassword: string;
-  passwordConfirm: string;
-};
+import { type UseFromRegisterTypes } from "@/types/input";
 
-type InputProps = {
+type InputProps<T extends UseFromRegisterTypes> = {
   type: string;
   placeholder: string;
-  register: UseFormRegister<FormData>;
+  register: UseFormRegister<T>;
   error: FieldError | undefined;
-  valueAsNumber?: boolean;
-  name: ValidFieldNames;
+  name: Path<T>;
 };
 
-type ValidFieldNames = "newPassword" | "currentPassword" | "passwordConfirm";
-
-export default function Input({
+export default function Input<T extends UseFromRegisterTypes>({
   type,
   placeholder,
   register,
   error,
-  valueAsNumber,
   name,
-}: InputProps) {
+}: InputProps<T>) {
   return (
     <div className={styles["input-container"]}>
       <input

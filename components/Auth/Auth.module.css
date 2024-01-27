@@ -10,7 +10,7 @@
 .signUp p {
   font-size: 1.3rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 1.4rem;
 }
 
 .signUp span {
@@ -20,56 +20,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-}
-
-.container > div label {
-  display: block;
-  letter-spacing: 1.2px;
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
-}
-
-.input {
-  font-family: var(--ff-third);
-  width: 100%;
-  padding: 0.7rem 1.2rem;
-  font-size: 1.4rem;
-  letter-spacing: 1.2px;
-  border: transparent;
-  outline: none;
-  box-shadow: var(--light-shadow);
-  border-radius: 10px;
-}
-
-.input:focus {
-  outline: var(--clr-primary-1);
-  border-bottom: 4px solid var(--clr-primary-1);
-}
-
-.input:focus:invalid {
-  border-bottom: 4px solid var(--danger);
-}
-
-.signUp-btn {
-  padding: 0.8rem 1.2rem;
-  /* border: none; */
-  border: 1px solid var(--clr-primary-1);
-  outline: none;
-  color: var(--clr-white);
-  letter-spacing: 1.2px;
-  background: var(--clr-primary-1);
-  box-shadow: var(--light-shadow);
-  font-size: 1.3rem;
-  border-radius: 10px;
-  transition: var(--transition);
-  margin-bottom: 1rem;
-}
-
-.signUp-btn:hover {
-  color: var(--color-dark);
-  background: transparent;
-  border: 1px solid var(--clr-primary-1);
+  gap: 1.2rem;
 }
 
 .login {
@@ -84,15 +35,4 @@
   text-align: center;
   text-decoration: underline;
   color: var(--clr-primary-3);
-}
-
-.error {
-  color: var(--danger);
-  display: inline-block;
-  margin-top: 6px;
-}
-
-.error-input.input:focus,
-.error-input.input {
-  border-bottom: 4px solid var(--danger);
 }
