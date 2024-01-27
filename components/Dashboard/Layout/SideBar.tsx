@@ -1,11 +1,16 @@
 "use client";
 
-import { FiStar, FiBriefcase, FiCreditCard, FiSettings } from "react-icons/fi";
-import styles from "./SideBar.module.css";
 import Link from "next/link";
-import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
-import { UserModel } from "@/types/model";
-import { getUserSession } from "@/util/actions";
+import {
+  FiStar,
+  FiBriefcase,
+  FiUser,
+  FiSettings,
+  FiHelpCircle,
+} from "react-icons/fi";
+import { useQueryClient } from "@tanstack/react-query";
+import styles from "./SideBar.module.css";
+import { type UserModel } from "@/types/model";
 
 export default function SideBar() {
   const queryClient = useQueryClient();
@@ -30,8 +35,8 @@ export default function SideBar() {
       <ul className={styles["section-container"]}>
         <li>
           <Link href="/dashboard" className={styles.link}>
-            <FiSettings className={styles.icon} />
-            <span>Settings</span>
+            <FiUser className={styles.icon} />
+            <span>Profile</span>
           </Link>
         </li>
         <li>
@@ -47,9 +52,15 @@ export default function SideBar() {
           </Link>
         </li>
         <li>
-          <Link href="/settings" className={styles.link}>
+          <Link href="/dashboard/query" className={styles.link}>
+            <FiHelpCircle className={styles.icon} />
+            <span>Query</span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/dashboard/settings" className={styles.link}>
             <FiSettings className={styles.icon} />
-            <span>Settings</span>
+            <span>Setting</span>
           </Link>
         </li>
       </ul>

@@ -1,5 +1,7 @@
-import React from "react";
+
+
+import Settings from "@/components/Dashboard/settings/Settings";
 
 export default function page() {
-  return <h1>Settings</h1>;
+  return <Settings />;
 }
