@@ -178,7 +178,7 @@ export async function fetchAllTopReviews(
     : { rating: { $eq: 5 } };
   const allReviews: FetchedReviewType[] = await Review.find(options)
     .sort({ createdAt: -1 })
-    .limit(20)
+    .limit(8)
     .populate({ path: "user" })
     .lean();
   const data: FetchedReviewType[] = JSON.parse(JSON.stringify(allReviews));

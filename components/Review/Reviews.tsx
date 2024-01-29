@@ -5,8 +5,7 @@ import styles from "./Reviews.module.css";
 import SingleReview from "./SingleReview";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAllTopReviews } from "@/util/actions";
-import { useEffect, useState } from "react";
-import { userModel } from "@/types/model";
+import { useEffect, useRef, useState } from "react";
 
 type reviewProps = {
   title: string;
@@ -14,23 +13,60 @@ type reviewProps = {
 };
 
 export default function Review({ title, id }: reviewProps) {
+  const ref = useRef<HTMLDivElement>(null);
   const { data, isPending } = useQuery({
     queryKey: ["review", id],
     queryFn: () => fetchAllTopReviews(id),
   });
   const [imageIndex, setImageIndex] = useState(0);
   useEffect(() => {
-    const id = setInterval(() => {
-      if (!data) return;
-      setImageIndex((prv) => {
-        if (data.length - prv > 3) {
-          return (prv + 1) % data.length;
-        } else {
-          return 0;
+    // const id = setInterval(() => {
+    //   if (!data) return;
+    //   setImageIndex((prv) => {
+    //     if (data.length - prv > 3) {
+    //       return (prv + 1) % data.length;
+    //     } else {
+    //       return 0;
+    //     }
+    //   });
+    // }, 5000);
+    // return () => clearInterval(id);
+    let isBegin = false;
+    if (data && ref.current) {
+      const shiftTransform = () => {
+        const currentTransform =
+          ref.current?.style.transform ||
+          window.getComputedStyle(ref.current!).getPropertyValue("transform");
+
+        const match = currentTransform.match(/translate3d\(([^,]+),/);
+        let currentTranslateX = match ? parseFloat(match[1]) : 0;
+        console.log(
+          "🚀 ~ shiftTransform ~ currentTranslateX:",
+          currentTranslateX
+        );
+
+        let newTranslateX = isBegin
+          ? currentTranslateX + 467
+          : currentTranslateX - 467;
+
+        console.log("🚀 ~ shiftTransform ~ newTranslateX:", newTranslateX);
+        if (newTranslateX === -2335) {
+          isBegin = true;
+          currentTranslateX = -2335;
         }
-      });
-    }, 5000);
-    return () => clearInterval(id);
+
+        if (newTranslateX === 0) {
+          currentTranslateX = 0;
+          isBegin = false;
+        }
+
+        ref.current!.style!.transform = `translate3d(${newTranslateX}px, 0, 0)`;
+      };
+
+      const intervalId = setInterval(shiftTransform, 4000);
+
+      return () => clearInterval(intervalId);
+    }
   }, [data]);
 
   if (!data) return <h1>No reviews found</h1>;
@@ -47,6 +83,11 @@ export default function Review({ title, id }: reviewProps) {
     setImageIndex((prv) => {
       return (prv - 1 + data.length) % data.length;
     });
+  }
+
+  if (data && ref.current) {
+    const numberOfReviews = data.length;
+    ref.current.style.width = `${numberOfReviews * 467}px`;
   }
 
   return (
@@ -87,15 +128,15 @@ export default function Review({ title, id }: reviewProps) {
         </div>
         <div className="underline"></div>
         <main className={styles["reviews-container"]}>
-          <div className={styles.container}>
-            {data.slice(imageIndex, imageIndex + 3).map((review, index) => {
+          <div className={styles.container} ref={ref}>
+            {data.map((review, index) => {
               return (
                 <SingleReview
+                  key={index}
                   photo={review.user.photo}
                   rating={review.rating}
                   review={review.review}
                   name={review.user.name}
-                  key={index}
                 />
               );
             })}
