@@ -19,3 +19,5 @@ export const ACCEPTED_IMAGE_TYPES = [
 ];
 
 export const PAGE_SIZE = 5;
+export const REVIEW_CARD_Size = 467;
+export const NUMBER_OF_MAX_CARD = 3;

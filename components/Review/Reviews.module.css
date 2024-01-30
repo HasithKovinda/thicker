@@ -23,11 +23,11 @@
   /* padding: 1rem; */
 }
 
-/* .heading {
+.heading {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-} */
+}
 
 .rounded {
   height: 80px;
