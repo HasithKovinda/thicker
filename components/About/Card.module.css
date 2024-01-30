@@ -1,0 +1,54 @@
+.image-card {
+  border-radius: 20px;
+  box-shadow: var(--light-shadow);
+  overflow: hidden;
+  width: 420px;
+}
+
+.profile {
+  overflow: hidden;
+}
+
+.image {
+  height: 400px;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.image:hover {
+  filter: grayscale(1);
+  transform: scale(1.1);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 2rem;
+}
+
+.icon {
+  height: 60px;
+  width: 60px;
+  background: #000;
+  color: var(--clr-white);
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info {
+  text-align: left;
+}
+
+.info p {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.info span {
+  color: var(--color-dark-2);
+  text-transform: capitalize;
+}

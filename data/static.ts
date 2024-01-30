@@ -33,3 +33,43 @@ export const dataRight: staticData[] = [
     content: "Richly varied landscapes, luxury accommodation Travel.",
   },
 ];
+
+export type guides = {
+  name: string;
+  role: string;
+  path: string;
+};
+
+export const tourGuides: guides[] = [
+  {
+    path: "/assert/profile/img-1.jpg",
+    name: "Anderson Roy",
+    role: "Tour Guide",
+  },
+  {
+    path: "/assert/profile/img-2.jpg",
+    name: "Anderson Roy",
+    role: "Tour Guide",
+  },
+  {
+    path: "/assert/profile/img-3.jpg",
+    name: "Anderson Roy",
+    role: "Tour Guide",
+  },
+  {
+    path: "/assert/profile/img-4.jpg",
+    name: "Anderson Roy",
+    role: "Tour Guide",
+  },
+  {
+    path: "/assert/profile/img-5.jpg",
+    name: "Anderson Roy",
+    role: "Tour Guide",
+  },
+
+  {
+    path: "/assert/profile/img-6.jpg",
+    name: "Anderson Roy",
+    role: "Tour Guide",
+  },
+];

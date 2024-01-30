@@ -1,0 +1,87 @@
+.section {
+  margin-top: 5rem;
+  position: relative;
+}
+
+.features {
+  display: block;
+  background-image: linear-gradient(
+      to right,
+      rgba(9, 102, 107, 0.8),
+      rgba(23, 192, 201, 0.822)
+    ),
+    url(/assert/feature.jpg);
+  height: 35rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 4rem;
+  color: var(--clr-white);
+  letter-spacing: 1.4px;
+  font-weight: bold;
+}
+
+.heading span {
+  font-size: 1.3rem;
+  font-family: var(--ff-secondary);
+}
+
+.heading h1 {
+  font-size: 4rem;
+}
+
+.heading div {
+  text-align: center;
+}
+
+.container {
+  width: 50%;
+  height: 200px;
+  padding: 2rem;
+  background: var(--clr-white);
+  margin-bottom: 5rem;
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translate(50%, 50%);
+  border-radius: 20px;
+  box-shadow: var(--dark-shadow);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+}
+
+.container div {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-right-color: aqua;
+}
+
+.container div span {
+  color: var(--color-dark-2);
+}
+
+.round {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  background: var(--clr-primary-1);
+}
+
+.round p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--clr-white);
+}

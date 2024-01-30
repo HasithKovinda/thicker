@@ -1,0 +1,13 @@
+.hero {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(28, 234, 245, 0.8),
+      rgba(29, 197, 206, 0.8)
+    ),
+    url(/assert/head.jpg);
+  height: 40rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: soft-light;
+}
