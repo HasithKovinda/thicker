@@ -24,10 +24,10 @@ import Review from "@/model/review";
 import User from "@/model/user";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import axios from "axios";
+
 import { v2 as cloudinary } from "cloudinary";
 import Booking from "@/model/booking";
-import { CgLayoutGrid } from "react-icons/cg";
+
 import mongoose from "mongoose";
 import { ResetPasswordType } from "@/types/input";
 
@@ -173,14 +173,26 @@ export async function fetchAllTopReviews(
   id?: string
 ): Promise<FetchedReviewType[]> {
   await connect();
-  const options = id
-    ? { rating: { $eq: 5 }, tour: id }
-    : { rating: { $eq: 5 } };
-  const allReviews: FetchedReviewType[] = await Review.find(options)
-    .sort({ createdAt: -1 })
-    .limit(8)
-    .populate({ path: "user" })
-    .lean();
+  const match = id
+    ? { $match: { rating: 5, tour: new mongoose.Types.ObjectId(id) } }
+    : { $match: { rating: 5 } };
+  const allReviews = await Review.aggregate([
+    match,
+    { $group: { _id: "$user", review: { $first: "$$ROOT" } } },
+    { $limit: 20 },
+    { $replaceRoot: { newRoot: "$review" } },
+    {
+      $lookup: {
+        from: "users",
+        localField: "user",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: "$user" },
+    { $project: { "user.password": 0 } },
+    { $sort: { createdAt: -1 } },
+  ]);
   const data: FetchedReviewType[] = JSON.parse(JSON.stringify(allReviews));
   return data;
 }
