@@ -72,4 +72,14 @@ export const tourGuides: guides[] = [
     name: "Anderson Roy",
     role: "Tour Guide",
   },
+  {
+    path: "/assert/profile/img-7.jpg",
+    name: "Anderson Roy",
+    role: "Tour Guide",
+  },
+  {
+    path: "/assert/profile/img-8.jpg",
+    name: "Anderson Roy",
+    role: "Tour Guide",
+  },
 ];

@@ -18,3 +18,23 @@
 .main {
   overflow: hidden;
 }
+
+.move {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.rectangle {
+  height: 8px;
+  width: 40px;
+  border: 1px solid var(--clr-primary-2);
+  border-radius: 4px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.active {
+  background: var(--clr-primary-2);
+  width: 55px;
+}
