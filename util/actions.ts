@@ -179,7 +179,7 @@ export async function fetchAllTopReviews(
   const allReviews = await Review.aggregate([
     match,
     { $group: { _id: "$user", review: { $first: "$$ROOT" } } },
-    { $limit: 20 },
+    { $limit: 10 },
     { $replaceRoot: { newRoot: "$review" } },
     {
       $lookup: {

@@ -5,19 +5,20 @@ import Card from "./Card";
 import styles from "./TourGuide.module.css";
 import { useEffect, useRef, useState } from "react";
 import { NUMBER_OF_MAX_CARD, TOUR_GUIDE_CARD_SIZE } from "@/util/constant";
+import useAnimateCard from "@/hooks/useAnimateCard";
 
 export default function TourGuide() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [currentWidth, setCurrentWidth] = useState(0);
-  const isMove = useRef(false);
+  // const ref = useRef<HTMLDivElement>(null);
+  // const [currentWidth, setCurrentWidth] = useState(0);
+  // const isMove = useRef(false);
 
-  useEffect(() => {
-    const shiftTransform = () => {
-      changeReviewCard();
-    };
-    const intervalId = setInterval(shiftTransform, 5000);
-    return () => clearInterval(intervalId);
-  }, []);
+  // useEffect(() => {
+  //   const shiftTransform = () => {
+  //     changeReviewCard();
+  //   };
+  //   const intervalId = setInterval(shiftTransform, 5000);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   const numGuides = tourGuides.length;
   const maxCardSize = numGuides * TOUR_GUIDE_CARD_SIZE;
@@ -28,47 +29,60 @@ export default function TourGuide() {
   const middleElement = Math.floor(elements / 2);
   const moveSize = -middleElement * TOUR_GUIDE_CARD_SIZE;
 
-  function changeReviewCard() {
-    const currentTransform =
-      ref.current?.style.transform ||
-      window.getComputedStyle(ref.current!).getPropertyValue("transform");
+  const {
+    ref,
+    currentWidth,
+    isMove,
+    setCurrentWidth,
+    backToMiddle,
+    backToStart,
+    backToEnd,
+  } = useAnimateCard<HTMLDivElement>(TOUR_GUIDE_CARD_SIZE, maxCardFitToFrame);
 
-    const match = currentTransform.match(/translate3d\(([^,]+),/);
-    let currentTranslateX = match ? parseFloat(match[1]) : 0;
-    let newTranslateX = isMove.current
-      ? currentTranslateX + TOUR_GUIDE_CARD_SIZE
-      : currentTranslateX - TOUR_GUIDE_CARD_SIZE;
+  // function changeReviewCard() {
+  //   const currentTransform =
+  //     ref.current?.style.transform ||
+  //     window.getComputedStyle(ref.current!).getPropertyValue("transform");
 
-    if (newTranslateX === -maxCardFitToFrame) {
-      isMove.current = true;
-      currentTranslateX = -maxCardFitToFrame;
-    }
+  //   const match = currentTransform.match(/translate3d\(([^,]+),/);
+  //   let currentTranslateX = match ? parseFloat(match[1]) : 0;
+  //   let newTranslateX = isMove.current
+  //     ? currentTranslateX + TOUR_GUIDE_CARD_SIZE
+  //     : currentTranslateX - TOUR_GUIDE_CARD_SIZE;
 
-    if (newTranslateX === 0) {
-      currentTranslateX = 0;
-      isMove.current = false;
-    }
+  //   if (newTranslateX === -maxCardFitToFrame) {
+  //     isMove.current = true;
+  //     currentTranslateX = -maxCardFitToFrame;
+  //   }
 
-    setCurrentWidth(newTranslateX);
-    ref.current!.style!.transform = `translate3d(${newTranslateX}px, 0, 0)`;
+  //   if (newTranslateX === 0) {
+  //     currentTranslateX = 0;
+  //     isMove.current = false;
+  //   }
+
+  //   setCurrentWidth(newTranslateX);
+  //   ref.current!.style!.transform = `translate3d(${newTranslateX}px, 0, 0)`;
+  // }
+
+  function handleStart() {
+    // ref.current!.style!.transform = `translate3d(${0}px, 0, 0)`;
+    // isMove.current = false;
+    // setCurrentWidth(0);
+    backToStart();
+  }
+  function handleMiddle() {
+    // ref.current!.style!.transform = `translate3d(${moveSize}px, 0, 0)`;
+    // isMove.current = false;
+    // console.log("moveSize", moveSize);
+    // setCurrentWidth(moveSize);
+    backToMiddle(moveSize);
   }
 
-  function backToStart() {
-    ref.current!.style!.transform = `translate3d(${0}px, 0, 0)`;
-    isMove.current = false;
-    setCurrentWidth(0);
-  }
-  function backToMiddle() {
-    ref.current!.style!.transform = `translate3d(${moveSize}px, 0, 0)`;
-    isMove.current = false;
-    console.log("moveSize", moveSize);
-    setCurrentWidth(moveSize);
-  }
-
-  function backToEnd() {
-    ref.current!.style!.transform = `translate3d(${-maxCardFitToFrame}px, 0, 0)`;
-    isMove.current = true;
-    setCurrentWidth(-maxCardFitToFrame);
+  function handleEnd() {
+    // ref.current!.style!.transform = `translate3d(${-maxCardFitToFrame}px, 0, 0)`;
+    // isMove.current = true;
+    // setCurrentWidth(-maxCardFitToFrame);
+    backToEnd();
   }
 
   if (ref.current) {
@@ -79,7 +93,7 @@ export default function TourGuide() {
     <section className={`section-center ${styles.guide}`}>
       <h1>Meet Our Tour Guide</h1>
       <main className={styles.main}>
-        <div className={styles.article} ref={ref}>
+        <div className={styles["guide-container"]} ref={ref}>
           {tourGuides.map((guide, index) => {
             return (
               <Card
@@ -98,7 +112,7 @@ export default function TourGuide() {
                 ? styles.active
                 : ""
             }`}
-            onClick={backToStart}
+            onClick={handleStart}
           ></div>
           <div
             className={`${styles.rectangle} ${
@@ -107,7 +121,7 @@ export default function TourGuide() {
                 ? styles.active
                 : ""
             }`}
-            onClick={backToMiddle}
+            onClick={handleMiddle}
           ></div>
           <div
             className={`${styles.rectangle} ${
@@ -116,7 +130,7 @@ export default function TourGuide() {
                 ? styles.active
                 : ""
             }`}
-            onClick={backToEnd}
+            onClick={handleEnd}
           ></div>
         </article>
       </main>

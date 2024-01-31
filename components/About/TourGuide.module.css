@@ -3,20 +3,20 @@
   text-align: center;
 }
 
-.article {
+.main {
+  overflow: hidden;
+}
+
+.guide-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-flow: column;
-  column-gap: 3rem;
+  column-gap: 2rem;
   transform: translate3d(0px, 0px, 0px);
   transition: all 2.8s ease 0s;
   margin-top: 7rem;
   padding: 1rem;
   width: 100%;
-}
-
-.main {
-  overflow: hidden;
 }
 
 .move {
