@@ -29,7 +29,8 @@ import { v2 as cloudinary } from "cloudinary";
 import Booking from "@/model/booking";
 
 import mongoose from "mongoose";
-import { ResetPasswordType } from "@/types/input";
+import { QueryType, ResetPasswordType } from "@/types/input";
+import Query from "@/model/query";
 
 //Auth Sever Actions
 
@@ -394,5 +395,14 @@ export async function resetPassword(
     // }
     // throw new Error("Something went wrong");
     throw error;
+  }
+}
+
+export async function createQuery(data: QueryType): Promise<string> {
+  try {
+    await Query.create(data);
+    return "Query created successfully";
+  } catch (error) {
+    throw new Error("Something went wrong");
   }
 }

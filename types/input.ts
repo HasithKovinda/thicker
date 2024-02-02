@@ -1,4 +1,8 @@
-export type UseFromRegisterTypes = SignUpType | ResetPasswordType | LoginType;
+export type UseFromRegisterTypes =
+  | SignUpType
+  | ResetPasswordType
+  | LoginType
+  | QueryType;
 
 export type SignUpType = {
   name: string;
@@ -16,4 +20,9 @@ export type ResetPasswordType = {
   currentPassword: string;
   newPassword: string;
   passwordConfirm: string;
+};
+
+export type QueryType = {
+  email?: string;
+  message: string;
 };

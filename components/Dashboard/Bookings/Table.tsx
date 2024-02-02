@@ -9,6 +9,7 @@ import Loading from "@/UI/Loading";
 import { UserModel } from "@/types/model";
 import Pagination from "@/components/Pagination/Pagination";
 import { PAGE_SIZE } from "@/util/constant";
+import Link from "next/link";
 
 export default function Table() {
   const searchParams = useSearchParams();
@@ -42,7 +43,16 @@ export default function Table() {
       </div>
     );
 
-  if (!data) return <h1>No Bookings Found</h1>;
+  if (!data?.bookings.length)
+    return (
+      <div className={styles["no-bookings"]}>
+        <h2>
+          No Bookings Found!. Please Hurry up and book a tour and enjoy your
+          life with your lovers
+        </h2>
+        <Link href="/tours">Book Tour Now</Link>
+      </div>
+    );
 
   return (
     <>

@@ -11,6 +11,7 @@
 .nav-heading {
   display: flex;
   align-items: center;
+  gap: 13px;
 }
 
 .nav-heading button {
@@ -29,4 +30,33 @@
   color: var(--color-dark);
   background: transparent;
   border: 1px solid var(--color-dark);
+}
+
+.container {
+  position: relative;
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  /* padding: 5px; */
+  background: var(--clr-primary-1);
+  position: absolute;
+  top: -10px;
+  right: -7px;
+}
+
+.count span {
+  font-size: 0.8rem;
+  color: var(--clr-white);
+  font-weight: bold;
+}
+
+.notification {
+  font-size: 1.5rem;
+  color: var(--clr-primary-1);
 }
