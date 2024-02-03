@@ -17,6 +17,7 @@ import { useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
 import { countTours, filterTours } from "@/util/actions";
 import Loading from "@/UI/Loading";
 import { useSearchParams } from "next/navigation";
+import BackgroundVideo from "@/UI/BackgroundVideo";
 
 export default function TourContent() {
   const [data, setData] = useState<Filter>({
@@ -49,6 +50,7 @@ export default function TourContent() {
 
   return (
     <main className={styles.main}>
+      <BackgroundVideo />
       <h1 className={`${styles.heading}`}>Filter Your Favorite Tours</h1>
       <div className="underline"></div>
       <div className={styles.pagination}>
