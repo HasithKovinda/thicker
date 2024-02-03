@@ -398,10 +398,23 @@ export async function resetPassword(
   }
 }
 
-export async function createQuery(data: QueryType): Promise<string> {
+export async function createQuery(
+  data: QueryType,
+  userId: string
+): Promise<string> {
   try {
-    await Query.create(data);
+    await Query.create({ ...data, userId });
     return "Query created successfully";
+  } catch (error) {
+    throw new Error("Something went wrong");
+  }
+}
+
+export async function fetchQuery(userId: string): Promise<number> {
+  try {
+    const queries = await Query.countDocuments({ userId, isRead: true });
+    console.log("🚀 ~ getQuery ~ queries:", queries);
+    return queries;
   } catch (error) {
     throw new Error("Something went wrong");
   }

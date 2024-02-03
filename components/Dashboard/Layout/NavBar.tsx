@@ -4,14 +4,17 @@ import { signOut, useSession } from "next-auth/react";
 import { FiBell } from "react-icons/fi";
 import NavUser from "../../NavUser";
 import styles from "./NavBar.module.css";
-import { getUserSession } from "@/util/actions";
+import { fetchQuery, getUserSession } from "@/util/actions";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { UserModel } from "@/types/model";
 import Loading from "@/UI/Loading";
 export default function NavBar() {
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<UserModel>(["user"]);
-
+  const { data } = useQuery({
+    queryKey: ["queries"],
+    queryFn: () => fetchQuery(queryData?.id!),
+  });
   if (!queryData) return <Loading />;
 
   return (
@@ -26,7 +29,7 @@ export default function NavBar() {
         <div className={styles.container}>
           <FiBell className={styles.notification} />
           <div className={styles.count}>
-            <span>01</span>
+            <span>{data ? (data < 10 ? `0${data}` : data) : "0"}</span>
           </div>
         </div>
         <button

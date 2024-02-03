@@ -16,7 +16,12 @@ export default function DashBoardLayout({
     queryKey: ["user"],
     queryFn: () => getUserSession(),
   });
-  if (isFetching) return <Loading />;
+  if (isFetching)
+    return (
+      <div className={styles.loading}>
+        <Loading />
+      </div>
+    );
   return (
     <main className={styles.container}>
       <SideBar />

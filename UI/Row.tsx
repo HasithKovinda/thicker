@@ -7,12 +7,20 @@ type RowPropType = {
   guides: Guides[];
   tourId: string;
   price: number;
+  description: string;
+  title: string;
 };
 
-export default function Row({ guides, tourId, price }: RowPropType) {
+export default function Row({
+  guides,
+  tourId,
+  price,
+  description,
+  title,
+}: RowPropType) {
   return (
     <main className={`section-center ${styles.main}`}>
-      <Wrapper guides={guides} />
+      <Wrapper guides={guides} description={description} title={title} />
       <OtherInformation tourId={tourId} price={price} />
     </main>
   );

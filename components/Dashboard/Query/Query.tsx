@@ -32,11 +32,12 @@ export default function Query() {
   const queryData = queryClient.getQueryData<UserModel>(["user"]);
 
   const { mutate } = useMutation({
-    mutationFn: (data: QueryType) => createQuery(data),
+    mutationFn: (data: QueryType) => createQuery(data, queryData?.id!),
     onSuccess: () => {
       toast.success("Query Send Successfully");
       reset();
     },
+    onError: (error) => toast.error(error.message),
   });
 
   function handleInput(data: QueryType) {

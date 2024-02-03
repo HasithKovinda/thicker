@@ -29,6 +29,7 @@ export default function PageContent({ tours }: PageContentProps) {
     price,
     startLocation,
     guides,
+    description,
   } = tours;
   const mapLocations: MapLocation[] = locations.map((location) => {
     return {
@@ -64,7 +65,13 @@ export default function PageContent({ tours }: PageContentProps) {
         title={name}
         price={price}
       />
-      <Row guides={tourGuides} tourId={tours._id} price={price} />
+      <Row
+        guides={tourGuides}
+        tourId={tours._id}
+        price={price}
+        title={name}
+        description={description}
+      />
       <div ref={ref}>
         <Map
           locations={mapLocations}

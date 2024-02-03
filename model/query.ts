@@ -1,8 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
+import User from "./user";
 
 interface IQueryModel extends Document {
   email: string;
   message: string;
+  userId: Types.ObjectId;
   isRead: boolean;
 }
 
@@ -14,6 +16,11 @@ const querySchema = new mongoose.Schema<IQueryModel>({
   },
   message: {
     type: String,
+  },
+  userId: {
+    type: mongoose.Schema.ObjectId,
+    ref: User,
+    required: [true, " Query must belong to user"],
   },
   isRead: {
     type: Boolean,
