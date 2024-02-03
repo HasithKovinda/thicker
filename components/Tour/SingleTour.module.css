@@ -19,6 +19,16 @@
   position: relative;
 }
 
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.heading span {
+  font-size: 1.6rem;
+}
+
 .price {
   position: absolute;
   top: 10px;

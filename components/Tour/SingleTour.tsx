@@ -16,7 +16,15 @@ export default function SingleTour({
   summary,
   slug,
 }: PopularTour) {
-  console.log(Math.floor(ratingsAverage));
+  const countries = [
+    { name: "USA", class: "fi fi-us" },
+    { name: "Australia", class: "fi fi-au" },
+    { name: "England", class: "fi fi-gb" },
+    { name: "CAN", class: "fi fi-ca" },
+  ];
+  const className = countries.find(
+    (country) => startLocation.split(",")[1].trim() === country.name
+  );
   return (
     <article className={styles["single-tour"]}>
       <div className={styles["main-image"]}>
@@ -24,9 +32,6 @@ export default function SingleTour({
         <div className={styles.info}>
           <FiClock className={styles.icons} />
           <span>{duration} days</span>
-          <span>
-            <BiSolidStar className={styles.color} />
-          </span>
           <FiMapPin className={styles.icons} />
           <span>{startLocation}</span>
         </div>
@@ -35,7 +40,10 @@ export default function SingleTour({
         </div>
       </div>
       <div className={styles.content}>
-        <h2>{name}</h2>
+        <div className={styles.heading}>
+          <h2>{name}</h2>
+          <span className={className?.class}></span>
+        </div>
         <div className={styles.rating}>
           <div className={styles["rating-icons"]}>
             <img src="/assert/rating.svg" alt="" />

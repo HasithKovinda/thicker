@@ -3,13 +3,17 @@
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import styles from "./Pagination.module.css";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { PAGE_SIZE } from "@/util/constant";
+import { BOOKING_PAGE_SIZE, TOUR_PAGE_SIZE } from "@/util/constant";
 
 type PaginationProps = {
   numberOfResults: number;
+  pageTypes: "bookings" | "tour";
 };
 
-export default function Pagination({ numberOfResults }: PaginationProps) {
+export default function Pagination({
+  numberOfResults,
+  pageTypes,
+}: PaginationProps) {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathName = usePathname();
@@ -18,7 +22,9 @@ export default function Pagination({ numberOfResults }: PaginationProps) {
     ? 1
     : Number(searchParams.get("page"));
 
-  const pageCount = Math.ceil(numberOfResults / PAGE_SIZE);
+  const pageSize =
+    pageTypes === "bookings" ? BOOKING_PAGE_SIZE : TOUR_PAGE_SIZE;
+  const pageCount = Math.ceil(numberOfResults / pageSize);
 
   function handleNext() {
     const next = currentPage === pageCount ? currentPage : currentPage + 1;
@@ -32,15 +38,12 @@ export default function Pagination({ numberOfResults }: PaginationProps) {
   }
 
   if (pageCount <= 1) return null;
-
   return (
     <section className={styles.pagination}>
       <div>
-        Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span> to{" "}
+        Showing <span>{(currentPage - 1) * pageSize + 1}</span> to{" "}
         <span>
-          {currentPage === pageCount
-            ? numberOfResults
-            : currentPage * PAGE_SIZE}
+          {currentPage === pageCount ? numberOfResults : currentPage * pageSize}
         </span>{" "}
         of <span>{numberOfResults}</span> results
       </div>

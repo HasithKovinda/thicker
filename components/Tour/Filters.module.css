@@ -3,7 +3,7 @@
   padding: 2rem;
   border-radius: 10px;
   box-shadow: var(--dark-shadow);
-  height: 58rem;
+  height: 61rem;
 }
 
 /* .heading h2 {
@@ -85,4 +85,15 @@
   background: var(--color-dark);
   border: none;
   padding: 0.8rem 1.2rem;
+}
+
+.country {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 2rem;
+}
+
+.country span {
+  cursor: pointer;
 }

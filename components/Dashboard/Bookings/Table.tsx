@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import Loading from "@/UI/Loading";
 import { UserModel } from "@/types/model";
 import Pagination from "@/components/Pagination/Pagination";
-import { PAGE_SIZE } from "@/util/constant";
+import { BOOKING_PAGE_SIZE } from "@/util/constant";
 import Link from "next/link";
 
 export default function Table() {
@@ -23,7 +23,7 @@ export default function Table() {
     queryFn: () => fetchBookings(currentPage, queryData?.id!),
   });
 
-  const pageCount = Math.ceil(data?.numberOfResults! / PAGE_SIZE);
+  const pageCount = Math.ceil(data?.numberOfResults! / BOOKING_PAGE_SIZE);
 
   if (currentPage < pageCount)
     queryClient.prefetchQuery({
@@ -80,7 +80,7 @@ export default function Table() {
           })}
         </section>
       </div>
-      <Pagination numberOfResults={data.numberOfResults} />
+      <Pagination numberOfResults={data.numberOfResults} pageTypes="bookings" />
     </>
   );
 }

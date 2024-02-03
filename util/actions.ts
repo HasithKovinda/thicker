@@ -18,7 +18,8 @@ import {
   DEFAULT_GROUP_SIZE,
   DEFAULT_PRICE,
   DEFAULT_RATING,
-  PAGE_SIZE,
+  BOOKING_PAGE_SIZE,
+  TOUR_PAGE_SIZE,
 } from "./constant";
 import Review from "@/model/review";
 import User from "@/model/user";
@@ -108,7 +109,75 @@ export async function fetchAllTours(): Promise<PopularTour[]> {
   return tourList;
 }
 
+const toursData = [
+  {
+    startLocation: {
+      description: "Oxford, England",
+      type: "Point",
+      coordinates: [-1.2577, 51.752],
+    },
+    ratingsAverage: 4.6,
+    ratingsQuantity: 12,
+    images: [
+      "https://res.cloudinary.com/dehxgov2k/image/upload/v1706949543/Tours/youwd55iwrpga21smnnr.jpg",
+      "https://res.cloudinary.com/dehxgov2k/image/upload/v1706949517/Tours/zzmvwtfvefkoit76lkdh.jpg",
+      "https://res.cloudinary.com/dehxgov2k/image/upload/v1706950257/Tours/zyhoq3ttdlv0bgwpy39q.jpg",
+    ],
+    startDates: [
+      "2022-07-05T09:00:00.000Z",
+      "2022-10-15T09:00:00.000Z",
+      "2023-04-01T09:00:00.000Z",
+    ],
+    name: "Oxford University Tour",
+    duration: 2,
+    maxGroupSize: 10,
+    guides: ["5c8a22c62f8fb814b56fa18b", "5c8a23412f8fb814b56fa18c"],
+    price: 980,
+    difficulty: "easy",
+    summary:
+      "Explore the historic halls and prestigious colleges of Oxford University on this guided tour.",
+    description:
+      "Step into the hallowed halls of Oxford University, one of the world's oldest and most prestigious educational institutions, and discover the secrets of its storied past. Explore the university's historic colleges, libraries, and chapels as you stroll through its picturesque campus, and learn about the famous scholars and literary figures who have walked its cobblestone streets. Visit iconic landmarks such as the Bodleian Library, Christ Church Cathedral, and Radcliffe Camera, and marvel at the stunning architecture and timeless beauty of these historic buildings. With knowledgeable guides leading the way, you'll gain insight into the university's rich history, academic traditions, and cultural significance. Whether you're a prospective student, a history buff, or simply curious to learn more, this guided tour offers a fascinating glimpse into the heart of Oxford.",
+    imageCover:
+      "https://res.cloudinary.com/dehxgov2k/image/upload/v1706949537/Tours/rbyyeom0o88swfeeux1d.jpg",
+    slug: "oxford-university-tour",
+    locations: [
+      {
+        description: "Bodleian Library",
+        type: "Point",
+        coordinates: [-1.2572, 51.7547],
+        day: 1,
+      },
+      {
+        description: "Ashmolean Museum",
+        type: "Point",
+        coordinates: [-1.2602, 51.755],
+        day: 1,
+      },
+      {
+        description: "Oxford Botanic Garden",
+        type: "Point",
+        coordinates: [-1.252, 51.7512],
+        day: 1,
+      },
+      {
+        description: "Magdalen College",
+        type: "Point",
+        coordinates: [-1.2434, 51.7528],
+        day: 2,
+      },
+      {
+        description: "University of Oxford Museum of Natural History",
+        type: "Point",
+        coordinates: [-1.2573, 51.758],
+        day: 2,
+      },
+    ],
+  },
+];
+
 export async function fetchMostPopularTour(): Promise<PopularTour[]> {
+  // await Tours.insertMany(toursData);
   await connect();
   const tours: TourModel[] = await Tours.find();
   const sortByAvgRating = tours.sort(
@@ -134,13 +203,17 @@ export async function fetchMostPopularTour(): Promise<PopularTour[]> {
   return tourList;
 }
 
-export async function filterTours({
-  price,
-  groupSize,
-  duration,
-  rating,
-  difficulty,
-}: Filter): Promise<PopularTour[]> {
+export async function countTours(): Promise<number> {
+  const res = await Tours.countDocuments();
+  return res;
+}
+
+export async function filterTours(
+  currentPage: number,
+  { price, groupSize, duration, rating, difficulty, country }: Filter
+): Promise<{ count: number; tours: PopularTour[] }> {
+  const limit = TOUR_PAGE_SIZE;
+  let skip = (currentPage - 1) * limit;
   await connect();
   let tours: PopularTour[] = await fetchAllTours();
   if (
@@ -148,9 +221,19 @@ export async function filterTours({
     !(groupSize !== DEFAULT_GROUP_SIZE) &&
     !(duration !== DEFAULT_DURATION) &&
     !(rating !== DEFAULT_RATING) &&
+    country === "all" &&
     difficulty === Difficulty.ALL
   ) {
-    return tours;
+    if (skip === 0) {
+      return {
+        count: tours.length,
+        tours: tours.slice(skip, TOUR_PAGE_SIZE),
+      };
+    }
+    return {
+      count: tours.length,
+      tours: tours.slice(skip, TOUR_PAGE_SIZE * currentPage),
+    };
   }
 
   const filters = [
@@ -167,7 +250,30 @@ export async function filterTours({
   }
 
   tours = tours.filter((tour) => filters.every((filter) => filter(tour)));
-  return tours;
+
+  if (country !== "all") {
+    console.log(country);
+    console.log(tours[0].startLocation.split(",")[1]);
+    tours = tours.filter(
+      (tour) => tour.startLocation.split(",")[1].trim() === country
+    );
+    console.log(tours.length);
+  }
+
+  if (skip === 0) {
+    console.log(
+      "🚀 ~  tours: tours.slice(skip, PAGE_SIZE):",
+      tours.slice(skip, TOUR_PAGE_SIZE)
+    );
+    return {
+      count: tours.length,
+      tours: tours.slice(skip, TOUR_PAGE_SIZE),
+    };
+  }
+  return {
+    count: tours.length,
+    tours: tours.slice(skip, TOUR_PAGE_SIZE * currentPage),
+  };
 }
 
 export async function fetchAllTopReviews(
@@ -288,7 +394,7 @@ export async function fetchBookings(
   userId: string
 ): Promise<BookPagination | null> {
   try {
-    const limit = PAGE_SIZE;
+    const limit = BOOKING_PAGE_SIZE;
     const skip = (page - 1) * limit;
     const numberBookings = await Booking.countDocuments({ userId });
     const bookings: FetchedBookingType[] = await Booking.find({ userId })
@@ -413,7 +519,6 @@ export async function createQuery(
 export async function fetchQuery(userId: string): Promise<number> {
   try {
     const queries = await Query.countDocuments({ userId, isRead: true });
-    console.log("🚀 ~ getQuery ~ queries:", queries);
     return queries;
   } catch (error) {
     throw new Error("Something went wrong");

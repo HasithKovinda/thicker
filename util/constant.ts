@@ -18,7 +18,8 @@ export const ACCEPTED_IMAGE_TYPES = [
   "image/webp",
 ];
 
-export const PAGE_SIZE = 5;
+export const BOOKING_PAGE_SIZE = 5;
+export const TOUR_PAGE_SIZE = 6;
 export const REVIEW_CARD_Size = 467;
 export const NUMBER_OF_MAX_CARD = 3;
 export const TOUR_GUIDE_CARD_SIZE = 467;

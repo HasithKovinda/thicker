@@ -21,6 +21,7 @@ export type Filter = {
   groupSize: number;
   rating: number;
   difficulty: Difficulty;
+  country: string;
 };
 
 export type MapLocation = {
