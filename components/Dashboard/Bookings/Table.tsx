@@ -10,6 +10,7 @@ import TableRow from "./TableRow";
 import Loading from "@/UI/Loading";
 import { type UserModel } from "@/types/model";
 import { BOOKING_PAGE_SIZE } from "@/util/constant";
+import { useEffect } from "react";
 
 export default function Table() {
   const searchParams = useSearchParams();
@@ -25,16 +26,21 @@ export default function Table() {
 
   const pageCount = Math.ceil(data?.numberOfResults! / BOOKING_PAGE_SIZE);
 
-  if (currentPage < pageCount)
-    queryClient.prefetchQuery({
-      queryKey: ["bookings", currentPage + 1],
-      queryFn: () => fetchBookings(currentPage + 1, queryData?.id!),
-    });
-  if (currentPage > 1)
-    queryClient.prefetchQuery({
-      queryKey: ["bookings", currentPage - 1],
-      queryFn: () => fetchBookings(currentPage - 1, queryData?.id!),
-    });
+  useEffect(() => {
+    if (currentPage < pageCount) {
+      queryClient.prefetchQuery({
+        queryKey: ["bookings", currentPage + 1],
+        queryFn: () => fetchBookings(currentPage + 1, queryData?.id!),
+      });
+    }
+
+    if (currentPage > 1) {
+      queryClient.prefetchQuery({
+        queryKey: ["bookings", currentPage - 1],
+        queryFn: () => fetchBookings(currentPage - 1, queryData?.id!),
+      });
+    }
+  }, [currentPage, pageCount, queryClient, queryData?.id]);
 
   if (isPending)
     return (
@@ -65,11 +71,11 @@ export default function Table() {
           <div>Invoice</div>
         </header>
         <section>
-          {data.bookings.map((booking) => {
+          {data.bookings.map((booking, index) => {
             return (
               <TableRow
                 userName={booking.fullName}
-                key={booking.id}
+                key={index}
                 name={booking.tourId.name}
                 price={booking.price}
                 email={booking.email}

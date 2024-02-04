@@ -1,6 +1,9 @@
 "use client";
 
+import styles from "./SideBar.module.css";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   FiStar,
   FiBriefcase,
@@ -8,11 +11,11 @@ import {
   FiSettings,
   FiHelpCircle,
 } from "react-icons/fi";
-import { useQueryClient } from "@tanstack/react-query";
-import styles from "./SideBar.module.css";
 import { type UserModel } from "@/types/model";
 
 export default function SideBar() {
+  const pathName = usePathname();
+  console.log("🚀 ~ SideBar ~ pathName:", pathName);
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<UserModel>(["user"]);
   const src = queryData?.photo ? queryData.photo : "assert/default.jpg";
