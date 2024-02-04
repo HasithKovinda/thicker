@@ -13,6 +13,7 @@ type ButtonProps = {
 type BaseProps = {
   children: ReactNode;
   path: string;
+  classType: "normal" | "sideBar";
 };
 
 type LinkProps = {
@@ -22,12 +23,18 @@ type LinkProps = {
 type NavLinkProps = ButtonProps | LinkProps;
 
 export default function NavLink(props: NavLinkProps) {
-  const { children, path } = props;
+  const { children, path, classType } = props;
   const pathName = usePathname();
   const activePath = path === pathName ? true : false;
+  const generalClass =
+    classType === "normal" ? `${styles.link}` : `${styles["link-sidebar"]}`;
+
+  const activeClassType =
+    classType === "normal" ? `${styles.active}` : `${styles["sidebar-active"]}`;
   const classActive = activePath
-    ? `${styles.link} ${styles.active}`
-    : styles.link;
+    ? `${generalClass} ${activeClassType}`
+    : generalClass;
+
   if (props.type === "link")
     return (
       <Link

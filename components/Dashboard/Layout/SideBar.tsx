@@ -12,10 +12,11 @@ import {
   FiHelpCircle,
 } from "react-icons/fi";
 import { type UserModel } from "@/types/model";
+import NavLink from "@/components/NavLink";
 
 export default function SideBar() {
   const pathName = usePathname();
-  console.log("🚀 ~ SideBar ~ pathName:", pathName);
+  // console.log("🚀 ~ SideBar ~ pathName:", pathName);
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<UserModel>(["user"]);
   const src = queryData?.photo ? queryData.photo : "assert/default.jpg";
@@ -33,34 +34,34 @@ export default function SideBar() {
       </div>
       <ul className={styles["section-container"]}>
         <li>
-          <Link href="/dashboard" className={styles.link}>
+          <NavLink classType="sideBar" path="/dashboard" type="link">
             <FiUser className={styles.icon} />
             <span>Profile</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link href="/dashboard/bookings" className={styles.link}>
+          <NavLink classType="sideBar" path="/dashboard/bookings" type="link">
             <FiBriefcase className={styles.icon} />
             <span>Bookings</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link href="/dashboard/reviews" className={styles.link}>
+          <NavLink classType="sideBar" path="/dashboard/reviews" type="link">
             <FiStar className={styles.icon} />
             <span>Reviews</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link href="/dashboard/query" className={styles.link}>
+          <NavLink classType="sideBar" path="/dashboard/query" type="link">
             <FiHelpCircle className={styles.icon} />
             <span>Query</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link href="/dashboard/settings" className={styles.link}>
+          <NavLink classType="sideBar" path="/dashboard/settings" type="link">
             <FiSettings className={styles.icon} />
             <span>Setting</span>
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </aside>

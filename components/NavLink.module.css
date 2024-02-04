@@ -8,6 +8,23 @@
   padding: 0.7rem 0.7rem;
 }
 
+.link-sidebar {
+  display: flex;
+  align-items: center;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  gap: 10px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.sidebar-active {
+  background: var(--color-dark);
+  color: var(--clr-white);
+  padding: 0.4rem 0.8rem;
+}
+
 .link:hover {
   color: var(--clr-primary-1);
 }

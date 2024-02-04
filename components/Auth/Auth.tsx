@@ -19,6 +19,7 @@ export default function Auth() {
           </li>
           <li>
             <NavLink
+              classType="normal"
               type="button"
               path="/login"
               onClick={() =>
@@ -32,12 +33,17 @@ export default function Auth() {
       ) : (
         <>
           <li>
-            <NavLink type="button" path="/login" onClick={() => signIn()}>
+            <NavLink
+              classType="normal"
+              type="button"
+              path="/login"
+              onClick={() => signIn()}
+            >
               Login
             </NavLink>
           </li>
           <li>
-            <NavLink type="link" path="/signUp">
+            <NavLink classType="normal" type="link" path="/signUp">
               SignUp
             </NavLink>
           </li>
