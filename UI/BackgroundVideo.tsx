@@ -8,7 +8,11 @@ export default function BackgroundVideo() {
         Your Browser is not supported
       </video>
       <div className={styles.heading}>
-        <h1>Well Come to Our tour page</h1>
+        <svg viewBox="0 0 1320 300" className={styles.svg}>
+          <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+            Unveiling the Story Behind Your Next Adventure
+          </text>
+        </svg>
       </div>
     </section>
   );

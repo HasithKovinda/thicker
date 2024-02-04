@@ -19,7 +19,7 @@ export default function Auth() {
           </li>
           <li>
             <NavLink
-              classType="normal"
+              activeclasstype="normal"
               type="button"
               path="/login"
               onClick={() =>
@@ -34,7 +34,7 @@ export default function Auth() {
         <>
           <li>
             <NavLink
-              classType="normal"
+              activeclasstype="normal"
               type="button"
               path="/login"
               onClick={() => signIn()}
@@ -43,7 +43,7 @@ export default function Auth() {
             </NavLink>
           </li>
           <li>
-            <NavLink classType="normal" type="link" path="/signUp">
+            <NavLink activeclasstype="normal" type="link" path="/signUp">
               SignUp
             </NavLink>
           </li>

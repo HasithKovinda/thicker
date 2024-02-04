@@ -1,13 +1,52 @@
 .hero {
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(28, 234, 245, 0.8),
-      rgba(29, 197, 206, 0.8)
-    ),
-    url(/assert/head.jpg);
-  height: 40rem;
+  background-image: url(/assert/about-img.jpg);
+  height: 45rem;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-blend-mode: soft-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  position: relative;
+  font-family: var(--ff-third);
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+}
+.svg text {
+  text-transform: uppercase;
+  animation: stroke 5s infinite alternate;
+  stroke-width: 2;
+  stroke: var(--clr-white);
+  font-size: 3rem;
+  letter-spacing: 1.3px;
+}
+@keyframes stroke {
+  0% {
+    fill: rgba(72, 138, 20, 0);
+    stroke: rgb(156, 155, 155);
+    stroke-dashoffset: 25%;
+    stroke-dasharray: 0 50%;
+    stroke-width: 2;
+  }
+  70% {
+    fill: rgba(72, 138, 20, 0);
+    stroke: rgb(224, 225, 226);
+  }
+  80% {
+    fill: rgba(72, 138, 20, 0);
+    stroke: rgb(235, 236, 238);
+    stroke-width: 3;
+  }
+  100% {
+    fill: rgb(255, 255, 255);
+    stroke: rgba(54, 95, 160, 0);
+    stroke-dashoffset: -25%;
+    stroke-dasharray: 50% 0;
+    stroke-width: 0;
+  }
 }

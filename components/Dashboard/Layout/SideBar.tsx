@@ -34,31 +34,47 @@ export default function SideBar() {
       </div>
       <ul className={styles["section-container"]}>
         <li>
-          <NavLink classType="sideBar" path="/dashboard" type="link">
+          <NavLink activeclasstype="sideBar" path="/dashboard" type="link">
             <FiUser className={styles.icon} />
             <span>Profile</span>
           </NavLink>
         </li>
         <li>
-          <NavLink classType="sideBar" path="/dashboard/bookings" type="link">
+          <NavLink
+            activeclasstype="sideBar"
+            path="/dashboard/bookings"
+            type="link"
+          >
             <FiBriefcase className={styles.icon} />
             <span>Bookings</span>
           </NavLink>
         </li>
         <li>
-          <NavLink classType="sideBar" path="/dashboard/reviews" type="link">
+          <NavLink
+            activeclasstype="sideBar"
+            path="/dashboard/reviews"
+            type="link"
+          >
             <FiStar className={styles.icon} />
             <span>Reviews</span>
           </NavLink>
         </li>
         <li>
-          <NavLink classType="sideBar" path="/dashboard/query" type="link">
+          <NavLink
+            activeclasstype="sideBar"
+            path="/dashboard/query"
+            type="link"
+          >
             <FiHelpCircle className={styles.icon} />
             <span>Query</span>
           </NavLink>
         </li>
         <li>
-          <NavLink classType="sideBar" path="/dashboard/settings" type="link">
+          <NavLink
+            activeclasstype="sideBar"
+            path="/dashboard/settings"
+            type="link"
+          >
             <FiSettings className={styles.icon} />
             <span>Setting</span>
           </NavLink>

@@ -21,6 +21,7 @@
     "flag-icons": "^7.1.0",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
+    "lottie-react": "^2.4.0",
     "mongoose": "^8.0.4",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
