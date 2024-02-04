@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import NavLink from "@/components/NavLink";
 import Auth from "@/components/Auth/Auth";
 import { SCROLL_POSITION_THRESHOLD_VALUE } from "@/util/constant";
+import Link from "next/link";
 
 export default function NavBar() {
   const [isNavFixed, setIsNavFixed] = useState(false);
@@ -25,7 +26,9 @@ export default function NavBar() {
     <nav className={`${styles.nav}  ${isNavFixed ? styles.fixed : ""} `}>
       <section className={`section-center ${styles["nav-items"]}`}>
         <div>
-          <img src="/logo.svg" alt="logo" className={styles.logo} />
+          <Link href="/">
+            <img src="/logo.svg" alt="logo" className={styles.logo} />
+          </Link>
         </div>
         <ul>
           <li>

@@ -64,6 +64,10 @@ export default function SideBar() {
           </NavLink>
         </li>
       </ul>
+      <div className={styles.footer}>
+        <p>Copyright © {new Date().getFullYear()}</p>
+        <p>Treker All Rights Reserved🎖️ </p>
+      </div>
     </aside>
   );
 }

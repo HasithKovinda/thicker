@@ -6,6 +6,8 @@
   width: 20rem;
   border-radius: 20px;
   box-shadow: var(--light-shadow);
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
 }
 
 .section {
@@ -71,4 +73,9 @@
 .section-container span {
   font-size: 1.2rem;
   flex-grow: 1;
+}
+
+.footer {
+  text-align: center;
+  color: var(--color-dark-2);
 }
