@@ -1,37 +1,17 @@
 "use client";
 
-import { ZodType, z } from "zod";
+import styles from "./Settings.module.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import styles from "./Settings.module.css";
+import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { signOut } from "next-auth/react";
+import { resetPassword } from "@/lib/actions/auth/auth";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
-import { type ResetPasswordType } from "@/types/input";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { resetPassword } from "@/util/actions";
-import { UserModel } from "@/types/model";
-import toast from "react-hot-toast";
-import { signOut } from "next-auth/react";
-
-const settingsSchema: ZodType<ResetPasswordType> = z
-  .object({
-    currentPassword: z
-      .string()
-      .min(6, "password should have at least 6 charters")
-      .max(12, "password should not be exceed 12 charters"),
-    newPassword: z
-      .string()
-      .min(6, "password should have at least 6 charters")
-      .max(12, "password should not be exceed 12 charters"),
-    passwordConfirm: z
-      .string()
-      .min(6, "password should have at least 6 charters")
-      .max(12, "password should not be exceed 12 charters"),
-  })
-  .refine((data) => data.newPassword === data.passwordConfirm, {
-    message: "password and password confirm should match",
-    path: ["passwordConfirm"],
-  });
+import { settingsSchema } from "@/util/zodSchema/schema";
+import { type UserModel } from "@/types/model";
+import { type ResetPasswordType } from "@/types/userInput";
 
 export default function Settings() {
   const {
@@ -46,7 +26,6 @@ export default function Settings() {
     mutationFn: (data: { userId: string; options: ResetPasswordType }) =>
       resetPassword(data.userId, data.options),
     onSuccess: (data) => {
-      console.log("🚀 ~ Settings ~ data:", data);
       toast.success("Password Reset Successfully");
       signOut({ callbackUrl: "http://localhost:3000/login" });
     },

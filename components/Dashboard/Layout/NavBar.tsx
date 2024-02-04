@@ -1,13 +1,14 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import styles from "./NavBar.module.css";
+import { signOut } from "next-auth/react";
 import { FiBell } from "react-icons/fi";
 import NavUser from "../../NavUser";
-import styles from "./NavBar.module.css";
-import { fetchQuery, getUserSession } from "@/util/actions";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { UserModel } from "@/types/model";
 import Loading from "@/UI/Loading";
+import { fetchQuery } from "@/lib/actions/query/query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { type UserModel } from "@/types/model";
+
 export default function NavBar() {
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<UserModel>(["user"]);

@@ -28,7 +28,7 @@ export default function Info({
       <article className={styles.article}>
         <div>
           <div className={styles["img-container"]}>
-            <img src="/assert/icons/duration.svg" alt="" />
+            <img src="/assert/icons/duration.svg" alt="duration" />
           </div>
           <div>
             <p>Duration</p>
@@ -38,7 +38,7 @@ export default function Info({
         </div>
         <div>
           <div className={styles["img-container"]}>
-            <img src="/assert/icons/speedometer.svg" alt="" />
+            <img src="/assert/icons/speedometer.svg" alt="speedometer" />
           </div>
           <div>
             <p>Difficulty</p>
@@ -48,7 +48,7 @@ export default function Info({
         </div>
         <div>
           <div className={styles["img-container"]}>
-            <img src="/assert/icons/team-group.svg" alt="" />
+            <img src="/assert/icons/team-group.svg" alt="team-group" />
           </div>
           <div>
             <p>Group Size</p>
@@ -58,7 +58,7 @@ export default function Info({
         </div>
         <div>
           <div className={styles["img-container"]}>
-            <img src="/assert/icons/icon-1.svg" alt="" />
+            <img src="/assert/icons/icon-1.svg" alt="icon-1" />
           </div>
           <div>
             <p>Location</p>

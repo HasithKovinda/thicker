@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 import SideBar from "./SideBar";
 import styles from "./DashBoardLayout.module.css";
 import { useQuery } from "@tanstack/react-query";
-import { getUserSession } from "@/util/actions";
+import { getUserSession } from "@/lib/actions/auth/auth";
 import Loading from "@/UI/Loading";
 
 export default function DashBoardLayout({
@@ -12,7 +12,7 @@ export default function DashBoardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { data, isFetching } = useQuery({
+  const { isFetching } = useQuery({
     queryKey: ["user"],
     queryFn: () => getUserSession(),
   });

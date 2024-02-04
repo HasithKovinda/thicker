@@ -3,31 +3,22 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import styles from "./Auth.module.css";
-import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { getUserSession } from "@/util/actions";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { signIn } from "next-auth/react";
+import styles from "./Auth.module.css";
 import Loading from "@/UI/Loading";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import { signInFromSchema } from "@/util/zodSchema/schema";
 
 type LoginProps = {
   callbackUrl?: string;
 };
 
-const signUpFromSchema = z.object({
-  email: z.string().email("please add a valid email address"),
-  password: z
-    .string()
-    .min(6, "password should have at least 6 charters")
-    .max(12, "password should not be exceed 12 charters"),
-});
-
-type InputTypes = z.infer<typeof signUpFromSchema>;
+type InputTypes = z.infer<typeof signInFromSchema>;
 
 export default function Login({ callbackUrl }: LoginProps) {
   const router = useRouter();
@@ -35,7 +26,7 @@ export default function Login({ callbackUrl }: LoginProps) {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<InputTypes>({ resolver: zodResolver(signUpFromSchema) });
+  } = useForm<InputTypes>({ resolver: zodResolver(signInFromSchema) });
 
   const queryClient = useQueryClient();
 

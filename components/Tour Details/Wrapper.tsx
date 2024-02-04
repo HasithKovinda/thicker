@@ -1,4 +1,4 @@
-import { Guides } from "@/types/tour";
+import { Guides } from "@/types/model";
 import Description from "./Description";
 
 type WrapperPropType = {

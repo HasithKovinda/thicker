@@ -1,5 +1,5 @@
 import mongoose, { Types } from "mongoose";
-import user from "./user";
+import user from "./User";
 import Tours from "./Tours";
 
 interface IReviewModel extends Document {

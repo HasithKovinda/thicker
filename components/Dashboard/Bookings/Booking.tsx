@@ -1,6 +1,5 @@
 import Table from "./Table";
 import styles from "./Booking.module.css";
-import Pagination from "@/components/Pagination/Pagination";
 
 export default async function Booking() {
   return (
@@ -14,7 +13,6 @@ export default async function Booking() {
         </p>
       </div>
       <Table />
-      {/* <Pagination numberOfResults={45} /> */}
     </main>
   );
 }

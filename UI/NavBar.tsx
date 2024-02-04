@@ -4,13 +4,14 @@ import styles from "./NavBar.module.css";
 import { useEffect, useState } from "react";
 import NavLink from "@/components/NavLink";
 import Auth from "@/components/Auth/Auth";
+import { SCROLL_POSITION_THRESHOLD_VALUE } from "@/util/constant";
 
 export default function NavBar() {
   const [isNavFixed, setIsNavFixed] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const threshold = 80;
+      const threshold = SCROLL_POSITION_THRESHOLD_VALUE;
 
       setIsNavFixed(scrollPosition > threshold);
     };

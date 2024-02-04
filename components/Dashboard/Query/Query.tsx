@@ -1,24 +1,16 @@
 "use client";
 
-import { ZodType, z } from "zod";
 import styles from "./Query.module.css";
-import { QueryType } from "@/types/input";
+import { QueryType } from "@/types/userInput";
 import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import { UserModel } from "@/types/model";
-import { createQuery } from "@/util/actions";
-
-const querySchema: ZodType<QueryType> = z.object({
-  email: z.string().email().optional(),
-  message: z
-    .string()
-    .min(10, "Message should not be at least 10 characters")
-    .max(500, "Message should not be exceed 500 characters"),
-});
+import { createQuery } from "@/lib/actions/query/query";
+import { querySchema } from "@/util/zodSchema/schema";
+import { type UserModel } from "@/types/model";
 
 export default function Query() {
   const {

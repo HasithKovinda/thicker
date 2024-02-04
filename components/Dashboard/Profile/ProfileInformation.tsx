@@ -5,14 +5,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./ProfileInformation.module.css";
 import { ChangeEvent, useState } from "react";
-import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from "@/util/constant";
-import axios from "axios";
-import { useSession } from "next-auth/react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { changeProfile, getUserSession, uploadImage } from "@/util/actions";
 import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { changeProfile } from "@/lib/actions/auth/auth";
+import { uploadImage } from "@/lib/actions/helper/uploadImage";
 import Loading from "@/UI/Loading";
-import { UserModel } from "@/types/model";
+import { type ProfileSettings } from "@/types/model";
+import { profileFromSchema } from "@/util/zodSchema/schema";
+import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from "@/util/constant";
+import Input from "@/components/Input/Input";
 
 type ImageType = {
   submit: boolean;
@@ -24,33 +25,26 @@ const initialState: ImageType = {
   file: null,
 };
 
-const profileFromSchema = z.object({
-  name: z.string().min(4, "name should at least 4 character"),
-  email: z.string().email("please add a valid email address"),
-});
-
 type InputTypes = z.infer<typeof profileFromSchema>;
 
 export default function ProfileInformation() {
-  // const { data: session } = useSession();
   const [image, setImage] = useState<ImageType>(initialState);
   const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
     reset,
-    getValues,
     formState: { errors, isSubmitting },
   } = useForm<InputTypes>({ resolver: zodResolver(profileFromSchema) });
 
   const queryClient = useQueryClient();
-  const queryData = queryClient.getQueryData<UserModel>(["user"]);
   const [dataImg, setData] = useState("");
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (data: ProfileSettings) => changeProfile(data),
     onSuccess: () => {
       toast.success("Profile settings updated successfully");
       queryClient.invalidateQueries({ queryKey: ["user"] });
+      reset();
     },
     onError: () => {
       toast.error("Something went wrong");
@@ -106,42 +100,20 @@ export default function ProfileInformation() {
       <h2>Your Profile Information</h2>
       <article className={styles.article}>
         <form className={styles.form}>
-          <div>
-            <label htmlFor="email">Your User Name</label>
-            <input
-              type="text"
-              id="name"
-              className={
-                errors.name
-                  ? `${styles["error-input"]} ${styles.input}`
-                  : `${styles.input}`
-              }
-              defaultValue={queryData?.name!}
-              {...register("name")}
-            />
-            {errors.name && (
-              <span className={styles.error}>{errors.name?.message}</span>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="email">Your Email Address</label>
-            <input
-              type="email"
-              id="email"
-              className={
-                errors.email
-                  ? `${styles["error-input"]} ${styles.input}`
-                  : `${styles.input}`
-              }
-              defaultValue={queryData?.email!}
-              {...register("email")}
-            />
-            {errors.email && (
-              <span className={styles.error}>{errors.email?.message}</span>
-            )}
-          </div>
-
+          <Input
+            type="text"
+            placeholder="Your User Name"
+            name="name"
+            register={register}
+            error={errors.name}
+          />
+          <Input
+            type="email"
+            placeholder="Your Email Address"
+            name="email"
+            register={register}
+            error={errors.email}
+          />
           <div className={styles["image-upload"]}>
             <img src={src} alt="logo" className={styles["profile-img"]} />
           </div>

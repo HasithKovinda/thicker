@@ -1,7 +1,6 @@
-import React from "react";
 import SingleTour from "./SingleTour";
 import styles from "./Tours.module.css";
-import { fetchMostPopularTour } from "@/util/actions";
+import { fetchMostPopularTour } from "@/lib/actions/tour/tour";
 
 export default async function Tours() {
   const data = await fetchMostPopularTour();

@@ -1,7 +1,7 @@
 import { FieldError, Path, UseFormRegister } from "react-hook-form";
-import styles from "./Input.module.css";
-import { type UseFromRegisterTypes } from "@/types/input";
 import { ComponentPropsWithoutRef } from "react";
+import styles from "./Input.module.css";
+import { type UseFromRegisterTypes } from "@/types/userInput";
 
 type InputProps<T extends UseFromRegisterTypes> = {
   type: string;

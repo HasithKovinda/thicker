@@ -1,11 +1,11 @@
 "use client";
 
-import styles from "./Map.module.css";
-import { MapLocation } from "@/types/tour";
-import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+import styles from "./Map.module.css";
+import { MapLocation } from "@/types/model";
+import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
 
 type MapProps = {
   locations: MapLocation[];

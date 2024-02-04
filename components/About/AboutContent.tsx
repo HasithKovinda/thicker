@@ -4,7 +4,11 @@ export default function AboutContent() {
   return (
     <section className={`section-center ${styles.container}`}>
       <article>
-        <img src="/assert/about-image-3.svg" alt="" className={styles.image} />
+        <img
+          src="/assert/about-image-3.svg"
+          alt="about-image"
+          className={styles.image}
+        />
       </article>
       <article className={styles.heading}>
         <h1>World Best Travel Agency</h1>
@@ -15,11 +19,11 @@ export default function AboutContent() {
         </p>
         <div className={styles["icons-container"]}>
           <div className={styles.feature}>
-            <img src="/assert/about-icon-1.svg" alt="" />
+            <img src="/assert/about-icon-1.svg" alt="about-icon-1" />
             <span>Expert Team for Support</span>
           </div>
           <div className={styles.feature}>
-            <img src="/assert/about-icon-2.svg" alt="" />
+            <img src="/assert/about-icon-2.svg" alt="about-icon-2" />
             <span>Urgent Support for Client</span>
           </div>
         </div>
@@ -28,7 +32,7 @@ export default function AboutContent() {
           the best outdoor experience of their lives."
         </blockquote>
         <div className={styles.footer}>
-          <img src="/assert/founder.webp" alt="" />
+          <img src="/assert/founder.webp" alt="founder" />
           <div>
             <p>Jonathon bLIL</p>
             <span>Founder of treker</span>

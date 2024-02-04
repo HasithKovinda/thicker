@@ -1,12 +1,11 @@
 "use client";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useQuery } from "@tanstack/react-query";
+import { signIn, signOut } from "next-auth/react";
+import { getUserSession } from "@/lib/actions/auth/auth";
 import NavLink from "../NavLink";
 import NavUser from "../NavUser";
-import { useQuery } from "@tanstack/react-query";
-import { getUserSession } from "@/util/actions";
 
 export default function Auth() {
-  // const { data: session } = useSession();
   const { data: queryData } = useQuery({
     queryKey: ["user"],
     queryFn: () => getUserSession(),
@@ -28,7 +27,6 @@ export default function Auth() {
             >
               Sign out
             </NavLink>
-            {/* <NavLink herf="/api/auth/signout">Sign out</NavLink> */}
           </li>
         </>
       ) : (
@@ -37,9 +35,6 @@ export default function Auth() {
             <NavLink type="button" path="/login" onClick={() => signIn()}>
               Login
             </NavLink>
-            {/* <NavLink type="link" link="/api/auth/signin">
-              Login
-            </NavLink> */}
           </li>
           <li>
             <NavLink type="link" path="/signUp">

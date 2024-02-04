@@ -1,13 +1,13 @@
 "use client";
 
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import styles from "./Reviews.module.css";
-import SingleReview from "./SingleReview";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { useQuery } from "@tanstack/react-query";
-import { fetchAllTopReviews } from "@/util/actions";
-import { NUMBER_OF_MAX_CARD, REVIEW_CARD_Size } from "@/util/constant";
+import { fetchAllTopReviews } from "@/lib/actions/review/review";
+import SingleReview from "./SingleReview";
 import useAnimateCard from "@/hooks/useAnimateCard";
 import Loading from "@/UI/Loading";
+import { NUMBER_OF_MAX_CARD, REVIEW_CARD_Size } from "@/util/constant";
 
 type reviewProps = {
   title: string;
@@ -103,7 +103,6 @@ export default function Review({ title, id }: reviewProps) {
                 <SingleReview
                   key={index}
                   photo={review.user.photo}
-                  rating={review.rating}
                   review={review.review}
                   name={review.user.name}
                 />

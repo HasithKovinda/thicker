@@ -1,6 +1,6 @@
 import { TourModel } from "@/types/model";
 import mongoose from "mongoose";
-import user from "./user";
+import user from "./User";
 
 const tourSchema = new mongoose.Schema<TourModel>(
   {

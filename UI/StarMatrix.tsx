@@ -1,8 +1,7 @@
 "use client";
 
-import { BiSolidStar } from "react-icons/bi";
+import { ReactNode } from "react";
 import styles from "./StarMatrix.module.css";
-import { ReactHTML, ReactNode } from "react";
 interface StarMatrixProps {
   rows: number;
   handleRating: (rating: number) => void;

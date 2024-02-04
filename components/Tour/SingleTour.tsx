@@ -1,28 +1,21 @@
 "use client";
-import styles from "./SingleTour.module.css";
-import { FiClock, FiMapPin } from "react-icons/fi";
-import { BiSolidStar } from "react-icons/bi";
-import { type PopularTour } from "@/types/tour";
 import Link from "next/link";
+import { FiClock, FiMapPin } from "react-icons/fi";
+import styles from "./SingleTour.module.css";
+import { type PopularTour } from "@/types/model";
+import { COUNTRIES } from "@/util/constant";
 
 export default function SingleTour({
   name,
   duration,
   imageCover,
   price,
-  ratingsAverage,
   ratingsQuantity,
   startLocation,
   summary,
   slug,
 }: PopularTour) {
-  const countries = [
-    { name: "USA", class: "fi fi-us" },
-    { name: "Australia", class: "fi fi-au" },
-    { name: "England", class: "fi fi-gb" },
-    { name: "CAN", class: "fi fi-ca" },
-  ];
-  const className = countries.find(
+  const className = COUNTRIES.find(
     (country) => startLocation.split(",")[1].trim() === country.name
   );
   return (
@@ -46,11 +39,9 @@ export default function SingleTour({
         </div>
         <div className={styles.rating}>
           <div className={styles["rating-icons"]}>
-            <img src="/assert/rating.svg" alt="" />
-            <img src="/assert/rating.svg" alt="" />
-            <img src="/assert/rating.svg" alt="" />
-            <img src="/assert/rating.svg" alt="" />
-            <img src="/assert/rating.svg" alt="" />
+            {Array.from({ length: 5 }, (_, i) => {
+              return <img src="/assert/rating.svg" alt="rating" key={i} />;
+            })}
           </div>
           <span>0{ratingsQuantity} Reviews</span>
         </div>

@@ -1,14 +1,14 @@
 "use client";
 
+import dynamic from "next/dynamic";
+import { useRef } from "react";
 import Row from "@/UI/Row";
 import Review from "../Review/Reviews";
 import CoverImage from "../Tour Details/CoverImage";
 import Info from "../Tour Details/Info";
-import { Guides, MapLocation } from "@/types/tour";
+import { Guides, MapLocation } from "@/types/model";
 import { TourModel } from "@/types/model";
 
-import dynamic from "next/dynamic";
-import { useRef } from "react";
 const Map = dynamic(() => import("@/components/Map/Map"), {
   ssr: false,
 });

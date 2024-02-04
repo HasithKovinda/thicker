@@ -1,5 +1,5 @@
 import mongoose, { Types } from "mongoose";
-import User from "./user";
+import User from "./User";
 
 interface IQueryModel extends Document {
   email: string;

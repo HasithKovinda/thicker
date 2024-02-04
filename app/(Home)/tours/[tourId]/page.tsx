@@ -1,5 +1,5 @@
 import PageContent from "@/components/Tour/PageContent";
-import { fetchSingleTour } from "@/util/actions";
+import { fetchSingleTour } from "@/lib/actions/tour/tour";
 
 export default async function page({ params }: { params: { tourId: string } }) {
   const tours = await fetchSingleTour(params.tourId);

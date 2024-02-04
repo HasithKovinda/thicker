@@ -1,36 +1,18 @@
 "use client";
 
-import { ZodType, z } from "zod";
+import styles from "./Auth.module.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import styles from "./Auth.module.css";
-import { useMutation } from "@tanstack/react-query";
-import { signUpUser } from "@/util/actions";
-import { UserModel } from "@/types/model";
 import toast from "react-hot-toast";
+import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
+import { signUpUser } from "@/lib/actions/auth/auth";
+import { UserModel } from "@/types/model";
 import { useRouter } from "next/navigation";
-import { type SignUpType } from "@/types/input";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-
-const signUpFromSchema: ZodType<SignUpType> = z
-  .object({
-    name: z.string().min(4, "name should at least 4 character"),
-    email: z.string().email("please add a valid email address"),
-    password: z
-      .string()
-      .min(6, "password should have at least 6 charters")
-      .max(12, "password should not be exceed 12 charters"),
-    passwordConfirm: z
-      .string()
-      .min(6, "password should have at least 6 charters")
-      .max(12, "password should not be exceed 12 charters"),
-  })
-  .refine((data) => data.password === data.passwordConfirm, {
-    message: "password and password confirm should match",
-    path: ["passwordConfirm"],
-  });
+import { signUpFromSchema } from "@/util/zodSchema/schema";
+import { type SignUpType } from "@/types/userInput";
 
 export default function SignUp() {
   const {

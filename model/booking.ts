@@ -1,6 +1,6 @@
 import mongoose, { Types } from "mongoose";
 import Tours from "./Tours";
-import User from "./user";
+import User from "./User";
 
 interface IBooking extends Document {
   fullName: string;

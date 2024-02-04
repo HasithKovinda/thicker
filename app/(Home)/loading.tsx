@@ -1,5 +1,4 @@
 import Loading from "@/UI/Loading";
-import React from "react";
 
 export default function loading() {
   return (

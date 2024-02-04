@@ -2,7 +2,7 @@ import connect from "@/DB/db";
 import NextAuth, { AuthOptions, User as NextAuthUser } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import User from "@/model/user";
+import User from "@/model/User";
 import { UserModel } from "@/types/model";
 
 type ExtendedUser = NextAuthUser & UserModel;

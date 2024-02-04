@@ -2,7 +2,9 @@ export type UseFromRegisterTypes =
   | SignUpType
   | ResetPasswordType
   | LoginType
-  | QueryType;
+  | QueryType
+  | BookingType
+  | ProfileSettingType;
 
 export type SignUpType = {
   name: string;
@@ -25,4 +27,16 @@ export type ResetPasswordType = {
 export type QueryType = {
   email?: string;
   message: string;
+};
+
+export type BookingType = {
+  name: string;
+  email: string;
+  phone: string;
+  date: Date;
+};
+
+export type ProfileSettingType = {
+  name: string;
+  email: string;
 };

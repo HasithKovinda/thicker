@@ -14,10 +14,6 @@ import { type UserModel } from "@/types/model";
 
 export default function SideBar() {
   const queryClient = useQueryClient();
-  // const { data: queryData } = useQuery({
-  //   queryKey: ["user"],
-  //   queryFn: () => getUserSession(),
-  // });
   const queryData = queryClient.getQueryData<UserModel>(["user"]);
   const src = queryData?.photo ? queryData.photo : "assert/default.jpg";
   return (

@@ -1,5 +1,4 @@
 import TourContent from "@/components/Tour/TourContent";
-import TourCover from "@/components/Tour/TourCover";
 import {
   HydrationBoundary,
   QueryClient,

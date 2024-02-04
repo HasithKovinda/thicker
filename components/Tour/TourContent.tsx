@@ -1,23 +1,22 @@
 "use client";
 
 import styles from "./TourContent.module.css";
-import Filters from "./Filters";
-import AllTours from "./AllTours";
-import { Filter } from "@/types/tour";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import AllTours from "./AllTours";
+import Pagination from "../Pagination/Pagination";
+import BackgroundVideo from "@/UI/BackgroundVideo";
+import Filters from "./Filters";
+import { filterTours } from "@/lib/actions/tour/tour";
+import { type Filter } from "@/types/model";
 import { Difficulty } from "@/types/enum";
 import {
+  DEFAULT_COUNTRY_VALUE,
   DEFAULT_DURATION,
   DEFAULT_GROUP_SIZE,
   DEFAULT_PRICE,
   DEFAULT_RATING,
 } from "@/util/constant";
-import Pagination from "../Pagination/Pagination";
-import { useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
-import { countTours, filterTours } from "@/util/actions";
-import Loading from "@/UI/Loading";
-import { useSearchParams } from "next/navigation";
-import BackgroundVideo from "@/UI/BackgroundVideo";
 
 export default function TourContent() {
   const [data, setData] = useState<Filter>({
@@ -26,7 +25,7 @@ export default function TourContent() {
     groupSize: DEFAULT_GROUP_SIZE,
     rating: DEFAULT_RATING,
     difficulty: Difficulty.ALL,
-    country: "all",
+    country: DEFAULT_COUNTRY_VALUE,
   });
 
   const [count, setCount] = useState(0);
@@ -51,7 +50,7 @@ export default function TourContent() {
   return (
     <main className={styles.main}>
       <BackgroundVideo />
-      <h1 className={`${styles.heading}`}>Filter Your Favorite Tours</h1>
+      <h1 className={`${styles.heading}`}>Your Favorite Tours</h1>
       <div className="underline"></div>
       <div className={styles.pagination}>
         <Pagination numberOfResults={count} pageTypes="tour" />

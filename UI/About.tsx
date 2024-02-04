@@ -11,7 +11,7 @@ export default async function About() {
             <img src="/assert/about.png" alt="" />
           </div>
           <div className={styles.image}>
-            <img src="/assert/about.svg" alt="" />
+            <img src="/assert/about.svg" alt="about" />
           </div>
         </div>
         <div className={styles.content}>

@@ -1,11 +1,11 @@
 "use client";
 
-import { fetchAllTours, filterTours } from "@/util/actions";
+import { filterTours } from "@/lib/actions/tour/tour";
 import React from "react";
 import SingleTour from "./SingleTour";
 import styles from "./AllTours.module.css";
 import { useQuery } from "@tanstack/react-query";
-import { Filter, PopularTour } from "@/types/tour";
+import { Filter } from "@/types/model";
 import { useSearchParams } from "next/navigation";
 import Loading from "@/UI/Loading";
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 type singleIconProps = staticData;
 
 export default function SingleIcon({ path, tittle, content }: singleIconProps) {

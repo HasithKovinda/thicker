@@ -1,10 +1,10 @@
 "use client";
 
-import { format } from "date-fns";
 import styles from "./TableRow.module.css";
-import { formatCurrency } from "@/util/helper";
+import { format } from "date-fns";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import Invoice from "@/components/PDF";
+import { formatCurrency } from "@/util/helper";
 
 type TableRowProps = {
   name: string;
@@ -42,14 +42,13 @@ export default function TableRow({
                 packageName={name}
               />
             }
-            fileName="somename.pdf"
+            fileName={`${userName}-invoice.pdf`}
           >
             {({ blob, url, loading, error }) =>
               loading ? "Loading document..." : "Download now!"
             }
           </PDFDownloadLink>
         </button>
-        {/* <button>DownLoad</button> */}
       </div>
     </div>
   );

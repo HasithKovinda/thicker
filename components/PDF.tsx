@@ -5,9 +5,7 @@ import {
   View,
   Document,
   StyleSheet,
-  Svg,
   Image,
-  Canvas,
 } from "@react-pdf/renderer";
 import { format } from "date-fns";
 

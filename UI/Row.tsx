@@ -1,7 +1,7 @@
-import Wrapper from "@/components/Tour Details/Wrapper";
 import styles from "./Row.module.css";
+import Wrapper from "@/components/Tour Details/Wrapper";
 import OtherInformation from "@/components/Tour Details/OtherInformation";
-import { Guides } from "@/types/tour";
+import { type Guides } from "@/types/model";
 
 type RowPropType = {
   guides: Guides[];

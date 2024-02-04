@@ -1,4 +1,4 @@
-import { FetchedReviewType } from "@/types/tour";
+import { FetchedReviewType } from "@/types/model";
 import { RefObject, useEffect, useRef, useState } from "react";
 
 export default function useAnimateCard<T extends HTMLElement>(
@@ -15,7 +15,7 @@ export default function useAnimateCard<T extends HTMLElement>(
     const shiftTransform = () => {
       changeCardView();
     };
-    const intervalId = setInterval(shiftTransform, 5000);
+    const intervalId = setInterval(shiftTransform, time);
     return () => clearInterval(intervalId);
   }, [data]);
 

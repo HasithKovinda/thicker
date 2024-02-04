@@ -1,15 +1,15 @@
 "use client";
 
-import { fetchBookings } from "@/util/actions";
 import styles from "./Table.module.css";
-import TableRow from "./TableRow";
+import Link from "next/link";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import Loading from "@/UI/Loading";
-import { UserModel } from "@/types/model";
+import { fetchBookings } from "@/lib/actions/booking/booking";
 import Pagination from "@/components/Pagination/Pagination";
+import TableRow from "./TableRow";
+import Loading from "@/UI/Loading";
+import { type UserModel } from "@/types/model";
 import { BOOKING_PAGE_SIZE } from "@/util/constant";
-import Link from "next/link";
 
 export default function Table() {
   const searchParams = useSearchParams();

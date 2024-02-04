@@ -1,4 +1,4 @@
-import { Guides } from "@/types/tour";
+import { type Guides } from "@/types/model";
 import styles from "./Description.module.css";
 import Facilities from "./Facilities";
 import Features from "./Features";

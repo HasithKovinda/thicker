@@ -3,14 +3,12 @@ import styles from "./SingleReview.module.css";
 type SingleReviewProp = {
   photo: string;
   review: string;
-  rating: number;
   name: string;
 };
 
 export default function SingleReview({
   photo,
   review,
-  rating,
   name,
 }: SingleReviewProp) {
   return (
@@ -29,11 +27,9 @@ export default function SingleReview({
       </div>
       <div className={styles.footer}>
         <div className={styles["rating-icons"]}>
-          <img src="/assert/rating.svg" alt="" />
-          <img src="/assert/rating.svg" alt="" />
-          <img src="/assert/rating.svg" alt="" />
-          <img src="/assert/rating.svg" alt="" />
-          <img src="/assert/rating.svg" alt="" />
+          {Array.from({ length: 5 }, (_, i) => {
+            return <img src="/assert/rating.svg" alt="rating" key={i} />;
+          })}
         </div>
       </div>
     </article>

@@ -1,3 +1,4 @@
+export const SCROLL_POSITION_THRESHOLD_VALUE = 80;
 export const PRICE_MIN = 300;
 export const PRICE_MAX = 3000;
 export const DURATION_MIN = 7;
@@ -23,3 +24,14 @@ export const TOUR_PAGE_SIZE = 6;
 export const REVIEW_CARD_Size = 467;
 export const NUMBER_OF_MAX_CARD = 3;
 export const TOUR_GUIDE_CARD_SIZE = 467;
+
+export const OPTIONS = ["All", "Easy", "Medium", "Difficult"];
+
+export const COUNTRIES = [
+  { name: "USA", class: "fi fi-us" },
+  { name: "Australia", class: "fi fi-au" },
+  { name: "England", class: "fi fi-gb" },
+  { name: "CAN", class: "fi fi-ca" },
+];
+
+export const DEFAULT_COUNTRY_VALUE = "all";

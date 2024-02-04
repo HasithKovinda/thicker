@@ -3,8 +3,8 @@
 import { tourGuides } from "@/data/static";
 import Card from "./Card";
 import styles from "./TourGuide.module.css";
-import { NUMBER_OF_MAX_CARD, TOUR_GUIDE_CARD_SIZE } from "@/util/constant";
 import useAnimateCard from "@/hooks/useAnimateCard";
+import { NUMBER_OF_MAX_CARD, TOUR_GUIDE_CARD_SIZE } from "@/util/constant";
 
 export default function TourGuide() {
   const numGuides = tourGuides.length;

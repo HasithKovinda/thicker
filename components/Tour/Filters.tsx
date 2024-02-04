@@ -1,9 +1,13 @@
 "use client";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import StarMatrix from "@/UI/StarMatri";
-import styles from "./Filters.module.css";
 import { type ChangeEvent, useState, useEffect } from "react";
+import StarMatrix from "@/UI/StarMatrix";
+import styles from "./Filters.module.css";
+import { type Filter } from "@/types/model";
+import { Difficulty } from "@/types/enum";
 import {
+  COUNTRIES,
+  DEFAULT_COUNTRY_VALUE,
   DEFAULT_DURATION,
   DEFAULT_GROUP_SIZE,
   DEFAULT_PRICE,
@@ -12,25 +16,14 @@ import {
   DURATION_MIN,
   GROUP_SIZE_MAX,
   GROUP_SIZE_MIN,
+  OPTIONS,
   PRICE_MAX,
   PRICE_MIN,
 } from "@/util/constant";
 
-import { type Filter } from "@/types/tour";
-import { Difficulty } from "@/types/enum";
-
 type FilterPops = {
   handleChange: (data: Filter) => void;
 };
-
-const options = ["All", "Easy", "Medium", "Difficult"];
-
-const countries = [
-  { name: "USA", class: "fi fi-us" },
-  { name: "Australia", class: "fi fi-gb" },
-  { name: "England", class: "fi fi-au" },
-  { name: "CAN", class: "fi fi-ca" },
-];
 
 export default function Filters({ handleChange }: FilterPops) {
   const [price, setPrice] = useState(DEFAULT_PRICE);
@@ -38,7 +31,7 @@ export default function Filters({ handleChange }: FilterPops) {
   const [groupSize, setGroupSize] = useState(DEFAULT_GROUP_SIZE);
   const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.ALL);
   const [rating, setRating] = useState(DEFAULT_RATING);
-  const [country, setCountry] = useState("all");
+  const [country, setCountry] = useState(DEFAULT_COUNTRY_VALUE);
 
   const isFilterApply =
     DEFAULT_PRICE < price ||
@@ -46,7 +39,7 @@ export default function Filters({ handleChange }: FilterPops) {
     DEFAULT_GROUP_SIZE < groupSize ||
     rating > DEFAULT_PRICE ||
     difficulty !== Difficulty.ALL ||
-    country !== "all";
+    country !== DEFAULT_COUNTRY_VALUE;
 
   function handleSelect(event: ChangeEvent<HTMLSelectElement>) {
     setDifficulty(event.target.value.toLowerCase() as Difficulty);
@@ -62,7 +55,7 @@ export default function Filters({ handleChange }: FilterPops) {
     setDuration(DEFAULT_DURATION);
     setRating(DEFAULT_RATING);
     setGroupSize(DEFAULT_GROUP_SIZE);
-    setCountry("all");
+    setCountry(DEFAULT_COUNTRY_VALUE);
   }
   useEffect(() => {
     handleChange({
@@ -123,7 +116,6 @@ export default function Filters({ handleChange }: FilterPops) {
       </div>
       <div className={styles.options}>
         <div>
-          {/* Think About OPtimized */}
           <p>Group Size</p>
           <span>
             {DEFAULT_GROUP_SIZE >= groupSize
@@ -145,7 +137,7 @@ export default function Filters({ handleChange }: FilterPops) {
       <div className={styles.options}>
         <p>Country</p>
         <div className={styles.country}>
-          {countries.map((country, i) => {
+          {COUNTRIES.map((country, i) => {
             return (
               <span
                 className={country.class}
@@ -156,7 +148,6 @@ export default function Filters({ handleChange }: FilterPops) {
           })}
         </div>
       </div>
-      {/* Think About OPtimized */}
       <div className={styles.options}>
         <p>Difficulty</p>
         <select
@@ -166,7 +157,7 @@ export default function Filters({ handleChange }: FilterPops) {
           onChange={handleSelect}
           defaultValue={difficulty}
         >
-          {options.map((option, index) => {
+          {OPTIONS.map((option, index) => {
             return (
               <option value={option} key={index}>
                 {option}

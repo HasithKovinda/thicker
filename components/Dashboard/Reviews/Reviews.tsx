@@ -7,10 +7,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { UserModel } from "@/types/model";
-import { createReview, fetchParchedTours } from "@/util/actions";
+import { createReview } from "@/lib/actions/review/review";
+import { fetchParchedTours } from "@/lib/actions/tour/tour";
+
 import Loading from "@/UI/Loading";
 import Image from "next/image";
-import { CreateReviewType } from "@/types/tour";
+import { type CreateReviewType } from "@/types/model";
 import toast from "react-hot-toast";
 
 const reviewSchema = z.object({
