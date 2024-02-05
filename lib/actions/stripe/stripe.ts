@@ -1,6 +1,5 @@
 import { StripeCheckoutType } from "@/types/model";
 import Stripe from "stripe";
-import getStripe from "../helper/get-stripejs";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 export async function createCheckout(
@@ -10,7 +9,7 @@ export async function createCheckout(
     submit_type: "pay",
     payment_method_types: ["card"],
     customer_email: payload.email,
-    client_reference_id: payload.tourId,
+    client_reference_id: payload.userId,
     mode: "payment",
     line_items: [
       {
@@ -19,9 +18,6 @@ export async function createCheckout(
             name: payload.name,
             description: payload.description,
             images: [payload.image],
-            metadata: {
-              bookingDate: payload.bookingDate.toString(),
-            },
           },
           currency: "usd",
           unit_amount: payload.amount * 100,
@@ -30,6 +26,12 @@ export async function createCheckout(
         quantity: payload.quantity,
       },
     ],
+    metadata: {
+      bookingDate: payload.bookingDate.toString(),
+      tourId: payload.tourId,
+      phoneNumber: payload.phone,
+      userName: payload.userName,
+    },
     success_url: "http://localhost:3000/payment/success",
     cancel_url: `http://localhost:3000/tours/${payload.slug}`,
   };

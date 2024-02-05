@@ -125,9 +125,12 @@ export type ProfileSettings = {
 };
 
 export type StripeCheckoutType = {
+  userName: string;
   name: string;
   email: string;
   tourId: string;
+  userId: string;
+  phone: string;
   description: string;
   image: string;
   amount: number;

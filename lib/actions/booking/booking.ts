@@ -46,7 +46,10 @@ export async function createBooking(bookingData: Omit<NewBookingType, "id">) {
     const checkoutSessionData: StripeCheckoutType = {
       name: tour.name,
       email: bookingData.email,
+      userId: bookingData.userId,
       tourId: bookingData.tourId,
+      phone: bookingData.phoneNumber,
+      userName: bookingData.fullName,
       description: tour.description,
       image: tour.imageCover,
       amount: tour.price,
