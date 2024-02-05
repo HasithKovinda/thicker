@@ -1,22 +1,17 @@
 "use server";
 
 import Booking from "@/model/Booking";
+import Tours from "@/model/Tours";
 import {
   type NewBookingType,
   type BookPagination,
   type FetchedBookingType,
+  TourModel,
+  StripeCheckoutType,
 } from "@/types/model";
 import { BOOKING_PAGE_SIZE } from "@/util/constant";
-
-export async function createBooking(bookingData: Omit<NewBookingType, "id">) {
-  try {
-    await Booking.create(bookingData);
-    return "Booking created successfully";
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}
+import { createCheckout } from "../stripe/stripe";
+import { redirect } from "next/navigation";
 
 export async function fetchBookings(
   page: number,
@@ -41,5 +36,30 @@ export async function fetchBookings(
     return data;
   } catch (error) {
     return null;
+  }
+}
+
+export async function createBooking(bookingData: Omit<NewBookingType, "id">) {
+  try {
+    const tour = (await Tours.findById(bookingData.tourId)) as TourModel;
+    if (!tour) throw new Error("Tour not found");
+    const checkoutSessionData: StripeCheckoutType = {
+      name: tour.name,
+      email: bookingData.email,
+      tourId: bookingData.tourId,
+      description: tour.description,
+      image: tour.imageCover,
+      amount: tour.price,
+      bookingDate: bookingData.bookingDate,
+      slug: tour.slug,
+      quantity: 1,
+    };
+    const session = await createCheckout(checkoutSessionData);
+    if (!session) throw new Error("something went wrong");
+    redirect(session);
+    // return session;
+    // revalidatePath(`${session}`);
+  } catch (error) {
+    throw error;
   }
 }

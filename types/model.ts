@@ -124,6 +124,18 @@ export type ProfileSettings = {
   photo?: string;
 };
 
+export type StripeCheckoutType = {
+  name: string;
+  email: string;
+  tourId: string;
+  description: string;
+  image: string;
+  amount: number;
+  bookingDate: Date;
+  quantity: number;
+  slug: string;
+};
+
 // Review
 // export type ReviewModel = Document & {
 //   review: string;
