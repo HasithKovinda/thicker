@@ -1,0 +1,40 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  min-height: 100vh;
+}
+
+.heading h2 {
+  color: var(--color-dark-3);
+}
+
+.payment {
+  height: 400px;
+}
+
+.explore {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.explore p {
+  font-size: 1.4rem;
+}
+
+.explore a {
+  display: inline-block;
+  cursor: pointer;
+  background: var(--clr-primary-1);
+  padding: 1rem 2rem;
+  color: var(--clr-white);
+  margin-top: 1rem;
+  border-radius: 10px;
+  transition: var(--transition);
+}
+
+.explore a:hover {
+  transform: scale(1.1);
+}
