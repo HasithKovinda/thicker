@@ -50,13 +50,8 @@ export default function Review({ title, id }: reviewProps) {
     back();
   }
 
-  if (data && ref.current) {
-    const numberOfReviews = data.length;
-    ref.current.style.width = `${numberOfReviews * REVIEW_CARD_Size}px`;
-  }
-
   return (
-    <section className={`section-center ${styles.section}`}>
+    <section className={styles.section}>
       <div>
         <div className={styles.heading}>
           <div

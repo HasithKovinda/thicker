@@ -12,6 +12,10 @@ export default function useAnimateCard<T extends HTMLElement>(
   const isMove = useRef(false);
 
   useEffect(() => {
+    if (data && ref.current) {
+      const numberOfReviews = data.length;
+      ref.current.style.width = `${numberOfReviews * cardSize}px`;
+    }
     const shiftTransform = () => {
       changeCardView();
     };
