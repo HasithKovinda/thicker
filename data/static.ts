@@ -83,3 +83,72 @@ export const tourGuides: guides[] = [
     role: "Tour Guide",
   },
 ];
+
+type Gallery = {
+  src: string;
+  title: string;
+  content: string;
+};
+
+export const imageGallery: Gallery[] = [
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1706949543/Tours/youwd55iwrpga21smnnr.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1706949232/Tours/dwwfbtzmsbf0c0dkllkb.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1706949278/Tours/f6huxwf5offmke27yj3x.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1706947769/Tours/piwgkw4navjqicgk6eks.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1706946581/Tours/ryds6vtvrytwlknqtunt.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1706946118/Tours/ccrxyedtwnefaoa2aydg.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1706021709/canifnnwjv9km5mhp0zs.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1675656016/tgguk1ez2jm2mpe6m5n6.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1675655691/Tours/fwcfu5qifnnr0twpaeur.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1675655460/Tours/nw0m3udfivusa0ihjv6d.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1675655308/Tours/vwpa1hhr6mo1nwoqlojz.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+  {
+    src: "https://res.cloudinary.com/dehxgov2k/image/upload/v1675655687/juk7zjhx7u216qskdwwe.jpg",
+    title: "View This Location",
+    content: "Beautiful place in the world",
+  },
+];

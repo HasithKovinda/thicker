@@ -4,6 +4,7 @@ import NewLetter from "@/UI/NewLetter";
 import WhyUs from "@/UI/WhyUs";
 import Tours from "@/components/Tour/Tours";
 import ReviewSection from "@/components/Review/ReviewSection";
+import Gallery from "@/UI/Gallery";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <WhyUs />
       <ReviewSection />
       <NewLetter />
+      <Gallery />
     </main>
   );
 }
