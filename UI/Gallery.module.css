@@ -5,6 +5,7 @@
 .heading {
   text-align: center;
   margin-bottom: 1rem;
+  text-transform: capitalize;
 }
 .container {
   display: grid;

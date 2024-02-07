@@ -8,6 +8,7 @@ import CoverImage from "../Tour Details/CoverImage";
 import Info from "../Tour Details/Info";
 import { Guides, MapLocation } from "@/types/model";
 import { TourModel } from "@/types/model";
+import PopularLocations from "./PopularLocations";
 
 const Map = dynamic(() => import("@/components/Map/Map"), {
   ssr: false,
@@ -30,6 +31,7 @@ export default function PageContent({ tours }: PageContentProps) {
     startLocation,
     guides,
     description,
+    images,
   } = tours;
   const mapLocations: MapLocation[] = locations.map((location) => {
     return {
@@ -37,8 +39,6 @@ export default function PageContent({ tours }: PageContentProps) {
       coordinates: location.coordinates,
     };
   });
-
-  console.log(tours._id);
 
   const tourGuides: Guides[] = guides.map((guide) => {
     return {
@@ -56,7 +56,11 @@ export default function PageContent({ tours }: PageContentProps) {
 
   return (
     <main>
-      <CoverImage herf={imageCover} onMapButtonClick={handleClick} />
+      <CoverImage
+        name={name}
+        herf={imageCover}
+        onMapButtonClick={handleClick}
+      />
       <Info
         startLocation={startLocation.description}
         groupSize={maxGroupSize}
@@ -78,6 +82,7 @@ export default function PageContent({ tours }: PageContentProps) {
           startLocation={startLocation.coordinates}
         />
       </div>
+      <PopularLocations images={images} />
       <Review title="Review For The Tour" id={tours._id} />
     </main>
   );

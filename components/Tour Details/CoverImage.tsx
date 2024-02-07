@@ -2,10 +2,12 @@ import styles from "./CoverImage.module.css";
 
 type CoverImageProps = {
   herf: string;
+  name: string;
   onMapButtonClick: () => void;
 };
 
 export default function CoverImage({
+  name,
   herf,
   onMapButtonClick,
 }: CoverImageProps) {
@@ -22,7 +24,7 @@ export default function CoverImage({
       }}
     >
       <div>
-        <h1>The Star Gazer</h1>
+        <h1>{name}</h1>
         <button className={`btn ${styles.view}`} onClick={onMapButtonClick}>
           View on Map
         </button>
