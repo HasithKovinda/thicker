@@ -1,0 +1,22 @@
+.sponsor {
+  margin-top: 5rem;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 3rem;
+  align-content: center;
+}
+
+.container div {
+  padding: 3rem 1rem;
+  box-shadow: var(--light-shadow);
+  transition: var(--transition);
+  text-align: center;
+}
+
+.container div:hover {
+  transform: scale(1.1);
+  box-shadow: var(--color-shadow);
+}

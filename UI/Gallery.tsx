@@ -4,6 +4,10 @@ import styles from "./Gallery.module.css";
 export default function Gallery() {
   return (
     <section className={`section-center ${styles.gallery}`}>
+      <div className={styles.heading}>
+        <h1>Explore Our Visual Journey</h1>
+        <div className="underline"></div>
+      </div>
       <div className={styles.container}>
         {imageGallery.map((img, index) => {
           return (

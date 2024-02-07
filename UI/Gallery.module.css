@@ -1,6 +1,11 @@
 .gallery {
   margin-top: 5rem;
 }
+
+.heading {
+  text-align: center;
+  margin-bottom: 1rem;
+}
 .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
