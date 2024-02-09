@@ -23,16 +23,15 @@ export default function SignUp() {
   } = useForm<SignUpType>({ resolver: zodResolver(signUpFromSchema) });
 
   const router = useRouter();
-
   const { mutate, isPending } = useMutation({
     mutationFn: (user: UserModel) => signUpUser(user),
     onSuccess: () => {
       toast.success("User sign up successfully ");
       reset();
-      router.push("/");
+      router.push("/login");
     },
     onError: (err) => {
-      toast.error("Something went wrong");
+      toast.error(err.message);
     },
   });
 

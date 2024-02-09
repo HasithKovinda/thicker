@@ -7,15 +7,24 @@ import User from "@/model/User";
 import { type ProfileSettings, type UserModel } from "@/types/model";
 import { type ResetPasswordType } from "@/types/userInput";
 
-export async function signUpUser(user: Omit<UserModel, "photo" | "role">) {
+export async function signUpUser(
+  user: Omit<UserModel, "photo" | "role">
+): Promise<UserModel> {
   const role = "user";
 
   try {
+    const isUserExits = await User.findOne({ email: user.email });
+    console.log("🚀 ~ isUserExits:", isUserExits);
+    if (isUserExits) throw new Error("This email address already taken");
     const password = await bcrypt.hash(user.password, 10);
-    await User.create({ ...user, password, role });
-    return "user created successfully";
+    const newUser = (await User.create({
+      ...user,
+      password,
+      role,
+    })) as UserModel;
+    return newUser;
   } catch (error) {
-    throw new Error("Can not create the user");
+    throw error;
   }
 }
 

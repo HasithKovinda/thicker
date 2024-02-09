@@ -50,6 +50,8 @@ export default function Review({ title, id }: reviewProps) {
     back();
   }
 
+  if (!data?.length) return null;
+
   return (
     <section className={styles.section}>
       <div>

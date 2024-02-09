@@ -10,7 +10,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { changeProfile } from "@/lib/actions/auth/auth";
 import { uploadImage } from "@/lib/actions/helper/uploadImage";
 import Loading from "@/UI/Loading";
-import { type ProfileSettings } from "@/types/model";
+import { type UserModel, type ProfileSettings } from "@/types/model";
 import { profileFromSchema } from "@/util/zodSchema/schema";
 import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from "@/util/constant";
 import Input from "@/components/Input/Input";
@@ -39,6 +39,7 @@ export default function ProfileInformation() {
 
   const queryClient = useQueryClient();
   const [dataImg, setData] = useState("");
+  const queryData = queryClient.getQueryData<UserModel>(["user"]);
   const { mutate } = useMutation({
     mutationFn: (data: ProfileSettings) => changeProfile(data),
     onSuccess: () => {
@@ -58,6 +59,7 @@ export default function ProfileInformation() {
         photo = await uploadImage(dataImg, image.file?.name!);
       } catch (error) {
         if (error instanceof Error) toast.error(error.message);
+        return;
       }
     }
     const { name, email } = data;
@@ -102,6 +104,7 @@ export default function ProfileInformation() {
         <form className={styles.form}>
           <Input
             type="text"
+            defaultValue={queryData?.name}
             placeholder="Your User Name"
             name="name"
             register={register}
@@ -109,6 +112,7 @@ export default function ProfileInformation() {
           />
           <Input
             type="email"
+            defaultValue={queryData?.email}
             placeholder="Your Email Address"
             name="email"
             register={register}

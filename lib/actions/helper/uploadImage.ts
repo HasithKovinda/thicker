@@ -14,7 +14,7 @@ export async function uploadImage(
   baseString: string,
   fileName: string
 ): Promise<string> {
-  if (!CLOUD_NAME || !API_KEY || API_SECRET) {
+  if (!CLOUD_NAME || !API_KEY || !API_SECRET) {
     throw new Error("Please setup env values");
   }
 

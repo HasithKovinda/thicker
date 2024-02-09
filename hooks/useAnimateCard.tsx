@@ -12,6 +12,7 @@ export default function useAnimateCard<T extends HTMLElement>(
   const isMove = useRef(false);
 
   useEffect(() => {
+    if (!data?.length) return;
     if (data && ref.current) {
       const numberOfReviews = data.length;
       ref.current.style.width = `${numberOfReviews * cardSize}px`;

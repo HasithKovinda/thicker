@@ -43,7 +43,7 @@ export default function SingleTour({
               return <img src="/assert/rating.svg" alt="rating" key={i} />;
             })}
           </div>
-          <span>0{ratingsQuantity} Reviews</span>
+          <span>{ratingsQuantity} Reviews</span>
         </div>
       </div>
       <div className={styles.summary}>
