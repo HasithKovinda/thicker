@@ -14,7 +14,7 @@ export default function Home() {
       <About />
       <Tours />
       <WhyUs />
-      <ReviewSection />
+      {/* <ReviewSection /> */}
       <NewLetter />
       <Gallery />
       <Sponsor />
