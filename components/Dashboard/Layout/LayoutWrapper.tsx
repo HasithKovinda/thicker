@@ -13,7 +13,7 @@ export default function LayoutWrapper({
   const queryClient = new QueryClient();
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Parent children={children} />
+      <Parent>{children}</Parent>
     </HydrationBoundary>
   );
 }
