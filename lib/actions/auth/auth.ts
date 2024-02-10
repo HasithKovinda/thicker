@@ -28,6 +28,7 @@ export async function signUpUser(
 }
 
 export async function changeProfile({ name, email, photo }: ProfileSettings) {
+  await connect();
   const session = await getServerSession(authOptions);
   if (!session || !session.user) throw new Error("User not found");
   const id = session.user.id;
