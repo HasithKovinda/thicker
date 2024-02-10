@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import AllTours from "./AllTours";
 import Pagination from "../Pagination/Pagination";
-import BackgroundVideo from "@/UI/BackgroundVideo";
 import Filters from "./Filters";
 import { filterTours } from "@/lib/actions/tour/tour";
 import { type Filter } from "@/types/model";
@@ -49,7 +48,6 @@ export default function TourContent() {
 
   return (
     <main className={styles.main}>
-      <BackgroundVideo />
       <h1 className={`${styles.heading}`}>Your Favorite Tours</h1>
       <div className="underline"></div>
       <div className={styles.pagination}>

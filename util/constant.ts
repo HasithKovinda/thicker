@@ -32,6 +32,10 @@ export const COUNTRIES = [
   { name: "Australia", class: "fi fi-au" },
   { name: "England", class: "fi fi-gb" },
   { name: "CAN", class: "fi fi-ca" },
+  {
+    name: "Scotland",
+    class: "fi fi-gb",
+  },
 ];
 
 export const DEFAULT_COUNTRY_VALUE = "all";

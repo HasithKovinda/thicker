@@ -20,8 +20,10 @@ export default function useAnimateCard<T extends HTMLElement>(
     const shiftTransform = () => {
       changeCardView();
     };
-    const intervalId = setInterval(shiftTransform, time);
-    return () => clearInterval(intervalId);
+    if (data.length < maxCardFit) {
+      const intervalId = setInterval(shiftTransform, time);
+      return () => clearInterval(intervalId);
+    }
   }, [data]);
 
   function changeCardView() {

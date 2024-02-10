@@ -23,6 +23,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .heading span {
@@ -82,10 +84,10 @@
   margin-top: 3rem;
 }
 
-.content h2 {
+/* .content h2 {
   margin-bottom: 1rem;
   margin-top: 1rem;
-}
+} */
 
 /* .content {
   display: grid;
@@ -102,12 +104,14 @@
   height: 4rem;
   padding: 0.5rem 1rem;
   background: var(--color-light-1);
-  width: 80%;
+  width: 85%;
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 50%);
   margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .details {

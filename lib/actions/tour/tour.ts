@@ -17,6 +17,7 @@ import {
 } from "@/util/constant";
 import connect from "@/DB/db";
 import Booking from "@/model/Booking";
+import Review from "@/model/Review";
 
 export async function fetchAllTours(): Promise<PopularTour[]> {
   await connect();
