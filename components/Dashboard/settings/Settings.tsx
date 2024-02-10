@@ -27,7 +27,7 @@ export default function Settings() {
       resetPassword(data.userId, data.options),
     onSuccess: (data) => {
       toast.success("Password Reset Successfully");
-      signOut({ callbackUrl: "http://localhost:3000/login" });
+      signOut({ callbackUrl: process.env.LOGIN_URL });
     },
     onError: (err) => {
       toast.error(err.message);

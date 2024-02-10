@@ -22,9 +22,7 @@ export default function Auth() {
               activeclasstype="normal"
               type="button"
               path="/login"
-              onClick={() =>
-                signOut({ callbackUrl: "http://localhost:3000/login" })
-              }
+              onClick={() => signOut({ callbackUrl: process.env.LOGIN_URL })}
             >
               Sign out
             </NavLink>

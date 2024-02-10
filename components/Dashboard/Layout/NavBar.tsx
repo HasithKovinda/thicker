@@ -33,11 +33,7 @@ export default function NavBar() {
             <span>{data ? (data < 10 ? `0${data}` : data) : "0"}</span>
           </div>
         </div>
-        <button
-          onClick={() =>
-            signOut({ callbackUrl: "http://localhost:3000/login" })
-          }
-        >
+        <button onClick={() => signOut({ callbackUrl: process.env.LOGIN_URL })}>
           Sign out
         </button>
       </div>

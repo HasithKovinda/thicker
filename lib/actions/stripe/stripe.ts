@@ -32,8 +32,8 @@ export async function createCheckout(
       phoneNumber: payload.phone,
       userName: payload.userName,
     },
-    success_url: "http://localhost:3000/payment/success",
-    cancel_url: `http://localhost:3000/tours/${payload.slug}`,
+    success_url: process.env.SUCCESS_URL,
+    cancel_url: `${process.env.CANCEL_URL}${payload.slug}`,
   };
   const { url }: Stripe.Checkout.Session =
     await stripe.checkout.sessions.create(params);
