@@ -1,5 +1,4 @@
 "use server";
-
 import bcrypt from "bcrypt";
 import { getServerSession } from "next-auth";
 import User from "@/model/User";

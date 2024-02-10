@@ -1,4 +1,3 @@
-import { UserModel } from "@/types/model";
 import mongoose from "mongoose";
 
 interface IUser extends Document {
