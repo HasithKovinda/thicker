@@ -1,11 +1,11 @@
 "use server";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import bcrypt from "bcrypt";
 import { getServerSession } from "next-auth";
 import User from "@/model/User";
 import { type ProfileSettings, type UserModel } from "@/types/model";
 import { type ResetPasswordType } from "@/types/userInput";
+import { authOptions } from "@/util/nextAuth";
 
 export async function signUpUser(
   user: Omit<UserModel, "photo" | "role">

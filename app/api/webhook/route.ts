@@ -9,11 +9,6 @@ import { NewBookingType } from "@/types/model";
 const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET!;
 console.log("🚀 ~ webhookSecret:", webhookSecret);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 export async function POST(request: Request) {
   if (request.method === "POST") {
     const body = await request.text();
