@@ -5,6 +5,7 @@ import User from "@/model/User";
 import { type ProfileSettings, type UserModel } from "@/types/model";
 import { type ResetPasswordType } from "@/types/userInput";
 import { authOptions } from "@/util/nextAuth";
+import connect from "@/DB/db";
 
 export async function signUpUser(
   user: Omit<UserModel, "photo" | "role">
@@ -48,6 +49,7 @@ export async function getUserSession(): Promise<Omit<
   "password"
 > | null> {
   try {
+    await connect();
     const session = await getServerSession(authOptions);
     if (!session || !session.user) return null;
     const data = await User.findById(session.user.id).lean();
