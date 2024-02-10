@@ -45,7 +45,6 @@ export default function ProfileInformation() {
     onSuccess: () => {
       toast.success("Profile settings updated successfully");
       queryClient.invalidateQueries({ queryKey: ["user"] });
-      reset();
     },
     onError: () => {
       toast.error("Something went wrong");
@@ -58,6 +57,7 @@ export default function ProfileInformation() {
       try {
         photo = await uploadImage(dataImg, image.file?.name!);
       } catch (error) {
+        console.log("🚀 ~ changeSettings ~ error:", error);
         if (error instanceof Error) toast.error(error.message);
         return;
       }
