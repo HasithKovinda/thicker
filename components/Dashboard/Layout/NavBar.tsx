@@ -17,7 +17,6 @@ export default function NavBar() {
     queryFn: () => fetchQuery(queryData?.id!),
   });
   if (!queryData) return <Loading />;
-
   return (
     <nav className={styles.nav}>
       <div>
@@ -33,7 +32,11 @@ export default function NavBar() {
             <span>{data ? (data < 10 ? `0${data}` : data) : "0"}</span>
           </div>
         </div>
-        <button onClick={() => signOut({ callbackUrl: process.env.LOGIN_URL })}>
+        <button
+          onClick={() =>
+            signOut({ callbackUrl: process.env.NEXT_PUBLIC_LOGIN_URL })
+          }
+        >
           Sign out
         </button>
       </div>
