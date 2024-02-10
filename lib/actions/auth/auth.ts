@@ -9,20 +9,19 @@ import { type ResetPasswordType } from "@/types/userInput";
 
 export async function signUpUser(
   user: Omit<UserModel, "photo" | "role">
-): Promise<UserModel> {
+): Promise<string> {
   const role = "user";
 
   try {
     const isUserExits = await User.findOne({ email: user.email });
-    console.log("🚀 ~ isUserExits:", isUserExits);
     if (isUserExits) throw new Error("This email address already taken");
     const password = await bcrypt.hash(user.password, 10);
-    const newUser = (await User.create({
+    await User.create({
       ...user,
       password,
       role,
-    })) as UserModel;
-    return newUser;
+    });
+    return "User created successfully";
   } catch (error) {
     throw error;
   }

@@ -11,12 +11,13 @@ export default function SingleReview({
   review,
   name,
 }: SingleReviewProp) {
+  const src = photo ? photo : "/assert/default.jpg";
   return (
     <article className={styles.article}>
       <div className={styles.main}>
         <span className={styles.overlay}></span>
         <div className={styles.container}>
-          <img src={photo} className={styles.profile} alt="" />
+          <img src={src} className={styles.profile} alt={name} />
         </div>
       </div>
       <div>

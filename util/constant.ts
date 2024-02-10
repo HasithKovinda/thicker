@@ -34,7 +34,7 @@ export const COUNTRIES = [
   { name: "CAN", class: "fi fi-ca" },
   {
     name: "Scotland",
-    class: "fi fi-gb",
+    class: "fi fi-gr",
   },
 ];
 
