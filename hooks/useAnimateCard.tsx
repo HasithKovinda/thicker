@@ -12,7 +12,6 @@ export default function useAnimateCard<T extends HTMLElement>(
   const isMove = useRef(false);
 
   useEffect(() => {
-    if (!data?.length) return;
     if (data && ref.current) {
       const numberOfReviews = data.length;
       ref.current.style.width = `${numberOfReviews * cardSize}px`;
@@ -20,7 +19,8 @@ export default function useAnimateCard<T extends HTMLElement>(
     const shiftTransform = () => {
       changeCardView();
     };
-    if (data.length < maxCardFit) {
+    const fnRun = data ? data.length > 3 : true;
+    if (fnRun) {
       const intervalId = setInterval(shiftTransform, time);
       return () => clearInterval(intervalId);
     }

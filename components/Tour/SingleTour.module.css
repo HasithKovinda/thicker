@@ -31,6 +31,15 @@
   font-size: 1.6rem;
 }
 
+.rating {
+  margin-bottom: 1rem;
+}
+
+.count {
+  font-size: 1.2rem;
+  margin-top: 0.4rem;
+}
+
 .price {
   position: absolute;
   top: 10px;
@@ -58,9 +67,11 @@
   border-radius: 10px;
 }
 
-.rating-icons img {
-  height: 30px;
-  width: 30px;
+.rating-icons {
+  /* height: 30px;
+  width: 30px; */
+  display: flex;
+  align-items: center;
 }
 
 .info img {

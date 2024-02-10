@@ -35,8 +35,9 @@ export default function TourGuide() {
   }
 
   return (
-    <section className={`section-center ${styles.guide}`}>
+    <section className={styles.guide}>
       <h1>Meet Our Tour Guide</h1>
+      <div className="underline"></div>
       <main className={styles.main}>
         <div className={styles["guide-container"]} ref={ref}>
           {tourGuides.map((guide, index) => {

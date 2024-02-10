@@ -143,7 +143,6 @@ export async function filterTours(
       tours: tours.slice(skip, TOUR_PAGE_SIZE * currentPage),
     };
   }
-
   const filters = [
     (tour: PopularTour) =>
       difficulty !== Difficulty.ALL && tour.difficulty === difficulty,
@@ -160,8 +159,6 @@ export async function filterTours(
   tours = tours.filter((tour) => filters.every((filter) => filter(tour)));
 
   if (country !== "all") {
-    console.log(country);
-    console.log(tours[0].startLocation.split(",")[1]);
     tours = tours.filter(
       (tour) => tour.startLocation.split(",")[1].trim() === country
     );
@@ -169,10 +166,6 @@ export async function filterTours(
   }
 
   if (skip === 0) {
-    console.log(
-      "🚀 ~  tours: tours.slice(skip, PAGE_SIZE):",
-      tours.slice(skip, TOUR_PAGE_SIZE)
-    );
     return {
       count: tours.length,
       tours: tours.slice(skip, TOUR_PAGE_SIZE),

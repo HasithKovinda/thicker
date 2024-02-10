@@ -4,6 +4,7 @@ import { FiClock, FiMapPin } from "react-icons/fi";
 import styles from "./SingleTour.module.css";
 import { type PopularTour } from "@/types/model";
 import { COUNTRIES } from "@/util/constant";
+import TourRating from "@/UI/TourRating";
 
 export default function SingleTour({
   name,
@@ -14,6 +15,7 @@ export default function SingleTour({
   startLocation,
   summary,
   slug,
+  ratingsAverage,
 }: PopularTour) {
   const className = COUNTRIES.find(
     (country) => startLocation.split(",")[1].trim() === country.name
@@ -39,11 +41,9 @@ export default function SingleTour({
         </div>
         <div className={styles.rating}>
           <div className={styles["rating-icons"]}>
-            {Array.from({ length: 5 }, (_, i) => {
-              return <img src="/assert/rating.svg" alt="rating" key={i} />;
-            })}
+            <TourRating ratingNumber={ratingsAverage} />
           </div>
-          <span>{ratingsQuantity} Reviews</span>
+          <span className={styles.count}>{ratingsQuantity} Reviews</span>
         </div>
       </div>
       <div className={styles.summary}>

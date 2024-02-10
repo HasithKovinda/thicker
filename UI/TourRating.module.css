@@ -1,0 +1,26 @@
+.section {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.container {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  margin-right: 1px;
+  background: var(--color-dark);
+}
+
+.progress {
+  height: 30px;
+  background: #fdbc4b;
+}
+
+.icon {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
