@@ -11,6 +11,7 @@ export default function Auth() {
     queryFn: () => getUserSession(),
   });
   console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+  console.log("🚀 ~ Auth ~ queryData:", queryData);
   return (
     <>
       {queryData ? (
