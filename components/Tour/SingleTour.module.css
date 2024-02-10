@@ -4,15 +4,15 @@
   align-items: center;
   padding: 2rem;
   background: #fff;
-  /* border: 1px solid rgb(150, 150, 150); */
   border-radius: 10px;
   box-shadow: var(--dark-shadow);
   cursor: pointer;
   transition: var(--transition);
+  position: relative;
 }
 
 .single-tour:hover {
-  transform: scale(1.06);
+  box-shadow: 0 40px 35px 0px rgba(0, 0, 0, 0.1);
 }
 
 .main-image {
@@ -38,6 +38,10 @@
 .count {
   font-size: 1.2rem;
   margin-top: 0.4rem;
+}
+
+.count span {
+  margin-right: 20px;
 }
 
 .price {
@@ -89,6 +93,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.rating {
+  gap: 0;
 }
 
 .content {

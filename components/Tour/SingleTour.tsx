@@ -43,7 +43,10 @@ export default function SingleTour({
           <div className={styles["rating-icons"]}>
             <TourRating ratingNumber={ratingsAverage} />
           </div>
-          <span className={styles.count}>{ratingsQuantity} Reviews</span>
+          <span className={styles.count}>
+            <span>({ratingsAverage})</span>
+            {ratingsQuantity} Reviews
+          </span>
         </div>
       </div>
       <div className={styles.summary}>

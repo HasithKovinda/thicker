@@ -10,6 +10,7 @@
   width: 30px;
   margin-right: 1px;
   background: var(--color-dark);
+  overflow: hidden;
 }
 
 .progress {
