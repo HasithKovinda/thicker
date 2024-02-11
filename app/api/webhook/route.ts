@@ -42,6 +42,7 @@ export async function POST(request: Request) {
 }
 
 async function createBooking(event: Stripe.Checkout.Session) {
+  console.log("🚀 ~ createBooking ~ event:", event);
   if (!event) return;
   const { metadata } = event;
   const amount = event.amount_total! / 100;
