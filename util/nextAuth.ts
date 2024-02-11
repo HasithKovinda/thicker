@@ -1,5 +1,5 @@
 import connect from "@/DB/db";
-import NextAuth, { AuthOptions, User as NextAuthUser } from "next-auth";
+import { AuthOptions, User as NextAuthUser } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import User from "@/model/User";
@@ -8,9 +8,12 @@ import { UserModel } from "@/types/model";
 type ExtendedUser = NextAuthUser & UserModel;
 
 export const authOptions: AuthOptions = {
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
+  },
+  jwt: {
+    maxAge: 30 * 24 * 60,
   },
   //   Configure one or more authentication providers
   providers: [
