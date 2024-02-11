@@ -113,6 +113,14 @@ const Invoice = ({
             <View style={{ marginBottom: 10 }}>
               <Image src={imageUrl} style={{ height: "200px" }} />
             </View>
+            <View style={{ marginBottom: 10 }}>
+              <Text style={{ letterSpacing: "1.2px" }}>
+                Thank you for booking your tour with Thicker Tours! We are
+                thrilled to confirm your reservation and provide you with the
+                details of your upcoming adventure. Below, you'll find a summary
+                of your booking.
+              </Text>
+            </View>
             <View style={styles.bill}>
               <View style={styles.fontStyle}>
                 <Text style={styles.textAlign}>Customer Name</Text>
@@ -141,6 +149,16 @@ const Invoice = ({
           <View style={styles.amount}>
             <Text>Total Amount</Text>
             <Text>USD {formatCurrency(amount)}</Text>
+          </View>
+          <View>
+            <Text style={{ fontSize: 11, marginTop: "12px" }}>
+              Your payment has been successfully processed, and your booking is
+              now confirmed. Please keep this invoice for your records. If you
+              have any questions or need further assistance, feel free to
+              contact our customer support team at Thicker@gmail.com or
+              +965435345434. We can't wait to welcome you on board for an
+              unforgettable journey with Thicker Tours! Best regards, Thicker
+            </Text>
           </View>
         </View>
         <View style={styles.footer}>
