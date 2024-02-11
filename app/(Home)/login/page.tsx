@@ -4,6 +4,13 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Log In to Thicker Tours | Your Gateway to Adventure",
+  description:
+    "Access your Thicker Tours account to manage your bookings, save your favorite destinations, and unlock exclusive offers. Log in now to begin your next travel adventure!",
+};
 
 type PageProps = {
   searchParams: {
