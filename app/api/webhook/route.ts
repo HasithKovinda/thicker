@@ -1,7 +1,4 @@
-import { NextApiRequest } from "next";
-import { NextRequest } from "next/server";
 import { headers } from "next/headers";
-import { buffer } from "stream/consumers";
 import Stripe from "stripe";
 import Booking from "@/model/Booking";
 import { NewBookingType } from "@/types/model";
@@ -58,6 +55,7 @@ async function createBooking(event: Stripe.Checkout.Session) {
     phoneNumber: phoneNumber,
     price: amount,
   };
+  console.log("🚀 ~ createBooking ~ payload:", payload);
   await connect();
   await Booking.create(payload);
 }
