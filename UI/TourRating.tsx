@@ -9,6 +9,7 @@ export default function TourRating({ ratingNumber }: TourRatingProp) {
     (ratingNumber - Math.floor(ratingNumber)).toFixed(1)
   );
   const applyWith = widthSize === 0 ? 30 : widthSize * 3 * 10;
+  const gap = 1 - widthSize;
   return (
     <div className={styles.section}>
       {Array.from({ length: 5 }, (_, i) => {
@@ -17,12 +18,13 @@ export default function TourRating({ ratingNumber }: TourRatingProp) {
             <div className={styles.container} key={i}>
               <div
                 className={styles.progress}
-                style={{
-                  width:
-                    ratingNumber - widthSize === i + 1
-                      ? `${applyWith}px`
-                      : `30px`,
-                }}
+                // style={{
+                //   width:
+                //     ratingNumber - widthSize === i + 1
+                //       ? `${applyWith}px`
+                //       : `30px`,
+                // }}
+                style={{ width: `30px` }}
               ></div>
               <img src="/download.png" className={styles.icon} />
             </div>
@@ -30,7 +32,13 @@ export default function TourRating({ ratingNumber }: TourRatingProp) {
         } else {
           return (
             <div className={styles.container} key={i}>
-              <div className={styles.progress} style={{ width: `0px` }}></div>
+              <div
+                className={styles.progress}
+                style={{
+                  width:
+                    ratingNumber + gap === i + 1 ? `${applyWith}px` : `0px`,
+                }}
+              ></div>
               <img src="/download.png" className={styles.icon} />
             </div>
           );
