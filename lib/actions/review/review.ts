@@ -5,6 +5,7 @@ import Tours from "@/model/Tours";
 import Review from "@/model/Review";
 import connect from "@/DB/db";
 import { FetchedReviewType, type CreateReviewType } from "@/types/model";
+import { revalidatePath } from "next/cache";
 
 export async function fetchAllTopReviews(
   id?: string
@@ -56,4 +57,5 @@ export async function createReview(review: CreateReviewType) {
       ratingsQuantity: res[0].nRating,
     }
   );
+  revalidatePath("/");
 }

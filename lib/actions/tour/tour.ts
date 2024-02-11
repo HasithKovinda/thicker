@@ -111,7 +111,7 @@ export async function fetchParchedTours(
           image: book?.tourId.imageCover,
         };
       });
-    return bookedToursNames;
+    return JSON.parse(JSON.stringify(bookedToursNames));
   } catch (error) {
     throw new Error("something went wrong");
   }

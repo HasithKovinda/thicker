@@ -66,6 +66,7 @@ export default function Reviews() {
 
   function handleInput(inputData: InputTypes) {
     if (!rating) return toast.error("Select value for rating");
+    if (!tour.id) return toast.error("Select tour for rating");
     const image = data?.find((tour) => tour.name === inputData.tourName);
     if (!image) return;
     mutate({
