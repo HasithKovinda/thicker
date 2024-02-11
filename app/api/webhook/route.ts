@@ -56,6 +56,10 @@ async function createBooking(event: Stripe.Checkout.Session) {
     price: amount,
   };
   console.log("🚀 ~ createBooking ~ payload:", payload);
-  await connect();
-  await Booking.create(payload);
+  try {
+    await connect();
+    await Booking.create(payload);
+  } catch (error) {
+    console.log("🚀 ~ createBooking ~ error:", error);
+  }
 }
