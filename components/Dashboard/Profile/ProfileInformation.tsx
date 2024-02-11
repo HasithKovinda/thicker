@@ -14,6 +14,7 @@ import { profileFromSchema } from "@/util/zodSchema/schema";
 import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from "@/util/constant";
 import Input from "@/components/Input/Input";
 import axios from "axios";
+import { signOut } from "next-auth/react";
 type ImageType = {
   submit: boolean;
   file: File | null;
@@ -40,8 +41,12 @@ export default function ProfileInformation() {
   const queryData = queryClient.getQueryData<UserModel>(["user"]);
   const { mutate } = useMutation({
     mutationFn: (data: ProfileSettings) => changeProfile(data),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log("🚀 ~ ProfileInformation ~ data:", data);
       toast.success("Profile settings updated successfully");
+      if (queryData?.email !== data.email) {
+        signOut({ callbackUrl: process.env.NEXT_PUBLIC_LOGIN_URL });
+      }
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
     onError: () => {
@@ -51,7 +56,7 @@ export default function ProfileInformation() {
 
   async function changeSettings(data: InputTypes) {
     let photo;
-    if (image.submit || !image.file) {
+    if (image.submit || image.file) {
       try {
         const data = new FormData();
         data.append("image", image.file!);

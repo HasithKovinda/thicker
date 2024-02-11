@@ -37,7 +37,9 @@ export async function changeProfile({ name, email, photo }: ProfileSettings) {
     if (photo) {
       updateData.photo = photo;
     }
-    const user = await User.findByIdAndUpdate(id, updateData).lean();
+    const user = await User.findByIdAndUpdate(id, updateData, {
+      new: true,
+    }).lean();
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
     console.log(error);
