@@ -42,7 +42,6 @@ export default function ProfileInformation() {
   const { mutate } = useMutation({
     mutationFn: (data: ProfileSettings) => changeProfile(data),
     onSuccess: (data) => {
-      console.log("🚀 ~ ProfileInformation ~ data:", data);
       toast.success("Profile settings updated successfully");
       if (queryData?.email !== data.email) {
         signOut({ callbackUrl: process.env.NEXT_PUBLIC_LOGIN_URL });

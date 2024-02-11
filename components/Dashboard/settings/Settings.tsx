@@ -27,7 +27,7 @@ export default function Settings() {
       resetPassword(data.userId, data.options),
     onSuccess: (data) => {
       toast.success("Password Reset Successfully");
-      signOut({ callbackUrl: process.env.LOGIN_URL });
+      signOut({ callbackUrl: process.env.NEXT_PUBLIC_LOGIN_URL });
     },
     onError: (err) => {
       toast.error(err.message);
@@ -71,7 +71,7 @@ export default function Settings() {
           register={register}
           error={errors.passwordConfirm}
         />
-        <Button hoverType="transform">
+        <Button hoverType="transform" disabled={isSubmitting}>
           {isSubmitting ? "Updating.." : "reset password"}
         </Button>
       </form>
