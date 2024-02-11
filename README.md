@@ -8,7 +8,7 @@
 - User Dashboard: Users have access to a personalized dashboard where they can manage their profile, view purchase history, download invoices, and give ratings for purchased tours.
 - Booking Tours: Users can book tours directly from the tour details page, making the process quick and convenient.
 - Interactive Map: Tour details pages feature an interactive map powered by React Leaflet, allowing users to visualize tour locations.
-- Smooth Animations: Lottie is employed to enhance user experience with delightful animations throughout the application.
+- Smooth Animations: Lottie and css animations are used to enhance user experience with delightful animations throughout the application.
 - Payment Integration: Thicker supports secure payments via Stripe, enabling users to complete their bookings hassle-free.
 - Profile Customization: Users can update their name, email, upload profile pictures, and reset passwords from their dashboard.
 
