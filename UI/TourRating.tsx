@@ -5,7 +5,6 @@ type TourRatingProp = {
 };
 
 export default function TourRating({ ratingNumber }: TourRatingProp) {
-  console.log("🚀 ~ TourRating ~ ratingNumber:", ratingNumber);
   const widthSize = Number(
     (ratingNumber - Math.floor(ratingNumber)).toFixed(1)
   );

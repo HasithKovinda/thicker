@@ -88,6 +88,7 @@ export async function fetchParchedTours(
   userId: string
 ): Promise<{ id: string; name: string; image: string }[] | null> {
   try {
+    await connect();
     const uniqueTourIds = await Booking.distinct("tourId", { userId });
     if (!uniqueTourIds.length) return null;
     const uniqueBookings: FetchedBookingType[] = await Promise.all(
@@ -162,7 +163,6 @@ export async function filterTours(
     tours = tours.filter(
       (tour) => tour.startLocation.split(",")[1].trim() === country
     );
-    console.log(tours.length);
   }
 
   if (skip === 0) {

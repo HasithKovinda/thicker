@@ -12,12 +12,14 @@ import {
 import { BOOKING_PAGE_SIZE } from "@/util/constant";
 import { createCheckout } from "../stripe/stripe";
 import { redirect } from "next/navigation";
+import connect from "@/DB/db";
 
 export async function fetchBookings(
   page: number,
   userId: string
 ): Promise<BookPagination | null> {
   try {
+    await connect();
     const limit = BOOKING_PAGE_SIZE;
     const skip = (page - 1) * limit;
     const numberBookings = await Booking.countDocuments({ userId });
@@ -41,6 +43,7 @@ export async function fetchBookings(
 
 export async function createBooking(bookingData: Omit<NewBookingType, "id">) {
   try {
+    await connect();
     const tour = (await Tours.findById(bookingData.tourId)) as TourModel;
     if (!tour) throw new Error("Tour not found");
     const checkoutSessionData: StripeCheckoutType = {

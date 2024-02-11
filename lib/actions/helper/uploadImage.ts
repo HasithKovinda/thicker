@@ -17,7 +17,7 @@ export async function uploadImage(
   if (!CLOUD_NAME || !API_KEY || !API_SECRET) {
     throw new Error("Please setup env values");
   }
-
+  console.log("METHOD EXCUSES");
   type CloudinaryUploadResult = {
     url: string;
     secure_url: string;
@@ -27,10 +27,12 @@ export async function uploadImage(
   const blob = new Blob([arrayBuffer]);
 
   const file = new File([blob], fileName);
+  console.log("🚀 ~ file:", file);
 
   const arrayBufferTwo = await (file as Blob).arrayBuffer();
 
   const buffer = new Uint8Array(arrayBufferTwo);
+  console.log("🚀 ~ buffer:", buffer);
   try {
     const photo: CloudinaryUploadResult = await new Promise(
       (resolve, reject) => {
@@ -53,6 +55,7 @@ export async function uploadImage(
     const data = photo.url;
     return data;
   } catch (error) {
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     console.log(error);
     throw new Error("Cannot upload the image!");
   }

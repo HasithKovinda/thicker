@@ -8,13 +8,12 @@ import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { changeProfile } from "@/lib/actions/auth/auth";
-import { uploadImage } from "@/lib/actions/helper/uploadImage";
 import Loading from "@/UI/Loading";
 import { type UserModel, type ProfileSettings } from "@/types/model";
 import { profileFromSchema } from "@/util/zodSchema/schema";
 import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from "@/util/constant";
 import Input from "@/components/Input/Input";
-
+import axios from "axios";
 type ImageType = {
   submit: boolean;
   file: File | null;
@@ -38,7 +37,6 @@ export default function ProfileInformation() {
   } = useForm<InputTypes>({ resolver: zodResolver(profileFromSchema) });
 
   const queryClient = useQueryClient();
-  const [dataImg, setData] = useState("");
   const queryData = queryClient.getQueryData<UserModel>(["user"]);
   const { mutate } = useMutation({
     mutationFn: (data: ProfileSettings) => changeProfile(data),
@@ -55,9 +53,11 @@ export default function ProfileInformation() {
     let photo;
     if (image.submit || !image.file) {
       try {
-        photo = await uploadImage(dataImg, image.file?.name!);
+        const data = new FormData();
+        data.append("image", image.file!);
+        const res = await axios.post("api/upload", data);
+        photo = res.data.url;
       } catch (error) {
-        console.log("🚀 ~ changeSettings ~ error:", error);
         if (error instanceof Error) toast.error(error.message);
         return;
       }
@@ -68,7 +68,6 @@ export default function ProfileInformation() {
 
   function checkImage(e: ChangeEvent<HTMLInputElement>) {
     setError("");
-    console.log(image.file!);
     const file = e.target.files?.[0];
     if (!file) return;
     if (ACCEPTED_IMAGE_TYPES.includes(file?.name)) {
@@ -80,17 +79,6 @@ export default function ProfileInformation() {
       return;
     }
     if (e.target.files && e.target.files.length > 0) {
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        const result = reader.result;
-
-        if (typeof result === "string") {
-          const base64String = result.split(",")[1];
-          setData(base64String);
-        }
-      };
-      reader.readAsDataURL(e.target.files[0]);
       setImage({ submit: true, file: e.target.files[0] });
     }
   }

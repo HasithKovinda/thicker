@@ -13,8 +13,6 @@ type MapProps = {
 };
 
 export default function MapC({ locations, startLocation }: MapProps) {
-  //   console.log(locations);
-  console.log();
   return (
     <section className={`${styles.section}`}>
       <div>
@@ -32,7 +30,6 @@ export default function MapC({ locations, startLocation }: MapProps) {
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
         {locations.map((location, index) => {
-          console.log(location.coordinates);
           return (
             <Marker
               position={[location.coordinates[1], location.coordinates[0]]}

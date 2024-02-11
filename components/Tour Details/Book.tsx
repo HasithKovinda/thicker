@@ -42,7 +42,6 @@ export default function Book({ tourId, price }: BookingProps) {
     formState: { errors, isSubmitting },
   } = useForm<InputTypes>({ resolver: zodResolver(bookingSchema) });
   function handleBookingData(data: InputTypes) {
-    console.log(queryData);
     const { name, email, phone, bookingDate } = data;
     mutate({
       fullName: name,

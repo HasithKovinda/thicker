@@ -2,12 +2,14 @@
 
 import { QueryType } from "@/types/userInput";
 import Query from "@/model/Query";
+import connect from "@/DB/db";
 
 export async function createQuery(
   data: QueryType,
   userId: string
 ): Promise<string> {
   try {
+    await connect();
     await Query.create({ ...data, userId });
     return "Query created successfully";
   } catch (error) {

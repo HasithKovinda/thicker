@@ -78,6 +78,7 @@ export async function resetPassword(
   if (newPassword.trim() !== passwordConfirm.trim())
     throw new Error("Password should match to password confirm");
   try {
+    await connect();
     const user: UserModel | null = await User.findById({ _id: userId })
       .select("+password")
       .lean();

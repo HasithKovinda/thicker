@@ -36,6 +36,7 @@ export async function fetchAllTopReviews(
 
 export async function createReview(review: CreateReviewType) {
   const id = new mongoose.Types.ObjectId(review.tour);
+  await connect();
   await Review.create(review);
   const res: { id: string; nRating: number; avgRating: number }[] =
     await Review.aggregate([
