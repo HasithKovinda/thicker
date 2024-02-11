@@ -58,11 +58,6 @@
   transition: all 0.5s linear;
 }
 
-.price:hover {
-  font-weight: bold;
-  opacity: 1;
-}
-
 .main-img {
   display: block;
   height: 300px;
