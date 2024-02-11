@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     switch (event.type) {
       case "checkout.session.completed":
         const checkoutSessionCompleted = event.data.object;
-        createBooking(checkoutSessionCompleted);
+        await createBooking(checkoutSessionCompleted);
         break;
       default:
         console.log(`Unhandled event type ${event.type}`);
