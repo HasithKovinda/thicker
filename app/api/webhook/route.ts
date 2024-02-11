@@ -5,6 +5,7 @@ import { buffer } from "stream/consumers";
 import Stripe from "stripe";
 import Booking from "@/model/Booking";
 import { NewBookingType } from "@/types/model";
+import connect from "@/DB/db";
 
 const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET!;
 console.log("🚀 ~ webhookSecret:", webhookSecret);
@@ -56,5 +57,6 @@ async function createBooking(event: Stripe.Checkout.Session) {
     phoneNumber: phoneNumber,
     price: amount,
   };
+  await connect();
   await Booking.create(payload);
 }
