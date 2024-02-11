@@ -5,6 +5,7 @@ import styles from "./SingleTour.module.css";
 import { type PopularTour } from "@/types/model";
 import { COUNTRIES } from "@/util/constant";
 import TourRating from "@/UI/TourRating";
+import Image from "next/image";
 
 export default function SingleTour({
   name,
@@ -23,7 +24,7 @@ export default function SingleTour({
   return (
     <article className={styles["single-tour"]}>
       <div className={styles["main-image"]}>
-        <img src={imageCover} alt="" className={styles["main-img"]} />
+        <img src={imageCover} alt={name} className={styles["main-img"]} />
         <div className={styles.info}>
           <FiClock className={styles.icons} />
           <span>{duration} days</span>
