@@ -61,7 +61,7 @@ export default function Query() {
           />
           <div>
             <textarea
-              rows={10}
+              rows={6}
               cols={50}
               placeholder="Your Query"
               {...register("message")}

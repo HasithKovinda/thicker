@@ -1,6 +1,6 @@
 .nav {
   display: grid;
-  height: 7rem;
+  height: 6rem;
   align-items: center;
   transition: var(--transition);
   /* box-shadow: var(--light-shadow); */
@@ -44,6 +44,6 @@
 }
 
 .logo {
-  height: 100px;
   width: 100px;
+  object-fit: cover;
 }
