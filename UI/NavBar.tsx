@@ -32,7 +32,7 @@ export default function NavBar() {
               src="/logo.svg"
               alt="logo"
               className={styles.logo}
-              height={100}
+              height={50}
               width={100}
             />
           </Link>
