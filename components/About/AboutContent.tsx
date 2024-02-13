@@ -1,13 +1,16 @@
+import Image from "next/image";
 import styles from "./AboutContent.module.css";
 
 export default function AboutContent() {
   return (
     <section className={`section-center ${styles.container}`}>
       <article>
-        <img
+        <Image
           src="/assert/about-image-3.svg"
           alt="about-image"
           className={styles.image}
+          height={600}
+          width={600}
         />
       </article>
       <article className={styles.heading}>
@@ -19,11 +22,21 @@ export default function AboutContent() {
         </p>
         <div className={styles["icons-container"]}>
           <div className={styles.feature}>
-            <img src="/assert/about-icon-1.svg" alt="about-icon-1" />
+            <Image
+              src="/assert/about-icon-1.svg"
+              height={60}
+              width={70}
+              alt="about-icon-1"
+            />
             <span>Expert Team for Support</span>
           </div>
           <div className={styles.feature}>
-            <img src="/assert/about-icon-2.svg" alt="about-icon-2" />
+            <Image
+              src="/assert/about-icon-2.svg"
+              height={60}
+              width={70}
+              alt="about-icon-2"
+            />
             <span>Urgent Support for Client</span>
           </div>
         </div>
@@ -32,7 +45,12 @@ export default function AboutContent() {
           the best outdoor experience of their lives."
         </blockquote>
         <div className={styles.footer}>
-          <img src="/assert/founder.webp" alt="founder" />
+          <Image
+            src="/assert/founder.webp"
+            height={80}
+            width={80}
+            alt="fonder"
+          />
           <div>
             <p>Jonathon bLIL</p>
             <span>Founder of treker</span>
