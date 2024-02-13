@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./About.module.css";
 
 export default async function About() {
@@ -8,10 +9,20 @@ export default async function About() {
       <div className={`${styles["about-container"]}`}>
         <div>
           <div>
-            <img src="/assert/about.png" alt="" />
+            <Image
+              src="/assert/about.png"
+              height={500}
+              width={500}
+              alt="bg-one"
+            />
           </div>
           <div className={styles.image}>
-            <img src="/assert/about.svg" alt="about" />
+            <Image
+              src="/assert/about.svg"
+              height={500}
+              width={500}
+              alt="about"
+            />
           </div>
         </div>
         <div className={styles.content}>

@@ -44,7 +44,7 @@ export default function TourContent() {
       setCount(res.count);
     }
     fetchFilterTours();
-  }, [data]);
+  }, [data, currentPage]);
 
   return (
     <main className={styles.main}>

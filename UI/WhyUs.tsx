@@ -1,6 +1,7 @@
 import { dataLeft, dataRight } from "@/data/static";
 import styles from "./WhyUs.module.css";
 import SingleIcon from "./SingleIcon";
+import Image from "next/image";
 export default function WhyUs() {
   return (
     <section className={`section-center ${styles.section}`}>
@@ -15,7 +16,12 @@ export default function WhyUs() {
           })}
         </div>
         <div className={styles["main-image"]}>
-          <img src="/assert/why-image-1.svg" alt="" />
+          <Image
+            src="/assert/why-image-1.svg"
+            alt="why-image"
+            height={700}
+            width={700}
+          />
         </div>
         <div className={styles.left}>
           {dataRight.map((left) => {

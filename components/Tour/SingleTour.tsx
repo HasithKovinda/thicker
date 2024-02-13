@@ -24,7 +24,17 @@ export default function SingleTour({
   return (
     <article className={styles["single-tour"]}>
       <div className={styles["main-image"]}>
-        <img src={imageCover} alt={name} className={styles["main-img"]} />
+        <Image
+          src={imageCover}
+          height={300}
+          width={426}
+          alt={name}
+          blurDataURL={imageCover}
+          placeholder="blur"
+          loading="lazy"
+          className={styles["main-img"]}
+        />
+
         <div className={styles.info}>
           <FiClock className={styles.icons} />
           <span>{duration} days</span>

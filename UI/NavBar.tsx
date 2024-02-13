@@ -6,6 +6,7 @@ import NavLink from "@/components/NavLink";
 import Auth from "@/components/Auth/Auth";
 import { SCROLL_POSITION_THRESHOLD_VALUE } from "@/util/constant";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NavBar() {
   const [isNavFixed, setIsNavFixed] = useState(false);
@@ -27,7 +28,13 @@ export default function NavBar() {
       <section className={`section-center ${styles["nav-items"]}`}>
         <div>
           <Link href="/">
-            <img src="/logo.svg" alt="logo" className={styles.logo} />
+            <Image
+              src="/logo.svg"
+              alt="logo"
+              className={styles.logo}
+              height={100}
+              width={100}
+            />
           </Link>
         </div>
         <ul>

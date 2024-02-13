@@ -15,6 +15,12 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
+        pathname: "/dehxgov2k/image/**",
+      },
+      {
+        protocol: "http",
+        hostname: "res.cloudinary.com",
+        pathname: "/dehxgov2k/image/**",
       },
     ],
   },

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./SingleReview.module.css";
 
 type SingleReviewProp = {
@@ -17,7 +18,16 @@ export default function SingleReview({
       <div className={styles.main}>
         <span className={styles.overlay}></span>
         <div className={styles.container}>
-          <img src={src} className={styles.profile} alt={name} />
+          <Image
+            src={src}
+            height={200}
+            width={200}
+            alt={name}
+            blurDataURL={src}
+            placeholder="blur"
+            loading="lazy"
+            className={styles.profile}
+          />
         </div>
       </div>
       <div>

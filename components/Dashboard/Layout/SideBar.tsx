@@ -12,6 +12,7 @@ import {
 } from "react-icons/fi";
 import { type UserModel } from "@/types/model";
 import NavLink from "@/components/NavLink";
+import Image from "next/image";
 
 export default function SideBar() {
   const queryClient = useQueryClient();
@@ -21,11 +22,23 @@ export default function SideBar() {
     <aside className={styles.sidebar}>
       <div className={styles["logo-container"]}>
         <Link href="/">
-          <img src="/logo.svg" alt="logo" className={styles.logo} />
+          <Image
+            src="/logo.svg"
+            height={140}
+            width={140}
+            alt="logo"
+            className={styles.logo}
+          />
         </Link>
       </div>
       <div className={styles["profile-info"]}>
-        <img src={src} alt="logo" className={styles.profile} />
+        <Image
+          src={src}
+          alt="logo"
+          height={140}
+          width={140}
+          className={styles.profile}
+        />
         <p>{queryData?.name}</p>
         <span>User</span>
       </div>

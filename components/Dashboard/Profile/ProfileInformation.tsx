@@ -15,6 +15,7 @@ import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from "@/util/constant";
 import Input from "@/components/Input/Input";
 import axios from "axios";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 type ImageType = {
   submit: boolean;
   file: File | null;
@@ -111,7 +112,13 @@ export default function ProfileInformation() {
             error={errors.email}
           />
           <div className={styles["image-upload"]}>
-            <img src={src} alt="logo" className={styles["profile-img"]} />
+            <Image
+              src={src}
+              alt="logo"
+              height={120}
+              width={120}
+              className={styles["profile-img"]}
+            />
           </div>
           <div>
             <label className={styles["custom-file-upload"]}>
@@ -141,7 +148,13 @@ export default function ProfileInformation() {
           </div>
         </form>
         <div>
-          <img src="/assert/dashboard.jpg" alt="" className={styles.main} />
+          <Image
+            src="/assert/dashboard.jpg"
+            height={400}
+            width={600}
+            alt=""
+            className={styles.main}
+          />
         </div>
       </article>
     </section>
