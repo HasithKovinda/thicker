@@ -44,15 +44,16 @@ export default function NavBar() {
             </NavLink>
           </li>
           <li>
-            <NavLink activeclasstype="normal" type="link" path="/about">
-              About
-            </NavLink>
-          </li>
-          <li>
             <NavLink activeclasstype="normal" type="link" path="/tours">
               Tours
             </NavLink>
           </li>
+          <li>
+            <NavLink activeclasstype="normal" type="link" path="/about">
+              About
+            </NavLink>
+          </li>
+
           <Auth />
         </ul>
       </section>

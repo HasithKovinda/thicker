@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./PopularLocations.module.css";
 
 type PopularLocationsPrps = {
@@ -15,7 +16,14 @@ export default function PopularLocations({ images }: PopularLocationsPrps) {
         {images.map((img, index) => {
           return (
             <div key={index}>
-              <img src={img} alt={`image-${index + 1}`} />
+              <Image
+                src={img}
+                height={400}
+                width={500}
+                alt={`image-${index + 1}`}
+                blurDataURL={img}
+                placeholder="blur"
+              />
             </div>
           );
         })}

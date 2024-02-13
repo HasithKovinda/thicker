@@ -27,6 +27,7 @@ export default function useAnimateCard<T extends HTMLElement>(
   }, [data]);
 
   function changeCardView() {
+    if (!ref.current) return;
     const currentTransform =
       ref.current?.style.transform ||
       window.getComputedStyle(ref.current!).getPropertyValue("transform");

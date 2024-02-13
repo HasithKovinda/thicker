@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./Info.module.css";
 
 type InfoProps = {
@@ -28,7 +29,12 @@ export default function Info({
       <article className={styles.article}>
         <div>
           <div className={styles["img-container"]}>
-            <img src="/assert/icons/duration.svg" alt="duration" />
+            <Image
+              src="/assert/icons/duration.svg"
+              height={50}
+              width={50}
+              alt="duration"
+            />
           </div>
           <div>
             <p>Duration</p>
@@ -38,7 +44,12 @@ export default function Info({
         </div>
         <div>
           <div className={styles["img-container"]}>
-            <img src="/assert/icons/speedometer.svg" alt="speedometer" />
+            <Image
+              src="/assert/icons/speedometer.svg"
+              height={50}
+              width={50}
+              alt="speedometer"
+            />
           </div>
           <div>
             <p>Difficulty</p>
@@ -48,7 +59,12 @@ export default function Info({
         </div>
         <div>
           <div className={styles["img-container"]}>
-            <img src="/assert/icons/team-group.svg" alt="team-group" />
+            <Image
+              src="/assert/icons/team-group.svg"
+              height={50}
+              width={50}
+              alt="team-group"
+            />
           </div>
           <div>
             <p>Group Size</p>
@@ -58,7 +74,12 @@ export default function Info({
         </div>
         <div>
           <div className={styles["img-container"]}>
-            <img src="/assert/icons/icon-1.svg" alt="icon-1" />
+            <Image
+              src="/assert/icons/icon-1.svg"
+              height={50}
+              width={50}
+              alt="location"
+            />
           </div>
           <div>
             <p>Location</p>
