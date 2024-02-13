@@ -27,14 +27,13 @@ export default function SingleTour({
         <Image
           src={imageCover}
           height={300}
-          width={426}
+          width={300}
           alt={name}
           blurDataURL={imageCover}
           placeholder="blur"
           loading="lazy"
           className={styles["main-img"]}
         />
-
         <div className={styles.info}>
           <FiClock className={styles.icons} />
           <span>{duration} days</span>
